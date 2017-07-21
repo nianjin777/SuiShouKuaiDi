@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.edu.zucc.wmhxa.kuaishou">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- home -->
+        <activity android:name=".activity.home.HomeActivity"></activity>
+        <activity android:name=".activity.home.AddressAddActivity"></activity>
+        <activity android:name=".activity.home.ThingsAddActivity"></activity>
+        <activity android:name=".activity.home.AddressEditActivity"></activity>
+        <activity android:name=".activity.home.AddressChooseAcrtivity"></activity>
+        <activity android:name=".activity.home.AddressManageActivity"></activity>
+
+        <!-- login -->
+        <activity android:name=".activity.login.LoginActivity"></activity>
+        <activity android:name=".activity.login.RegisterActivity"></activity>
+
+        <!-- setting -->
+        <activity android:name=".activity.setting.WalletActivity"></activity>
+
+    </application>
+
+</manifest>

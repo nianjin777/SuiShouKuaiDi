@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/item_ll"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="33dp">
+
+    <TextView
+        android:id="@+id/item_tv_addname"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="33dp"
+        android:background="#FFFFFF"
+        android:text="chenhuansheng"
+        android:textColor="#000000"
+        android:textSize="20sp" 
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        />
+
+    <TextView
+        android:id="@+id/item_tv_addphone"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="33dp"
+        android:background="#FFFFFF"
+        android:text="1558258596"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:gravity="right"
+        android:paddingRight="16dp"
+        />
+
+    </LinearLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:layout_below="@+id/item_ll"
+    android:background="#FFFFFF"
+    >
+    <TextView
+        android:id="@+id/item_tv_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="收货地址："
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/item_tv_addaddress"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_toRightOf="@+id/item_tv_2"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:gravity="center_vertical"
+        android:text="浙江大学城市学院"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        />
+</RelativeLayout>
+
+    <View
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"
+        />
+
+</LinearLayout>

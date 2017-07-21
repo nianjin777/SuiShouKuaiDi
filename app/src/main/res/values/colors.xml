@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--标题天蓝色-->
+    <color name="head">#D7D7D7</color>
+    <!-- 标准背景色 -->
+    <color name="stand_backgroud">#F4F4F4</color>
+    <!-- 黑色 -->
+    <color name="black">#333333</color>
+    <!-- gray -->
+    <color name="gray">#E5E5E5</color>
+    <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+    <!--浅灰-->
+    <color name="light_gray">#B3B3B3</color>
+    <!--深灰-->
+    <color name="time_gray">#808080</color>
+    <!--天依蓝-->
+    <color name="sky">#00CCFF</color>
+    <!--深蓝-->
+    <color name="blue">#0066FF</color>
+    <!--绿色-->
+    <color name="green">#00FF00</color>
+    <!--土黄-->
+    <color name="yellow">#FFCC66</color>
+    <!--天蓝-->
+    <color name="light_blue">#33FFFF</color>
+</resources>

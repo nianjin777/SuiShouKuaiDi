@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/addaddress_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#D7D7D7">
+
+        <TextView
+            android:id="@+id/addaddress_tv_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加地址"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/addaddress_tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:gravity="center"
+            android:text="保存"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/addaddress_rl_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/addaddress_tv_1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:text="收货人"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/add_ev_savename"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/addaddress_tv_1"
+            android:background="@null"
+            android:hint="输入姓名"
+            android:paddingLeft="16dp"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:id="@+id/addaddress_rl_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/addaddress_tv_2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:text="联系电话"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/add_ev_savephone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/addaddress_tv_2"
+            android:background="@null"
+            android:hint="输入联系电话"
+            android:paddingLeft="16dp"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:id="@+id/addaddress_rl_place"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/addaddress_tv_3"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:text="所在地区"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/add_ev_saveplace"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/addaddress_tv_3"
+            android:background="@null"
+            android:hint=""
+            android:paddingLeft="16dp"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:id="@+id/addaddress_rl_spplace"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/addaddress_tv_4"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:text="地址"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <EditText
+        android:id="@+id/add_ev_savereplace"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/addaddress_tv_4"
+        android:background="@null"
+        android:hint="请输入具体地址"
+        android:paddingLeft="16dp"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <Button
+        android:id="@+id/addaddress_bt_del"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="设为默认地址"
+        android:textColor="#000000"
+        android:textSize="24sp"
+
+        />
+
+</LinearLayout>

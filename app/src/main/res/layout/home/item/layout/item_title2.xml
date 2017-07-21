@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/head">
+
+        <RelativeLayout
+            android:layout_width="124dp"
+            android:layout_height="34dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/title2_tv_accept"
+                android:layout_centerVertical="true"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="2dp"
+                android:text="接任务" />
+
+            <TextView
+                android:id="@+id/title2_tv_issue"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@color/head"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"
+                android:layout_centerVertical="true"
+                android:text="发任务" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

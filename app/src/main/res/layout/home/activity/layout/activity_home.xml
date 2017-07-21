@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity">
+
+    <LinearLayout
+        android:id="@+id/home_ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/home_title1"
+            layout="@layout/item_title1"
+            android:visibility="gone"></include>
+
+        <include
+            android:id="@+id/home_title2"
+            layout="@layout/item_title2"
+            android:visibility="visible"></include>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="1dp"
+            android:background="#888" />
+
+        <com.yinglan.alphatabs.AlphaTabsIndicator
+            android:id="@+id/alphaIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <com.yinglan.alphatabs.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabIconNormal="@mipmap/home_normal"
+                app:tabIconSelected="@mipmap/home_selected"
+                app:tabText="大厅"
+                app:tabTextSize="13sp"
+                app:textColorNormal="#999999"
+                app:textColorSelected="#46c01b" />
+
+            <com.yinglan.alphatabs.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabIconNormal="@mipmap/category_normal"
+                app:tabIconSelected="@mipmap/category_selected"
+                app:tabText="消息"
+                app:tabTextSize="13sp"
+                app:textColorNormal="#999999"
+                app:textColorSelected="#46c01b" />
+
+            <com.yinglan.alphatabs.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabIconNormal="@mipmap/category_normal"
+                app:tabIconSelected="@mipmap/category_selected"
+                app:tabText="通讯录"
+                app:tabTextSize="13sp"
+                app:textColorNormal="#999999"
+                app:textColorSelected="#46c01b" />
+
+            <com.yinglan.alphatabs.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabIconNormal="@mipmap/service_normal"
+                app:tabIconSelected="@mipmap/service_selected"
+                app:tabText="发现"
+                app:tabTextSize="13sp"
+                app:textColorNormal="#999999"
+                app:textColorSelected="#46c01b" />
+        </com.yinglan.alphatabs.AlphaTabsIndicator>
+
+    </LinearLayout>
+
+</LinearLayout>
