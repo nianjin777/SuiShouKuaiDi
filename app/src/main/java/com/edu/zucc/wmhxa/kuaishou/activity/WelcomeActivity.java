@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.Window;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity;
 import com.edu.zucc.wmhxa.kuaishou.activity.login.LoginActivity;
@@ -47,10 +48,12 @@ public class WelcomeActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_welcome);
         SysApplication.getInstance().addActivity(this);
+
 
         //初始化计时器任务
         task = new TimerTask() {

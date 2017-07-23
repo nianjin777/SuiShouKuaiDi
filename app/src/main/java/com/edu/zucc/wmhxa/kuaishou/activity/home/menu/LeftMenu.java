@@ -1,8 +1,11 @@
 package com.edu.zucc.wmhxa.kuaishou.activity.home.menu;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,11 +16,15 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.start;
+
 /**
  * Created by Administrator on 2017/7/20.
  */
 
-public class LeftMenu implements View.OnClickListener {
+public class LeftMenu {
+
+    private final static String TAG = "LeftMenu";
 
     private SlidingMenu menu;
     private Activity activity;
@@ -47,16 +54,31 @@ public class LeftMenu implements View.OnClickListener {
         itemList.add("设置");
         ListView menu_lv = (ListView) menu.findViewById(R.id.leftmenu_lv);
         menu_lv.setAdapter(new LeftMenuAdapter());
-        menu_lv.setOnClickListener(this);
+        menu_lv.setOnItemClickListener(new ItemClickListener());
 
         return menu;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case 1:
-                break;
+    private class ItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent();
+            switch (position) {
+                case 0:
+                    //地址管理
+                    intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.home.AddressManageActivity");
+                    activity.startActivity(intent);
+                    break;
+                case 1:
+                    //钱包
+                    intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.setting.WalletActivity");
+                    activity.startActivity(intent);
+                    break;
+                case 2:
+                    //设置
+                    break;
+            }
         }
     }
 

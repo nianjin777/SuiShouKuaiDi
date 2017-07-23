@@ -12,10 +12,10 @@ import com.edu.zucc.wmhxa.kuaishou.R;
 public class AddressAddActivity extends AppCompatActivity {
 
     private View view;
-    private EditText add_ev_savename;
-    private EditText add_ev_savephone;
-    private EditText add_ev_saveplace;
-    private EditText add_ev_savereplace;
+    private EditText add_et_savename;
+    private EditText add_et_savephone;
+    private EditText add_et_saveplace;
+    private EditText add_et_savereplace;
     private Button addaddress_tv_save;
     private Button addaddress_bt_del;
 
@@ -30,10 +30,10 @@ public class AddressAddActivity extends AppCompatActivity {
     }
 
     public void findViewById() {
-        add_ev_savename = (EditText) findViewById(R.id.add_ev_savename);
-        add_ev_savephone = (EditText) findViewById(R.id.add_ev_savephone);
-        add_ev_saveplace = (EditText) findViewById(R.id.add_ev_saveplace);
-        add_ev_savereplace = (EditText) findViewById(R.id.add_ev_savereplace);
+        add_et_savename = (EditText) findViewById(R.id.add_et_savename);
+        add_et_savephone = (EditText) findViewById(R.id.add_et_savephone);
+        add_et_saveplace = (EditText) findViewById(R.id.add_et_saveplace);
+        add_et_savereplace = (EditText) findViewById(R.id.add_et_savereplace);
         addaddress_tv_save = (Button) findViewById(R.id.addaddress_tv_save);
         addaddress_bt_del = (Button) findViewById(R.id.addaddress_bt_del);
     }

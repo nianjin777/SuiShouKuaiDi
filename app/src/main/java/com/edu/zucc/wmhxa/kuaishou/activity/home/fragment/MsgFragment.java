@@ -15,10 +15,19 @@ import com.edu.zucc.wmhxa.kuaishou.R;
 
 public class MsgFragment extends Fragment {
 
+    private View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_msg,container,false);
+        view = inflater.inflate(R.layout.fragment_msg, container, false);
+
+        findViewById();
+
         return view;
     }
+
+    private void findViewById() {
+    }
+
 }

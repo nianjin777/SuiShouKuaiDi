@@ -1,5 +1,6 @@
 package com.edu.zucc.wmhxa.kuaishou.activity.home;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -30,21 +31,23 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private SlidingMenu menu;
     private ViewPager mViewPager;
     private AlphaTabsIndicator alphaTabsIndicator;
-    private View home_title1;
+    private View home_title4;
     private View home_title2;
     private TextView title1_tv;
-    private TextView title2_tv_accept;
-    private TextView title2_tv_issue;
+    public TextView title2_tv_accept;
+    public TextView title2_tv_issue;
 
-    private List<Fragment> fragmentsList = new ArrayList<>();
+    public static HomeActivity activity = null;
+    public List<Fragment> fragmentsList = new ArrayList<>();
     private long mExitTime;
-    private BottomAdapter bottomAdapter;
+    public BottomAdapter bottomAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         SysApplication.getInstance().addActivity(this);
+        activity = this;
 
         menu = new LeftMenu(this).getLeftMenu();
         findViewById();
@@ -70,8 +73,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private void findViewById() {
         alphaTabsIndicator = (AlphaTabsIndicator) findViewById(R.id.alphaIndicator);
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
-        home_title1 = findViewById(R.id.home_title1);
-        title1_tv = (TextView) home_title1.findViewById(R.id.title1_tv);
+        home_title4 = findViewById(R.id.home_title4);
+        title1_tv = (TextView) home_title4.findViewById(R.id.title1_tv);
         home_title2 = findViewById(R.id.home_title2);
         title2_tv_accept = (TextView) home_title2.findViewById(R.id.title2_tv_accept);
         title2_tv_issue = (TextView) home_title2.findViewById(R.id.title2_tv_issue);
@@ -92,7 +95,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 title2_tv_issue.setBackground(getDrawable(R.color.head));
 
                 //修改页面
-                fragmentsList.set(0, new AccpetHallFragment());
+                fragmentsList.set(0, AccpetHallFragment.getInstanceFragment());
                 bottomAdapter.notifyDataSetChanged();
 
                 break;
@@ -103,11 +106,10 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 title2_tv_issue.setBackground(getDrawable(R.color.white));
 
                 //修改页面
-                fragmentsList.set(0, new IssueHallFragment());
+                fragmentsList.set(0, IssueHallFragment.getInstanceFragment());
                 bottomAdapter.notifyDataSetChanged();
 
                 break;
-
         }
     }
 
@@ -166,11 +168,11 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             //此方法是页面跳转完后得到调用，arg0是你当前选中的页面的Position(位置编号)。
             if (position == 0) {
                 menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-                home_title1.setVisibility(View.GONE);
+                home_title4.setVisibility(View.GONE);
                 home_title2.setVisibility(View.VISIBLE);
             } else {
                 menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-                home_title1.setVisibility(View.VISIBLE);
+                home_title4.setVisibility(View.VISIBLE);
                 home_title2.setVisibility(View.GONE);
                 switch (position) {
                     case 1:

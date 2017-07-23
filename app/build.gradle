@@ -10,6 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk{
+            abiFilters 'armeabi','armeabi-v7a','armeabi-v8a','x86','x86_64','mips','mips64'
+        }
     }
     buildTypes {
         release {
@@ -18,25 +21,29 @@ android {
         }
     }
     sourceSets {
-        main {
-            res.srcDirs =
-                    [
-                            'src/main/res/layout/setting/wallet',
-                            'src/main/res/layout/home/activity',
-                            'src/main/res/layout/home/fragment',
-                            'src/main/res/layout/home/item',
-                            'src/main/res/layout/home',
-                            'src/main/res/layout/login',
-                            'src/main/res/layout/setting',
-                            'src/main/res/layout',
-                            'src/main/res'
-                    ]
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['libs'];
+                res.srcDirs =
+                        [
+                                'src/main/res/layout/setting/wallet',
+                                'src/main/res/layout/home/activity',
+                                'src/main/res/layout/home/fragment',
+                                'src/main/res/layout/home/item',
+                                'src/main/res/layout/home',
+                                'src/main/res/layout/login',
+                                'src/main/res/layout/setting',
+                                'src/main/res/layout',
+                                'src/main/res'
+                        ]
+            }
         }
-    }
-    productFlavors {
-    }
-    lintOptions {
-        abortOnError false
+        productFlavors {
+        }
+        lintOptions {
+            abortOnError false
+        }
     }
 }
 
@@ -50,4 +57,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile project(':SlidingMenu')
+    compile files('libs/BaiduLBS_Android.jar')
 }

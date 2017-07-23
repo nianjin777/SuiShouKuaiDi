@@ -49,7 +49,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/add_ev_savename"
+            android:id="@+id/add_et_savename"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
@@ -82,7 +82,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/add_ev_savephone"
+            android:id="@+id/add_et_savephone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
@@ -115,7 +115,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/add_ev_saveplace"
+            android:id="@+id/add_et_saveplace"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
@@ -156,7 +156,7 @@
         android:background="#33000000" />
 
     <EditText
-        android:id="@+id/add_ev_savereplace"
+        android:id="@+id/add_et_savereplace"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_centerVertical="true"
