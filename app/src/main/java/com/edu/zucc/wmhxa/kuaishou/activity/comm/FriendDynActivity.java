@@ -9,7 +9,6 @@ import com.edu.zucc.wmhxa.kuaishou.R;
 
 public class FriendDynActivity extends AppCompatActivity {
 
-    private View view;
     private ImageView fridyn_tv_backgroundpic;
     private ImageView fdyn_iv_headpic;
 
@@ -21,7 +20,7 @@ public class FriendDynActivity extends AppCompatActivity {
     }
 
     public void findViewById() {
-        fridyn_tv_backgroundpic = (ImageView) view.findViewById(R.id.fridyn_tv_backgroundpic);
-        fdyn_iv_headpic = (ImageView) view.findViewById(R.id.fdyn_iv_headpic);
+        fridyn_tv_backgroundpic = (ImageView) findViewById(R.id.fridyn_tv_backgroundpic);
+        fdyn_iv_headpic = (ImageView) findViewById(R.id.fdyn_iv_headpic);
     }
 }
