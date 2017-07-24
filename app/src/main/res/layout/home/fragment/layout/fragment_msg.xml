@@ -40,12 +40,13 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="#F2F2F2"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:text="正在进行的订单"
+                android:text="正在进行的订单消息"
                 android:textSize="16sp" />
 
             <ListView
@@ -55,15 +56,16 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="16dp"></View>
+                android:layout_height="4dp"></View>
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="#F2F2F2"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:text="好友"
+                android:text="好友消息"
                 android:textSize="16sp" />
 
             <ListView

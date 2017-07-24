@@ -1,6 +1,5 @@
 package com.edu.zucc.wmhxa.kuaishou.activity.home.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,25 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.TextureMapView;
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
-import com.edu.zucc.wmhxa.kuaishou.util.SerializableMap;
+import com.edu.zucc.wmhxa.kuaishou.util.ListViewUtil;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.NearTaskAdapter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import static com.baidu.location.d.j.v;
 
 /**
  * Created by Administrator on 2017/7/19.
@@ -80,7 +73,7 @@ public class AccpetHallFragment extends Fragment {
         }
 
         accept_lv.setAdapter(new NearTaskAdapter(getContext(), mapList));
-        setListViewHeightBasedOnChildren(accept_lv);
+        ListViewUtil.setListViewHeightBasedOnChildren(accept_lv);
     }
 
     public void setListener() {
@@ -104,30 +97,6 @@ public class AccpetHallFragment extends Fragment {
         mMapView = (MapView) view.findViewById(R.id.mMapView);
     }
 
-    //解决ScrollView 嵌套ListView后只能显示一个item
-    public void setListViewHeightBasedOnChildren(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
-            // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            // 计算子项View 的宽高
-            listItem.measure(0, 0);
-            // 统计所有子项的总高度
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
-    }
 
     public View getView() {
         return view;

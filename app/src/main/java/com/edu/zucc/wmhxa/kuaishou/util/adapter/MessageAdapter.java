@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,16 +18,16 @@ import java.util.Map;
 
 public class MessageAdapter extends BaseAdapter {
     Context context;
-    Map<String, String> map;
+    List<Map<String, Object>> list;
 
-    public MessageAdapter(Context context, Map<String, String> map) {
+    public MessageAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
-        this.map = map;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return map.size();
+        return list.size();
     }
 
     @Override
@@ -43,18 +44,23 @@ public class MessageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = View.inflate(context, R.layout.item_address, parent);
+            view = View.inflate(context, R.layout.item_message, null);
         } else {
             view = convertView;
         }
-        ImageView headPic =(ImageView) view.findViewById(R.id.message_iv_head);
-        TextView name =(TextView) view.findViewById(R.id.message_tv_name);
-        TextView message = (TextView) view.findViewById(R.id.message_tv_mes);
-        TextView time =(TextView) view.findViewById(R.id.message_tv_time) ;
 
-        name.setText(map.get("friendname"));
-        message.setText(map.get("message"));
-        time.setText(map.get("time"));
+        Map<String, Object> map = list.get(position);
+
+        ImageView headPic = (ImageView) view.findViewById(R.id.message_iv_head);
+        TextView name = (TextView) view.findViewById(R.id.message_tv_name);
+        TextView message = (TextView) view.findViewById(R.id.message_tv_mes);
+        TextView time = (TextView) view.findViewById(R.id.message_tv_time);
+
+        List<String> msgList = (List<String>) map.get("message");
+
+        name.setText((String) map.get("friendname"));
+        message.setText(msgList.get(0));
+        time.setText((String) map.get("time"));
 
         return view;
     }
