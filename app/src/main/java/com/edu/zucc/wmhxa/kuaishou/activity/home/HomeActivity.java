@@ -78,7 +78,6 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         home_title2 = findViewById(R.id.home_title2);
         title2_tv_accept = (TextView) home_title2.findViewById(R.id.title2_tv_accept);
         title2_tv_issue = (TextView) home_title2.findViewById(R.id.title2_tv_issue);
-
     }
 
     private void setListener() {

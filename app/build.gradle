@@ -28,12 +28,16 @@ android {
                 res.srcDirs =
                         [
                                 'src/main/res/layout/setting/wallet',
+                                'src/main/res/layout/comm/activity',
+                                'src/main/res/layout/comm/fragment',
+                                'src/main/res/layout/comm/item',
                                 'src/main/res/layout/home/activity',
                                 'src/main/res/layout/home/fragment',
                                 'src/main/res/layout/home/item',
                                 'src/main/res/layout/home',
                                 'src/main/res/layout/login',
                                 'src/main/res/layout/setting',
+                                'src/main/res/layout/comm',
                                 'src/main/res/layout',
                                 'src/main/res'
                         ]

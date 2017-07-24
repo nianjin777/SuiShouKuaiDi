@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#D7D7D7"
+        >
+
+        <RelativeLayout
+            android:layout_width="124dp"
+            android:layout_height="34dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/title2_tv_accept"
+                android:layout_centerVertical="true"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="2dp"
+                android:text="朋友圈" />
+
+            <TextView
+                android:id="@+id/title2_tv_issue"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@color/head"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"
+                android:layout_centerVertical="true"
+                android:text="地区" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp">
+        <ImageView
+            android:id="@+id/fridyn_tv_backgroundpic"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="#CCCCCC"
+            />
+        <ImageView
+            android:id="@+id/fdyn_iv_headpic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/shape"
+            />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/dyv_lv_frienddyn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+    
+</LinearLayout>

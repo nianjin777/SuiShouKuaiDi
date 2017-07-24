@@ -51,6 +51,7 @@ public class LeftMenu {
         itemList = new ArrayList<String>();
         itemList.add("地址");
         itemList.add("钱包");
+        itemList.add("订单");
         itemList.add("设置");
         ListView menu_lv = (ListView) menu.findViewById(R.id.leftmenu_lv);
         menu_lv.setAdapter(new LeftMenuAdapter());
@@ -76,6 +77,9 @@ public class LeftMenu {
                     activity.startActivity(intent);
                     break;
                 case 2:
+                    //订单
+                    break;
+                case 3:
                     //设置
                     break;
             }
