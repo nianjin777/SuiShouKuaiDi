@@ -1,4 +1,4 @@
-package com.edu.zucc.wmhxa.kuaishou.activity.home;
+package com.edu.zucc.wmhxa.kuaishou.activity.setting.address;
 
 import android.app.Activity;
 import android.os.Bundle;

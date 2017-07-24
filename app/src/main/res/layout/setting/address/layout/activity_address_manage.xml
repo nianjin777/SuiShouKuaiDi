@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/manageaddre_title"
-        layout="@layout/item_title1"></include>
+        layout="@layout/item_title3"></include>
 
     <ListView
         android:id="@+id/manageaddre_lv"

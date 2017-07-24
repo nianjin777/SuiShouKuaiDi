@@ -1,4 +1,4 @@
-package com.edu.zucc.wmhxa.kuaishou.activity.home;
+package com.edu.zucc.wmhxa.kuaishou.activity.setting.address;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,8 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
-
-import static com.edu.zucc.wmhxa.kuaishou.R.id.title1_tv;
 
 /**
  * Created by Administrator on 2017/7/21.

@@ -16,12 +16,16 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.TextureMapView;
 import com.edu.zucc.wmhxa.kuaishou.R;
+import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
+import com.edu.zucc.wmhxa.kuaishou.util.SerializableMap;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.NearTaskAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.baidu.location.d.j.v;
 
@@ -35,7 +39,7 @@ public class AccpetHallFragment extends Fragment {
     private static Fragment instanceFragment = null;
     private MapView mMapView;
     private ListView accept_lv;
-    private List<Map<String, String>> mapList;
+    private List<Map<String, Object>> mapList;
 
     public static Fragment getInstanceFragment() {
         if (instanceFragment == null) {
@@ -62,12 +66,15 @@ public class AccpetHallFragment extends Fragment {
         accept_lv = (ListView) view.findViewById(R.id.accept_lv);
 
         //造一个假数据
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("taskname", "买烟");
         map.put("distance", "500米");
         map.put("text", "纯雅谢谢！");
-        map.put("money", "2元");
-        mapList = new ArrayList<Map<String, String>>();
+        map.put("money", 2.0);
+        List<BeanThing> thingList = new ArrayList<BeanThing>();
+        thingList.add(new BeanThing("纯雅", "超市", 16.0, 2));
+        map.put("things", thingList);
+        mapList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < 20; i++) {
             mapList.add(map);
         }
@@ -77,11 +84,18 @@ public class AccpetHallFragment extends Fragment {
     }
 
     public void setListener() {
+        //任务列表项目点击事件
         accept_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-//                intent.setClassName("com.edu.zucc.wmhxa.kuaishou","")
+                intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.order.accept.AcceptOrderActivity");
+//                SerializableMap sm = new SerializableMap();
+//                sm.setMap(data);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("info", sm);
+                intent.putExtra("info", (HashMap<String, Object>) mapList.get(position));
+                startActivity(intent);
             }
         });
     }
@@ -141,4 +155,6 @@ public class AccpetHallFragment extends Fragment {
         mMapView.onPause();
         super.onPause();
     }
+
+
 }

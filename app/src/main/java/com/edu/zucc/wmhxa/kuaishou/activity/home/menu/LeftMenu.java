@@ -68,7 +68,7 @@ public class LeftMenu {
             switch (position) {
                 case 0:
                     //地址管理
-                    intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.home.AddressManageActivity");
+                    intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.setting.address.AddressManageActivity");
                     activity.startActivity(intent);
                     break;
                 case 1:

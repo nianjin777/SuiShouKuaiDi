@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -22,7 +22,6 @@
         android:id="@+id/add_thingname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/add_title1"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="物品名"
@@ -39,7 +38,6 @@
         android:id="@+id/add_et_setname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/add_thingname"
         android:background="#FFFFFF"
         android:hint="输入物品名称"
         android:paddingLeft="16dp"
@@ -49,7 +47,6 @@
         android:id="@+id/add_thingplace"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/add_et_setname"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="购买地点"
@@ -61,7 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/add_thingplace"
         android:background="#FFFFFF"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
@@ -69,10 +65,28 @@
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/add_number"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="数量"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/add_et_setnumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:hint="输入数量(选填)"
+        android:paddingLeft="16dp"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/add_thingmoney"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/add_bt_setplace"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="预算"
@@ -83,7 +97,6 @@
         android:id="@+id/add_et_setmoney"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/add_thingmoney"
         android:background="#FFFFFF"
         android:hint="输入预算"
         android:paddingLeft="16dp"
@@ -92,7 +105,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <Button
@@ -116,6 +128,6 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>
 
 

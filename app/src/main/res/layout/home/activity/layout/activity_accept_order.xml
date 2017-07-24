@@ -2,84 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.edu.zucc.wmhxa.kuaishou.activity.home.AcceptOrderActivity">
+    android:orientation="vertical"
+    tools:context="com.edu.zucc.wmhxa.kuaishou.activity.order.accept.AcceptOrderActivity">
+
+    <include
+        android:id="@+id/accept_title"
+        layout="@layout/item_title1"></include>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="1dp"
-                android:background="@null">
-
-                <TextView
-                    android:id="@+id/accept_tv_word3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="收货人："
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/accept_tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="欢欢"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_alignStart="@+id/accept_tv_address" />
-
-                <TextView
-                    android:id="@+id/accept_tv_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="15858258596"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/accept_tv_addrword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="收货地址："
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/accept_tv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/accept_tv_addrword"
-                    android:maxLength="32"
-                    android:maxLines="2"
-                    android:text="浙江大学城市学院北校区"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -93,8 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@null"
-                android:hint="任务名"
                 android:gravity="center_vertical"
+                android:hint="任务名"
                 android:paddingLeft="16dp"
                 android:textSize="18sp" />
 
@@ -154,8 +94,18 @@
                 android:id="@+id/accrpt_tv_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
                 android:background="@null"
-                android:gravity="start" />
+                android:gravity="start"
+                android:paddingLeft="16dp"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:background="#33000000" />
 
         </LinearLayout>
     </ScrollView>
@@ -181,7 +131,8 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/accept_tv_word1"
-            android:background="@null" />
+            android:background="@null"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/accept_tv_word2"
@@ -214,42 +165,38 @@
         android:background="#33000000" />
 
     <LinearLayout
-        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        >
-
-        <Button
-            android:id="@+id/accept_bt_back"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="返回"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            style="?android:attr/borderlessButtonStyle"
-            />
+        android:background="@color/gray"
+        android:orientation="horizontal">
 
         <View
             android:layout_width="1dip"
             android:layout_height="match_parent"
-            android:background="#33000000"
             android:layout_gravity="center_horizontal"
-            />
+            android:background="#33000000" />
 
         <Button
-            android:id="@+id/accept_bt_accept"
+            android:id="@+id/accept_bt_back"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="接受任务"
             android:gravity="center"
-            android:textSize="20sp"
+            android:text="返回"
             android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/accept_bt_accept"
             style="?android:attr/borderlessButtonStyle"
-            />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="接受任务"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

@@ -18,9 +18,9 @@ import java.util.Map;
 
 public class NearTaskAdapter extends BaseAdapter {
     Context context;
-    List<Map<String, String>> list = null;
+    List<Map<String, Object>> list = null;
 
-    public NearTaskAdapter(Context context, List<Map<String, String>> list) {
+    public NearTaskAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;
     }
@@ -53,11 +53,11 @@ public class NearTaskAdapter extends BaseAdapter {
         TextView taskText = (TextView) view.findViewById(R.id.neartask_tv_text);
         TextView taskMoney = (TextView) view.findViewById(R.id.neartask_tv_money);
 
-        Map<String, String> map = list.get(position);
-        taskNmae.setText(map.get("taskname"));
-        taskDis.setText(map.get("distance"));//距离
-        taskText.setText(map.get("text"));
-        taskMoney.setText(map.get("money"));
+        Map<String, Object> map = list.get(position);
+        taskNmae.setText((String) map.get("taskname"));
+        taskDis.setText((String) map.get("distance"));//距离
+        taskText.setText((String) map.get("text"));
+        taskMoney.setText(String.valueOf(map.get("money")));
 
 
         return view;

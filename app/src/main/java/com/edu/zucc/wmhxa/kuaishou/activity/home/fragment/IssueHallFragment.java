@@ -92,12 +92,12 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.issue_rl_address:
                 //选择地址
-                intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.home.AddressChooseAcrtivity");
+                intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.setting.address.AddressChooseAcrtivity");
                 startActivity(intent);
                 break;
             case R.id.issue_bt_addthing:
                 //添加项目
-                intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.home.ThingsAddActivity");
+                intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.order.issue.ThingsAddActivity");
                 startActivity(intent);
                 break;
             case R.id.issue_bt_cancel:

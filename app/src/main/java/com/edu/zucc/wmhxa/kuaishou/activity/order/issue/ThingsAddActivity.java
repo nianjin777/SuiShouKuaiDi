@@ -1,4 +1,4 @@
-package com.edu.zucc.wmhxa.kuaishou.activity.home;
+package com.edu.zucc.wmhxa.kuaishou.activity.order.issue;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
     private Button add_bt_cancel;
     private Button add_bt_add;
     private ImageView title1_back;
+    private EditText add_et_setnumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
         title1_back = (ImageView) add_title1.findViewById(R.id.title1_back);
         title1_tv.setText("添加物品");
 
+        add_et_setnumber = (EditText) findViewById(R.id.add_et_setnumber);
         add_et_setname = (EditText) findViewById(R.id.add_et_setname);
         add_bt_setplace = (Button) findViewById(R.id.add_bt_setplace);
         add_et_setmoney = (EditText) findViewById(R.id.add_et_setmoney);

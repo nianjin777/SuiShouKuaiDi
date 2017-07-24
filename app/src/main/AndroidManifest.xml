@@ -14,9 +14,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/kuaishou"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/kuaishou"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.WelcomeActivity">
@@ -29,11 +29,11 @@
 
         <!-- home -->
         <activity android:name=".activity.home.HomeActivity"></activity>
-        <activity android:name=".activity.home.AddressAddActivity"></activity>
-        <activity android:name=".activity.home.ThingsAddActivity"></activity>
-        <activity android:name=".activity.home.AddressEditActivity"></activity>
-        <activity android:name=".activity.home.AddressChooseAcrtivity"></activity>
-        <activity android:name=".activity.home.AddressManageActivity"></activity>
+        <activity android:name=".activity.order.issue.ThingsAddActivity"></activity>
+        <activity android:name=".activity.order.accept.AcceptOrderActivity"></activity>
+        <activity android:name=".activity.order.evaluate.EvaluateActivity"></activity>
+        <activity android:name=".activity.order.MyOrderActivity"></activity>
+
 
         <!-- login -->
         <activity android:name=".activity.login.LoginActivity"></activity>
@@ -41,6 +41,10 @@
 
         <!-- setting -->
         <activity android:name=".activity.setting.WalletActivity"></activity>
+        <activity android:name=".activity.setting.address.AddressAddActivity"></activity>
+        <activity android:name=".activity.setting.address.AddressChooseAcrtivity"></activity>
+        <activity android:name=".activity.setting.address.AddressEditActivity"></activity>
+        <activity android:name=".activity.setting.address.AddressManageActivity"></activity>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

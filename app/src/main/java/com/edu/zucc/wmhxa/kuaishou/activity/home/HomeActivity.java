@@ -41,6 +41,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     public List<Fragment> fragmentsList = new ArrayList<>();
     private long mExitTime;
     public BottomAdapter bottomAdapter;
+    private int click = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,11 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title2_tv_accept:
+                if (click == 0) {
+                    break;
+                } else {
+                    click = 0;
+                }
                 Log.i(TAG, "点击接受任务");
                 title2_tv_accept.setBackground(getDrawable(R.color.white));
                 title2_tv_issue.setBackground(getDrawable(R.color.head));
@@ -100,6 +106,11 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 break;
 
             case R.id.title2_tv_issue:
+                if (click == 1) {
+                    break;
+                } else {
+                    click = 1;
+                }
                 Log.i(TAG, "点击发布任务");
                 title2_tv_accept.setBackground(getDrawable(R.color.head));
                 title2_tv_issue.setBackground(getDrawable(R.color.white));
