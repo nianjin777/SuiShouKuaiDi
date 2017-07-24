@@ -16,6 +16,7 @@ public class MyOrderActivity extends AppCompatActivity {
     private ListView order_lv_notfin;
     private ListView order_lv_wiateval;
     private ListView order_lv_haveeval;
+    private ListView order_lv_history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MyOrderActivity extends AppCompatActivity {
         order_lv_notfin = (ListView) view.findViewById(R.id.order_lv_notfin);
         order_lv_wiateval = (ListView) view.findViewById(R.id.order_lv_wiateval);
         order_lv_haveeval = (ListView) view.findViewById(R.id.order_lv_haveeval);
-
+        order_lv_history = (ListView) view.findViewById(R.id.order_lv_history);
     }
 
 }
