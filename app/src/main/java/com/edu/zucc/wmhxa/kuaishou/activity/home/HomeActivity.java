@@ -1,11 +1,15 @@
 package com.edu.zucc.wmhxa.kuaishou.activity.home;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -27,9 +31,10 @@ import java.util.List;
 
 public class HomeActivity extends FragmentActivity implements View.OnClickListener {
 
-    private String TAG = "HomeActivity";
-    private SlidingMenu menu;
-    private ViewPager mViewPager;
+    private static final String TAG = "HomeActivity";
+    private static final int VOICE_REQUEST_CODE = 66;
+    public static SlidingMenu menu;
+    public static ViewPager mViewPager;
     private AlphaTabsIndicator alphaTabsIndicator;
     private View home_title4;
     private View home_title2;
@@ -50,6 +55,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         SysApplication.getInstance().addActivity(this);
         activity = this;
 
+        requestPermissions();
         menu = new LeftMenu(this).getLeftMenu();
         findViewById();
         setListener();
@@ -202,7 +208,21 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         public void onPageScrollStateChanged(int state) {
             //有三种状态(0，1，2)。arg0 ==1的时辰默示正在滑动，arg0==2的时辰默示滑动完毕了，arg0==0的时辰默示什么都没做。
         }
+    }
 
-
+    /**
+     * 开启之前判断权限是否打开
+     */
+    private void requestPermissions() {
+        //判断是否开启摄像头权限
+        if ((ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) &&
+                (ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                ) {
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, VOICE_REQUEST_CODE);
+        }
     }
 }
