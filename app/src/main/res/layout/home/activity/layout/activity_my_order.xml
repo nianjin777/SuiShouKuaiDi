@@ -62,6 +62,19 @@
                 android:id="@+id/order_lv_haveeval"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:background="#F2F2F2"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="历史评价"
+                android:textSize="16sp" />
+
+            <ListView
+                android:id="@+id/order_lv_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
 
         </LinearLayout>
 
