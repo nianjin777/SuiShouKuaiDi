@@ -5,8 +5,8 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/ordewr_title4"
-        layout="@layout/item_title4"></include>
+        android:id="@+id/ordewr_title1"
+        layout="@layout/item_title1"></include>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,9 +29,11 @@
             <ListView
                 android:id="@+id/order_lv_notfin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"></ListView>
 
-            </ListView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"></View>
 
             <TextView
                 android:layout_width="match_parent"
@@ -49,6 +51,10 @@
 
             </ListView>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"></View>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
@@ -62,6 +68,11 @@
                 android:id="@+id/order_lv_haveeval"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"></View>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="33dp"

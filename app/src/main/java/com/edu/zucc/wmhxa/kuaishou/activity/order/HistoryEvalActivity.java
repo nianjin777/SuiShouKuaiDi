@@ -1,4 +1,4 @@
-package com.edu.zucc.wmhxa.kuaishou.activity.home;
+package com.edu.zucc.wmhxa.kuaishou.activity.order;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -27,6 +27,9 @@ android {
                 jniLibs.srcDirs = ['libs'];
                 res.srcDirs =
                         [
+                                'src/main/res/layout/order/accept',
+                                'src/main/res/layout/order/evaluate',
+                                'src/main/res/layout/order/issue',
                                 'src/main/res/layout/setting/wallet',
                                 'src/main/res/layout/setting/address',
                                 'src/main/res/layout/comm/activity',
@@ -39,6 +42,7 @@ android {
                                 'src/main/res/layout/login',
                                 'src/main/res/layout/setting',
                                 'src/main/res/layout/comm',
+                                'src/main/res/layout/order',
                                 'src/main/res/layout',
                                 'src/main/res'
                         ]

@@ -29,10 +29,14 @@
 
         <!-- home -->
         <activity android:name=".activity.home.HomeActivity"></activity>
+
+        <!-- order -->
         <activity android:name=".activity.order.issue.ThingsAddActivity"></activity>
         <activity android:name=".activity.order.accept.AcceptOrderActivity"></activity>
         <activity android:name=".activity.order.evaluate.EvaluateActivity"></activity>
         <activity android:name=".activity.order.MyOrderActivity"></activity>
+        <activity android:name=".activity.order.HistoryEvalActivity"></activity>
+        <activity android:name=".activity.order.SeeOrderActivity"></activity>
 
 
         <!-- login -->
@@ -46,6 +50,7 @@
         <activity android:name=".activity.setting.address.AddressEditActivity"></activity>
         <activity android:name=".activity.setting.address.AddressManageActivity"></activity>
 
+        <!-- 百度地图key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="bng1bmUtFQEsjdRGLTTUkHQYe1R4ElMP" />

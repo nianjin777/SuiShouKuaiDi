@@ -78,6 +78,8 @@ public class LeftMenu {
                     break;
                 case 2:
                     //订单
+                    intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.order.MyOrderActivity");
+                    activity.startActivity(intent);
                     break;
                 case 3:
                     //设置
