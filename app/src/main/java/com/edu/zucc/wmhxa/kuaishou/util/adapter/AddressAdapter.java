@@ -16,7 +16,7 @@ import java.util.Map;
  */
 
 
-public class AddressAdapter extends BaseAdapter {
+public class AddressAdapter extends BaseAdapter{
     Context context;
     Map<String, String> map;
 
@@ -54,7 +54,7 @@ public class AddressAdapter extends BaseAdapter {
         TextView addAddress = (TextView) view.findViewById(R.id.item_tv_addaddress);
 
         addName.setText(map.get("username"));
-        addPhone.setText(map.get("phone"));
+        addPhone.setText(map.get("uesrphone"));
         addAddress.setText(map.get("address"));
 
         return view;

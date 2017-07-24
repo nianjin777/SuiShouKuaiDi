@@ -9,46 +9,61 @@
         android:layout_height="1dp"
         android:background="#33000000" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="266dp"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:textSize="20dp">
+        android:layout_height="match_parent">
 
-        <com.baidu.mapapi.map.MapView
-            android:id="@+id/mMapView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="266dp"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:textSize="20dp">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#33000000" />
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/mMapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="附近任务"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+            </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"
-        android:background="#33000000" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="#33000000" />
 
-    <ListView
-        android:id="@+id/accept_lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="附近任务"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:background="#33000000" />
+
+            <ListView
+                android:id="@+id/accept_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

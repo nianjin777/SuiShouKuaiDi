@@ -91,21 +91,21 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.issue_rl_address:
+                //选择地址
                 intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.home.AddressChooseAcrtivity");
                 startActivity(intent);
                 break;
             case R.id.issue_bt_addthing:
+                //添加项目
                 intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.home.ThingsAddActivity");
                 startActivity(intent);
                 break;
             case R.id.issue_bt_cancel:
-                //Reset date
+                //点击取消
+                //重置数据
                 HomeActivity activity = HomeActivity.activity;
-
                 activity.fragmentsList.set(0, AccpetHallFragment.getInstanceFragment());
                 activity.bottomAdapter.notifyDataSetChanged();
-
-
                 activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
                 activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
 
