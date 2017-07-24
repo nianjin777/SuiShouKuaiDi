@@ -43,7 +43,7 @@ public class WaitEvalAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = View.inflate(context, R.layout.item_address, parent);
+            view = View.inflate(context, R.layout.item_order_waiteval, parent);
         } else {
             view = convertView;
         }

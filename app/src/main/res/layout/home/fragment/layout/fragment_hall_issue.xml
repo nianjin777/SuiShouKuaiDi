@@ -151,12 +151,13 @@
                 android:layout_height="16dp"></LinearLayout>
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="@color/gray"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:text="添加备注"
+                android:text="备注"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
