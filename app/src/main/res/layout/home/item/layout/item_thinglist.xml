@@ -7,7 +7,8 @@
     <RelativeLayout
         android:id="@+id/neartask_rl_body"
         android:layout_width="match_parent"
-        android:layout_height="66dp">
+        android:layout_height="66dp"
+        >
 
         <TextView
             android:id="@+id/thinglist_tv_name"
@@ -16,7 +17,8 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="16dp"
             android:text="买菜"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/thinglist_tv_place"
@@ -26,7 +28,8 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:text="购买地点"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:textColor="#000000"/>
 
         <!--<TextView-->
         <!--android:id="@+id/thinglist_tv_1"-->
@@ -56,14 +59,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="数量：" />
+                    android:text="数量："
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/thinglist_et_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="5" />
+                    android:text="5"
+                    android:textColor="#000000"/>
 
             </LinearLayout>
 
@@ -72,7 +77,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="大致金额:" />
+                android:text="大致金额:"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
@@ -84,7 +90,8 @@
             android:layout_toRightOf="@id/thinglist_ll"
             android:gravity="center"
             android:text="5"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="#000000"/>
     </RelativeLayout>
 
     <View

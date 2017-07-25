@@ -134,6 +134,12 @@
         android:id="@+id/history_et_text"
         android:layout_width="match_parent"
         android:layout_height="100dp" />
+    <View
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -39,6 +39,7 @@
             android:layout_toRightOf="@+id/message_iv_head"
             android:gravity="center"
             android:paddingLeft="16dp"
+            android:textColor="#000000"
             />
 
         <TextView
@@ -51,6 +52,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:gravity="center"
+            android:textColor="#000000"
             />
         
     </RelativeLayout>
