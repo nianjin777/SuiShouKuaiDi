@@ -16,6 +16,7 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="16dp"
             android:text="买菜"
+            android:textColor="@color/black"
             android:textSize="35sp" />
 
         <TextView
@@ -26,18 +27,9 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:text="购买地点"
+            android:textColor="@color/black"
             android:textSize="12sp" />
 
-        <!--<TextView-->
-        <!--android:id="@+id/thinglist_tv_1"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:text="大致金额"-->
-        <!--android:textSize="15sp"-->
-        <!--android:layout_alignBaseline="@+id/thinglist_tv_task"-->
-        <!--android:layout_alignBottom="@+id/thinglist_tv_task"-->
-        <!--android:layout_toEndOf="@+id/thinglist_tv_task" />-->
         <LinearLayout
             android:id="@+id/thinglist_ll"
             android:layout_width="80dp"
@@ -56,14 +48,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="数量：" />
+                    android:text="数量："
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/thinglist_et_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="5" />
+                    android:text="5"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -72,7 +66,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="大致金额:" />
+                android:text="大致金额:"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -84,6 +79,7 @@
             android:layout_toRightOf="@id/thinglist_ll"
             android:gravity="center"
             android:text="5"
+            android:textColor="@color/black"
             android:textSize="15sp" />
     </RelativeLayout>
 
