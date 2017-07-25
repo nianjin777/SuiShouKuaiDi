@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,9 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.edu.zucc.wmhxa.kuaishou.R.id.mViewPager;
-
 
 /**
  * Created by Administrator on 2017/7/19.
@@ -78,6 +74,7 @@ public class AccpetHallFragment extends Fragment {
         initData();
         findViewById();
 
+        //权限检查与申请
         while (!(ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) &&
                 !(ContextCompat.checkSelfPermission(getContext(),
@@ -123,8 +120,6 @@ public class AccpetHallFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        //对mapview监听，禁用其他滑动手势
         View v = mMapView.getChildAt(0);
         v.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -170,10 +165,10 @@ public class AccpetHallFragment extends Fragment {
                 // 设置定位数据
                 baiduMap.setMyLocationData(locData);
 
+                xy = new LatLng(location.getLatitude(), location.getLongitude());
                 // 第一次定位时，将地图位置移动到当前位置
                 if (firstLocation) {
                     firstLocation = false;
-                    xy = new LatLng(location.getLatitude(), location.getLongitude());
                     MapStatusUpdate status = MapStatusUpdateFactory.newLatLng(xy);
                     baiduMap.animateMapStatus(status);
                 }

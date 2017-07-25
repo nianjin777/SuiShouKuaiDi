@@ -4,10 +4,10 @@ package com.edu.zucc.wmhxa.kuaishou.model;
  * Created by Administrator on 2017/7/19.
  */
 
-public class BeanUsers {
+public class BeanUser {
     //TODO
-    public static BeanUsers localUser = new BeanUsers();
-//    public static BeanUsers localUser = null ;
+    public static BeanUser localUser = new BeanUser();
+//    public static BeanUser localUser = null ;
 
     private String userID;//用户编号
     private String username;

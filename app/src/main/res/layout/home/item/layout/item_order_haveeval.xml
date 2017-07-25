@@ -25,7 +25,8 @@
             android:layout_toRightOf="@+id/haveeval_head"
             android:paddingLeft="16dp"
             android:text="送货员1"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/haveeval_state"
@@ -36,7 +37,8 @@
             android:layout_marginRight="16dp"
             android:text="已评价"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            />
 
     </RelativeLayout>
 
@@ -58,7 +60,8 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:text="买菜"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/haveeval_tv_text"
@@ -67,7 +70,8 @@
             android:layout_below="@+id/haveeval_tv_task"
             android:paddingLeft="16dp"
             android:text="备注"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/haveeval_tv_distance"
@@ -76,7 +80,8 @@
             android:layout_toRightOf="@+id/haveeval_tv_task"
             android:gravity="center"
             android:text="最远距离："
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/haveeval_tv_dis"
@@ -85,7 +90,8 @@
             android:layout_toRightOf="@+id/haveeval_tv_distance"
             android:gravity="center"
             android:text="2km"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/haveeval_tv_reward"
@@ -96,7 +102,7 @@
             android:gravity="center"
             android:text="奖励金额："
             android:textSize="15sp"
-
+            android:textColor="#000000"
             />
 
         <TextView
@@ -106,7 +112,8 @@
             android:layout_toRightOf="@+id/haveeval_tv_dis"
             android:gravity="center"
             android:text="￥5"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="#000000"/>
     </RelativeLayout>
 
     <View

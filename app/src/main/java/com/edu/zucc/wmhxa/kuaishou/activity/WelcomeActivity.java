@@ -12,7 +12,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity;
 import com.edu.zucc.wmhxa.kuaishou.activity.login.LoginActivity;
-import com.edu.zucc.wmhxa.kuaishou.model.BeanUsers;
+import com.edu.zucc.wmhxa.kuaishou.model.BeanUser;
 import com.edu.zucc.wmhxa.kuaishou.util.SysApplication;
 
 import java.util.Timer;
@@ -35,7 +35,7 @@ public class WelcomeActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             // 要做的事情
-            if (BeanUsers.localUser != null) {
+            if (BeanUser.localUser != null) {
                 intent = new Intent(WelcomeActivity.this, HomeActivity.class);
             } else {
                 intent = new Intent(WelcomeActivity.this, LoginActivity.class);
