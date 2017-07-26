@@ -8,7 +8,41 @@
         android:id="@+id/ordewr_title1"
         layout="@layout/item_title1"></include>
 
+    <TextView
+        android:id="@+id/order_waitline2"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:background="#F2F2F2"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="等待接单"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/order_ingline2"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:background="#F2F2F2"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="正在进行"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/order_finishline2"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:background="#F2F2F2"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="已完成"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
     <ScrollView
+        android:id="@+id/order_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,16 +52,17 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/order_waitline"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="#F2F2F2"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:text="未完成"
+                android:text="等待接单"
                 android:textSize="16sp" />
 
             <ListView
-                android:id="@+id/order_lv_notfin"
+                android:id="@+id/order_lv_wait"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
 
@@ -36,16 +71,17 @@
                 android:layout_height="4dp"></View>
 
             <TextView
+                android:id="@+id/order_ingline"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="#F2F2F2"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:text="待评价"
+                android:text="正在进行"
                 android:textSize="16sp" />
 
             <ListView
-                android:id="@+id/order_lv_wiateval"
+                android:id="@+id/order_lv_ing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -56,16 +92,17 @@
                 android:layout_height="4dp"></View>
 
             <TextView
+                android:id="@+id/order_finishline"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="#F2F2F2"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:text="已评价"
+                android:text="已完成"
                 android:textSize="16sp" />
 
             <ListView
-                android:id="@+id/order_lv_haveeval"
+                android:id="@+id/order_lv_finish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
 
@@ -73,22 +110,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="4dp"></View>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:background="#F2F2F2"
-                android:gravity="center_vertical"
-                android:paddingLeft="16dp"
-                android:text="历史评价"
-                android:textSize="16sp" />
-
-            <ListView
-                android:id="@+id/order_lv_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
-
         </LinearLayout>
 
     </ScrollView>
+
 
 </LinearLayout>

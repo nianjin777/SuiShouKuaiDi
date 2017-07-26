@@ -1,8 +1,6 @@
 package com.edu.zucc.wmhxa.kuaishou.activity.order.accept;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
-import com.edu.zucc.wmhxa.kuaishou.util.SerializableMap;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.ThingListAdapter;
 
 import java.util.HashMap;
@@ -33,7 +30,7 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accept_order);
+        setContentView(R.layout.activity_order_accept);
         //拿到选择任务的信息Map
         Bundle extras = getIntent().getExtras();
         info = (HashMap<String, Object>) extras.get("info");

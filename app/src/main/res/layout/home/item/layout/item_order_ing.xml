@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:id="@+id/ordering_rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="33dp">
+
+        <ImageView
+            android:id="@+id/ordering_head"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/shape" />
+
+        <TextView
+            android:id="@+id/ordering_empname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ordering_head"
+            android:paddingLeft="16dp"
+            android:text="送货员1"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/ordering_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="正在进行"
+            android:textColor="#FF0000"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:id="@+id/ordering_rl_body"
+        android:layout_width="match_parent"
+        android:layout_height="66dp">
+
+        <TextView
+            android:id="@+id/ordering_tv_taskname"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="买菜"
+            android:textColor="#000000"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/ordering_tv_text"
+            android:layout_width="200dp"
+            android:layout_height="16dp"
+            android:layout_below="@+id/ordering_tv_taskname"
+            android:paddingLeft="16dp"
+            android:text="备注"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/ordering_tv_distance"
+            android:layout_width="80dp"
+            android:layout_height="33dp"
+            android:layout_toRightOf="@+id/ordering_tv_taskname"
+            android:gravity="center"
+            android:text="最远距离："
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/ordering_tv_dis"
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_toRightOf="@+id/ordering_tv_distance"
+            android:gravity="center"
+            android:text="2km"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/ordering_tv_reward"
+            android:layout_width="120dp"
+            android:layout_height="33dp"
+            android:layout_below="@+id/ordering_tv_distance"
+            android:layout_toRightOf="@+id/ordering_tv_taskname"
+            android:gravity="center"
+            android:text="奖励金额："
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/ordering_tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/ordering_tv_dis"
+            android:gravity="center"
+            android:text="￥5"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:id="@+id/ordering_ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_below="@+id/ordering_tv_address"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ordering_bt_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:text="确认收货"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/ordering_bt_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/ordering_bt_ok"
+            android:background="@null"
+            android:text="取消订单"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#33000000" />
+
+</LinearLayout>
