@@ -1,5 +1,6 @@
 package com.edu.zucc.wmhxa.kuaishou.activity.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import com.edu.zucc.wmhxa.kuaishou.util.SysApplication;
 
 import static android.R.id.button1;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private long mExitTime;
     private Button register;

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
+import com.edu.zucc.wmhxa.kuaishou.util.ListViewUtil;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.ThingListAdapter;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
     private TextView accept_tv_totle;
     private Button accept_bt_back;
     private Button accept_bt_accept;
-    private Map<String, Object> info;
+    private Map<String, Object> order;
     private ImageView back;
 
     @Override
@@ -33,7 +34,7 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.activity_order_accept);
         //拿到选择任务的信息Map
         Bundle extras = getIntent().getExtras();
-        info = (HashMap<String, Object>) extras.get("info");
+        order = (HashMap<String, Object>) extras.get("info");
         findViewById();
         setListener();
     }
@@ -45,24 +46,25 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
         TextView title1_tv = (TextView) title.findViewById(R.id.title1_tv);
         title1_tv.setText("订单详情");
 
-        List<BeanThing> things = (List<BeanThing>) info.get("things");
-        double totle = (Double) info.get("money");
+        List<BeanThing> things = (List<BeanThing>) order.get("thinglist");
+        double totle = (Double) order.get("orderbounty");
         for (BeanThing beanThing : things) {
-            totle += beanThing.getMoney() * beanThing.getNumber();
+            totle += beanThing.getMoney();
         }
 
         //任务名
         accept_tv_taskname = (TextView) findViewById(R.id.accept_tv_taskname);
-        accept_tv_taskname.setText((String) info.get("taskname"));
+        accept_tv_taskname.setText((String) order.get("ordername"));
         //物品清单
         accept_lv_thing = (ListView) findViewById(R.id.accept_lv_thing);
         accept_lv_thing.setAdapter(new ThingListAdapter(getApplicationContext(), things));
+        ListViewUtil.setListViewHeightBasedOnChildren(accept_lv_thing);
         //备注
         accrpt_tv_text = (TextView) findViewById(R.id.accrpt_tv_text);
-        accrpt_tv_text.setText((String) info.get("text"));
+        accrpt_tv_text.setText((String) order.get("ordertext"));
         //金额
         accept_tv_money = (TextView) findViewById(R.id.accept_tv_money);
-        accept_tv_money.setText(String.valueOf(info.get("money")));
+        accept_tv_money.setText(String.valueOf(order.get("orderbounty")));
         //总价
         accept_tv_totle = (TextView) findViewById(R.id.accept_tv_totle);
         accept_tv_totle.setText(String.valueOf(totle));

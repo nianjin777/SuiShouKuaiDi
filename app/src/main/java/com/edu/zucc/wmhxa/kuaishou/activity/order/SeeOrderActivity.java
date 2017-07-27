@@ -22,7 +22,7 @@ public class SeeOrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_see_order);
+        setContentView(R.layout.activity_seeorder);
         findViewById();
     }
     public void findViewById(){

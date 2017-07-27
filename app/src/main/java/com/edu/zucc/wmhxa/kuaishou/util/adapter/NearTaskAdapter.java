@@ -7,8 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.edu.zucc.wmhxa.kuaishou.R;
+import com.edu.zucc.wmhxa.kuaishou.activity.home.fragment.AcceptHallFragment;
+import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -54,10 +59,18 @@ public class NearTaskAdapter extends BaseAdapter {
         TextView taskMoney = (TextView) view.findViewById(R.id.neartask_tv_money);
 
         Map<String, Object> map = list.get(position);
-        taskNmae.setText((String) map.get("taskname"));
-        taskDis.setText((String) map.get("distance"));//距离
-        taskText.setText((String) map.get("text"));
-        taskMoney.setText(String.valueOf(map.get("money")));
+        List<BeanThing> thinglist = (List<BeanThing>) map.get("thinglist");
+        LatLng thingXY = new LatLng(thinglist.get(0).getLatitude(), thinglist.get(0).getLongitude());
+        LatLng userXY = AcceptHallFragment.xy;
+        taskNmae.setText((String) map.get("ordername"));
+//        taskDis.setText((String) map.get("distance"));//距离
+//        int distance = (int)DistanceUtil.getDistance(userXY, thingXY);
+        double distance = (int) DistanceUtil.getDistance(userXY, thingXY) / 1000.0;
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        taskDis.setText(df.format(distance) + " km");
+        taskText.setText((String) map.get("ordertext"));
+        taskMoney.setText(String.valueOf(map.get("orderbounty")));
 
 
         return view;

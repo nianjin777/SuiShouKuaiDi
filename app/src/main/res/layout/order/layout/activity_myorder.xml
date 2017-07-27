@@ -8,39 +8,6 @@
         android:id="@+id/ordewr_title1"
         layout="@layout/item_title1"></include>
 
-    <TextView
-        android:id="@+id/order_waitline2"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:background="#F2F2F2"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="等待接单"
-        android:textSize="16sp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/order_ingline2"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:background="#F2F2F2"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="正在进行"
-        android:textSize="16sp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/order_finishline2"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:background="#F2F2F2"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="已完成"
-        android:textSize="16sp"
-        android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/order_sv"
         android:layout_width="match_parent"

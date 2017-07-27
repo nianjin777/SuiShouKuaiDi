@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.util.ListViewUtil;
-import com.edu.zucc.wmhxa.kuaishou.util.OrderListScrollView;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.OrderFinishAdapter;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.OrderIngAdapter;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.OrderWaitAdapter;
@@ -30,7 +29,6 @@ public class MyOrderActivity extends Activity implements View.OnClickListener {
     private ImageView back;
 
     private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-    private OrderListScrollView order_sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +41,6 @@ public class MyOrderActivity extends Activity implements View.OnClickListener {
     }
 
     public void findViewById() {
-//        order_sv = (OrderListScrollView) findViewById(R.id.order_sv);
-//        View order_waitline2 = findViewById(R.id.order_waitline2);
-//        View order_ingline2 = findViewById(R.id.order_ingline2);
-//        View order_finishline2 = findViewById(R.id.order_finishline2);
-//        order_sv.setV(findViewById(R.id.order_waitline2), findViewById(R.id.order_ingline2), findViewById(R.id.order_finishline2));
-
         ordewr_title1 = findViewById(R.id.ordewr_title1);
         title1_tv = (TextView) ordewr_title1.findViewById(R.id.title1_tv);
         title1_tv.setText("我的订单");

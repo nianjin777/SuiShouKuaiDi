@@ -29,10 +29,10 @@
                 android:orientation="vertical"
                 android:textSize="20dp">
 
-                <com.baidu.mapapi.map.MapView
+                <com.baidu.mapapi.map.TextureMapView
                     android:id="@+id/mMapView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
+                    android:layout_height="match_parent"></com.baidu.mapapi.map.TextureMapView>
 
             </LinearLayout>
 

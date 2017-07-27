@@ -107,37 +107,42 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
             case R.id.issue_bt_cancel:
                 //点击取消
                 //重置数据
+
                 HomeActivity activity = HomeActivity.activity;
-                activity.fragmentsList.set(0, AccpetHallFragment.getInstanceFragment());
-                activity.bottomAdapter.notifyDataSetChanged();
                 activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
                 activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
+                activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
+                activity.bottomAdapter.notifyDataSetChanged();
 
                 break;
             case R.id.issue_bt_issue:
                 //TODO 发布操作
-
-                new AlertDialog.Builder(getContext()).setTitle("支付")//设置对话框标题
-                        .setMessage("是否进行支付(第三方接口未实现，点击是进行支付)")//设置显示的内容
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
-                                Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
-                                HomeActivity activity = HomeActivity.activity;
-                                activity.fragmentsList.set(0, AccpetHallFragment.getInstanceFragment());
-                                activity.bottomAdapter.notifyDataSetChanged();
-                                activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
-                                activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
-                            }
-                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加返回按钮
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {//响应事件
-                        Toast.makeText(getContext(), "发布失败", Toast.LENGTH_SHORT).show();
-                    }
-                }).show();//在按键响应事件中显示此对话框
-
+                issue();
                 break;
         }
+    }
+
+    //发布信息弹窗
+    private void issue() {
+        new AlertDialog.Builder(getContext()).setTitle("支付")//设置对话框标题
+                .setMessage("是否进行支付(第三方接口未实现，点击是进行支付)")//设置显示的内容
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                        Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        HomeActivity activity = HomeActivity.activity;
+                        HomeActivity.click = 0;
+                        activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
+                        activity.bottomAdapter.notifyDataSetChanged();
+                        activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
+                        activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加返回按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {//响应事件
+                Toast.makeText(getContext(), "发布失败", Toast.LENGTH_SHORT).show();
+            }
+        }).show();//在按键响应事件中显示此对话框
     }
 
     @Nullable

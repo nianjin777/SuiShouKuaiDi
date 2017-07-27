@@ -46,7 +46,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     public List<Fragment> fragmentsList = new ArrayList<>();
     private long mExitTime;
     public BottomAdapter bottomAdapter;
-    private int click = 0;
+    public static int click = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         setListener();
 
         //把碎片加入List中
-        fragmentsList.add(new AccpetHallFragment());
+        fragmentsList.add(new AcceptHallFragment());
         fragmentsList.add(new MsgFragment());
         fragmentsList.add(new BookFragment());
         fragmentsList.add(new FindFragment());
@@ -101,13 +101,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 } else {
                     click = 0;
                 }
-                Log.i(TAG, "点击接受任务");
-                title2_tv_accept.setBackground(getDrawable(R.color.white));
-                title2_tv_issue.setBackground(getDrawable(R.color.head));
-
-                //修改页面
-                fragmentsList.set(0, AccpetHallFragment.getInstanceFragment());
-                bottomAdapter.notifyDataSetChanged();
+                chooseAccept();
 
                 break;
 
@@ -117,16 +111,30 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 } else {
                     click = 1;
                 }
-                Log.i(TAG, "点击发布任务");
-                title2_tv_accept.setBackground(getDrawable(R.color.head));
-                title2_tv_issue.setBackground(getDrawable(R.color.white));
-
-                //修改页面
-                fragmentsList.set(0, IssueHallFragment.getInstanceFragment());
-                bottomAdapter.notifyDataSetChanged();
+                chooseIssue();
 
                 break;
         }
+    }
+
+    private void chooseAccept() {
+        Log.i(TAG, "点击接受任务");
+        title2_tv_accept.setBackground(getDrawable(R.color.white));
+        title2_tv_issue.setBackground(getDrawable(R.color.head));
+
+        //修改页面
+        fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
+        bottomAdapter.notifyDataSetChanged();
+    }
+
+    private void chooseIssue() {
+        Log.i(TAG, "点击发布任务");
+        title2_tv_accept.setBackground(getDrawable(R.color.head));
+        title2_tv_issue.setBackground(getDrawable(R.color.white));
+
+        //修改页面
+        fragmentsList.set(0, IssueHallFragment.getInstanceFragment());
+        bottomAdapter.notifyDataSetChanged();
     }
 
     //对返回键进行监听

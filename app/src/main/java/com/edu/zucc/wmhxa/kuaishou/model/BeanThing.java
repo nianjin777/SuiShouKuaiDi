@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 
 public class BeanThing implements Serializable {
+    //订单号
+    private int thingid;
     //物品名称
     private String name;
     //预算
@@ -20,6 +22,8 @@ public class BeanThing implements Serializable {
     //购买地点经纬度 (手动添加的地点没有这两个属性)
     private double longitude;
     private double latitude;
+    //是否购买
+    private boolean buy;
 
     //地点对象
     private LatLng xy = null;
@@ -39,6 +43,10 @@ public class BeanThing implements Serializable {
         this.money = money;
         this.number = number;
         this.address = address;
+    }
+
+    public BeanThing() {
+        super();
     }
 
     public String getName() {
@@ -95,5 +103,21 @@ public class BeanThing implements Serializable {
 
     public void setXy(LatLng xy) {
         this.xy = xy;
+    }
+
+    public int getThingid() {
+        return thingid;
+    }
+
+    public void setThingid(int thingid) {
+        this.thingid = thingid;
+    }
+
+    public boolean isBuy() {
+        return buy;
+    }
+
+    public void setBuy(boolean buy) {
+        this.buy = buy;
     }
 }

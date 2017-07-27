@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -24,9 +26,11 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity;
+import com.edu.zucc.wmhxa.kuaishou.control.MsgCenter;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
 import com.edu.zucc.wmhxa.kuaishou.util.ListViewUtil;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.NearTaskAdapter;
@@ -40,37 +44,44 @@ import java.util.Map;
  * Created by Administrator on 2017/7/19.
  */
 
-public class AccpetHallFragment extends Fragment {
+public class AcceptHallFragment extends Fragment {
 
     private String TAG = "AccpetHallFragment";
 
-    private MapView mMapView;
+    private TextureMapView mMapView;
     private BaiduMap baiduMap;
     private boolean firstLocation;
     private LocationClient mLocationClient;
-    LatLng xy = null;
+    public static LatLng xy = null;
 
     private View view;
     private static Fragment instanceFragment = null;
     private ListView accept_lv;
-    private List<Map<String, Object>> mapList;
+    private List<Map<String, Object>> orderList;
     private ScrollView accept_sv;
 
     public static Fragment getInstanceFragment() {
         if (instanceFragment == null) {
-            instanceFragment = new AccpetHallFragment();
+            instanceFragment = new AcceptHallFragment();
             return instanceFragment;
         } else {
             return instanceFragment;
         }
     }
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            accept_lv.setAdapter(new NearTaskAdapter(getContext(), orderList));
+            ListViewUtil.setListViewHeightBasedOnChildren(accept_lv);
+        }
+    };
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hall_accept, container, false);
-
-
+        //初始化数据
         initData();
         findViewById();
 
@@ -88,25 +99,24 @@ public class AccpetHallFragment extends Fragment {
 
     private void initData() {
         //造一个假数据
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("taskname", "买烟");
-        map.put("distance", "500米");
-        map.put("text", "纯雅谢谢！");
-        map.put("money", 2.0);
-        List<BeanThing> thingList = new ArrayList<BeanThing>();
-        thingList.add(new BeanThing("纯雅", "超市", 16.0, 2));
-        map.put("things", thingList);
-        mapList = new ArrayList<Map<String, Object>>();
-        for (int i = 0; i < 20; i++) {
-            mapList.add(map);
-        }
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("taskname", "买烟");
+//        map.put("distance", "500米");
+//        map.put("text", "纯雅谢谢！");
+//        map.put("money", 2.0);
+//        List<BeanThing> thingList = new ArrayList<BeanThing>();
+//        thingList.add(new BeanThing("纯雅", "超市", 16.0, 2));
+//        map.put("things", thingList);
+//        orderList = new ArrayList<Map<String, Object>>();
+//        for (int i = 0; i < 20; i++) {
+//            orderList.add(map);
+//        }
+        orderList = MsgCenter.nearTaskList;
     }
 
     public void findViewById() {
         accept_sv = (ScrollView) view.findViewById(R.id.accept_sv);
         accept_lv = (ListView) view.findViewById(R.id.accept_lv);
-        accept_lv.setAdapter(new NearTaskAdapter(getContext(), mapList));
-        ListViewUtil.setListViewHeightBasedOnChildren(accept_lv);
     }
 
     public void setListener() {
@@ -116,7 +126,7 @@ public class AccpetHallFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.order.accept.AcceptOrderActivity");
-                intent.putExtra("info", (HashMap<String, Object>) mapList.get(position));
+                intent.putExtra("info", (HashMap<String, Object>) orderList.get(position));
                 startActivity(intent);
             }
         });
@@ -140,7 +150,7 @@ public class AccpetHallFragment extends Fragment {
 
     //初始化地图
     private void initMap() {
-        mMapView = (MapView) view.findViewById(R.id.mMapView);
+        mMapView = (TextureMapView) view.findViewById(R.id.mMapView);
         baiduMap = mMapView.getMap();
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(18f);
         baiduMap.setMapStatus(msu);
@@ -166,12 +176,16 @@ public class AccpetHallFragment extends Fragment {
                 baiduMap.setMyLocationData(locData);
 
                 xy = new LatLng(location.getLatitude(), location.getLongitude());
-                // 第一次定位时，将地图位置移动到当前位置
+                // 第一次定位时，将地图位置移动到当前位置 并获取当前位置下的任务列表
                 if (firstLocation) {
                     firstLocation = false;
                     MapStatusUpdate status = MapStatusUpdateFactory.newLatLng(xy);
                     baiduMap.animateMapStatus(status);
+                    Message message = new Message();
+                    message.what = 1;
+                    handler.sendMessage(message);
                 }
+
             }
 
             @Override

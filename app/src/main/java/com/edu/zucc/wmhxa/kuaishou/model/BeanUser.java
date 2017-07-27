@@ -6,7 +6,7 @@ package com.edu.zucc.wmhxa.kuaishou.model;
 
 public class BeanUser {
     //TODO
-    public static BeanUser localUser = new BeanUser();
+//    public static BeanUser localUser = new BeanUser();
 //    public static BeanUser localUser = null ;
 
     private String userID;//用户编号
@@ -18,6 +18,21 @@ public class BeanUser {
     private String phone;//联系电话
     private boolean isCourier = false;
     private String email;//邮箱
+
+    public BeanUser(String username, String password, String payPassword, String name, String ID, String phone, boolean isCourier, String email) {
+        this.username = username;
+        this.password = password;
+        this.payPassword = payPassword;
+        this.name = name;
+        this.ID = ID;
+        this.phone = phone;
+        this.isCourier = isCourier;
+        this.email = email;
+    }
+
+//    public BeanUser() {
+//        super();
+//    }
 
     public String getUserID() {
         return userID;

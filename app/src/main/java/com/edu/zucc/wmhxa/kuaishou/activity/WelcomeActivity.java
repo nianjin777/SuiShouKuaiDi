@@ -12,6 +12,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity;
 import com.edu.zucc.wmhxa.kuaishou.activity.login.LoginActivity;
+import com.edu.zucc.wmhxa.kuaishou.control.MsgCenter;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanUser;
 import com.edu.zucc.wmhxa.kuaishou.util.SysApplication;
 
@@ -35,7 +36,7 @@ public class WelcomeActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             // 要做的事情
-            if (BeanUser.localUser != null) {
+            if (instanceMsgCenter.beanUser != null) {
                 intent = new Intent(WelcomeActivity.this, HomeActivity.class);
             } else {
                 intent = new Intent(WelcomeActivity.this, LoginActivity.class);
@@ -45,6 +46,7 @@ public class WelcomeActivity extends Activity {
             super.handleMessage(msg);
         }
     };
+    private MsgCenter instanceMsgCenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class WelcomeActivity extends Activity {
         setContentView(R.layout.activity_welcome);
         SysApplication.getInstance().addActivity(this);
 
+        //初始化消息中心
+        instanceMsgCenter = MsgCenter.getInstanceMsgCenter();
 
         //初始化计时器任务
         task = new TimerTask() {
