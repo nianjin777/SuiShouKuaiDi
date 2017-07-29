@@ -39,7 +39,7 @@
                     android:layout_height="40dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="34dp"
                     android:layout_marginLeft="16dp"
                     android:background="@drawable/custom_loc" />
 
