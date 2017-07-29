@@ -20,6 +20,12 @@ import android.widget.Toast;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity;
+import com.edu.zucc.wmhxa.kuaishou.control.MsgCenter;
+import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
+import com.edu.zucc.wmhxa.kuaishou.util.adapter.ThingListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -44,6 +50,8 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
     private Button issue_bt_cancel;
     private Button issue_bt_issue;
 
+    private List<BeanThing> thingList = new ArrayList<BeanThing>();
+
     public static IssueHallFragment getInstanceFragment() {
         if (instanceFragment == null) {
             instanceFragment = new IssueHallFragment();
@@ -64,14 +72,15 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
-
-    public void findViewById() {
+    private void findViewById() {
         issue_tv_name = (TextView) view.findViewById(R.id.issue_tv_name);
         issue_tv_phone = (TextView) view.findViewById(R.id.issue_tv_phone);
         issue_tv_addr = (TextView) view.findViewById(R.id.issue_tv_addr);
         issue_rl_address = view.findViewById(R.id.issue_rl_address);
         issue_et_taskname = (EditText) view.findViewById(R.id.issue_et_taskname);
+        //设置lv
         issue_lv = (ListView) view.findViewById(R.id.issue_lv);
+        issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
         issue_et_text = (EditText) view.findViewById(R.id.issue_et_text);
         issue_et_money = (EditText) view.findViewById(R.id.issue_et_money);
         issue_tv_totle = (TextView) view.findViewById(R.id.issue_tv_totle);
@@ -81,7 +90,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
 
     }
 
-    public void setListener() {
+    private void setListener() {
         issue_rl_address.setOnClickListener(this);
         issue_bt_cancel.setOnClickListener(this);
         issue_bt_issue.setOnClickListener(this);
@@ -89,6 +98,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
 
         //lv也要加监听
     }
+
 
     @Override
     public void onClick(View v) {
@@ -100,9 +110,10 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.issue_bt_addthing:
-                //添加项目
+                //添加物品
                 intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.order.issue.ThingsAddActivity");
-                startActivity(intent);
+//                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.issue_bt_cancel:
                 //点击取消
@@ -117,9 +128,17 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.issue_bt_issue:
                 //TODO 发布操作
+                getData();
                 issue();
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        BeanThing thing = (BeanThing) data.getExtras().get("thing");
+        thingList.add(thing);
+        issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
     }
 
     //发布信息弹窗
@@ -130,6 +149,10 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
                         Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        //发送数据
+                        sendData();
+
+                        //跳转
                         HomeActivity activity = HomeActivity.activity;
                         HomeActivity.click = 0;
                         activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
@@ -143,6 +166,19 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 Toast.makeText(getContext(), "发布失败", Toast.LENGTH_SHORT).show();
             }
         }).show();//在按键响应事件中显示此对话框
+    }
+
+    private void getData() {
+        String bossName = (String) issue_tv_name.getText();
+        String phone = (String) issue_tv_phone.getText();
+        String Address = (String) issue_tv_addr.getText();
+        String orderName = String.valueOf(issue_et_taskname.getText());
+        // thingList 可以直接拿过去发
+        String orderText = String.valueOf(issue_et_text.getText());
+    }
+
+    private void sendData() {
+        //TODO 发送一条订单数据到服务器
     }
 
     @Nullable

@@ -51,6 +51,7 @@
         <activity android:name=".activity.order.MyOrderActivity"></activity>
         <activity android:name=".activity.order.HistoryEvalActivity"></activity>
         <activity android:name=".activity.order.SeeOrderActivity"></activity>
+        <activity android:name=".activity.order.issue.ChoosePositionActivity"></activity>
 
         <!-- comm -->
         <activity android:name=".activity.comm.DynamicActivity"></activity>

@@ -73,7 +73,7 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
         accept_bt_accept = (Button) findViewById(R.id.accept_bt_accept);
     }
 
-    public void setListener() {
+    private void setListener() {
         accept_bt_back.setOnClickListener(this);
         accept_bt_accept.setOnClickListener(this);
         back.setOnClickListener(this);

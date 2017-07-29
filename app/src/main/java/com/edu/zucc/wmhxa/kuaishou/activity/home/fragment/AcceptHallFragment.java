@@ -98,19 +98,6 @@ public class AcceptHallFragment extends Fragment {
     }
 
     private void initData() {
-        //造一个假数据
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("taskname", "买烟");
-//        map.put("distance", "500米");
-//        map.put("text", "纯雅谢谢！");
-//        map.put("money", 2.0);
-//        List<BeanThing> thingList = new ArrayList<BeanThing>();
-//        thingList.add(new BeanThing("纯雅", "超市", 16.0, 2));
-//        map.put("things", thingList);
-//        orderList = new ArrayList<Map<String, Object>>();
-//        for (int i = 0; i < 20; i++) {
-//            orderList.add(map);
-//        }
         orderList = MsgCenter.nearTaskList;
     }
 
