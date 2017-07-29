@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
+import com.edu.zucc.wmhxa.kuaishou.control.MsgCenter;
+import com.edu.zucc.wmhxa.kuaishou.model.BeanUser;
 import com.edu.zucc.wmhxa.kuaishou.util.ListViewUtil;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.FriendAdapter;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.HandleAdapter;
@@ -31,7 +33,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
     private ListView book_lv_friends;
     private ListView book_lv_handle;
     private List<String> list;
-    private List<Map<String, String>> friendsList;
+    private List<BeanUser> friendsList;
 
     @Nullable
     @Override
@@ -50,13 +52,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
         list = new ArrayList<String>();
         list.add("添加好友");
 
-        friendsList = new ArrayList<Map<String, String>>();
-        for (int i = 0; i < 20; i++) {
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("friendname", "好友 " + i);
-            map.put("friendlevel", "" + i);
-            friendsList.add(map);
-        }
+        friendsList = MsgCenter.friendList;
 
     }
 

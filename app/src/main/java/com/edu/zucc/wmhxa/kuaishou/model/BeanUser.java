@@ -9,7 +9,7 @@ public class BeanUser {
 //    public static BeanUser localUser = new BeanUser();
 //    public static BeanUser localUser = null ;
 
-    private String userID;//用户编号
+    private int userID;//用户编号
     private String username;
     private String password;
     private String payPassword;
@@ -18,6 +18,8 @@ public class BeanUser {
     private String phone;//联系电话
     private boolean isCourier = false;
     private String email;//邮箱
+    private String sex;
+    private int good;
 
     public BeanUser(String username, String password, String payPassword, String name, String ID, String phone, boolean isCourier, String email) {
         this.username = username;
@@ -30,15 +32,31 @@ public class BeanUser {
         this.email = email;
     }
 
-//    public BeanUser() {
-//        super();
-//    }
+    public BeanUser() {
+        super();
+    }
 
-    public String getUserID() {
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public int getGood() {
+        return good;
+    }
+
+    public void setGood(int good) {
+        this.good = good;
+    }
+
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 

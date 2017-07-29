@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
+import com.edu.zucc.wmhxa.kuaishou.model.BeanUser;
 
 import java.util.List;
 import java.util.Map;
@@ -18,9 +19,9 @@ import java.util.Map;
 
 public class FriendAdapter extends BaseAdapter {
     Context context;
-    List<Map<String, String>> list;
+    List<BeanUser> list;
 
-    public FriendAdapter(Context context, List<Map<String, String>> list) {
+    public FriendAdapter(Context context, List<BeanUser> list) {
         this.context = context;
         this.list = list;
     }
@@ -53,11 +54,10 @@ public class FriendAdapter extends BaseAdapter {
         TextView name = (TextView) view.findViewById(R.id.friend_tv_name);
         TextView level = (TextView) view.findViewById(R.id.friend_tv_level);
 
-        Map<String, String> map = list.get(position);
+        BeanUser beanUser = list.get(position);
 
-        name.setText(map.get("friendname"));
-        level.setText(map.get("friendlevel"));
-
+        name.setText(beanUser.getName());
+        level.setText(String.valueOf(beanUser.getGood()));
         return view;
     }
 }
