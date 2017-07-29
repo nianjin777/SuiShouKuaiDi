@@ -31,7 +31,8 @@
         android:layout_below="@+id/login_et_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:background="#1E90FF"
+        android:background="#F64242
+"
         android:text="登陆"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
