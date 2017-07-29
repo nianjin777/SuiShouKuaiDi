@@ -33,6 +33,8 @@ public class MsgCenter {
     public static Map<String, Object> orderInfo = null;
     //物品清单
     public static List<BeanThing> thingList = null;
+    //朋友表
+    public static List<BeanUser> friendList = null;
 
     private MsgCenter() {
         initData();
@@ -74,6 +76,19 @@ public class MsgCenter {
             nearTaskList.add(order);
             Log.i(TAG, "添加一个订单");
         }
+
+        friendList = new ArrayList<BeanUser>();
+        for (int i = 0; i < 20; i++) {
+            BeanUser beanUser = new BeanUser();
+            beanUser.setUserID(i);
+            beanUser.setName("朋友" + i);
+            beanUser.setSex("女");
+            beanUser.setPhone("110" + i);
+            beanUser.setUsername("userAccount" + i);
+            beanUser.setGood(i);
+            friendList.add(beanUser);
+        }
+
     }
 
     /**
