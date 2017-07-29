@@ -150,6 +150,12 @@ public class ChoosePositionActivity extends Activity implements
     }
 
     private void setListener() {
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initMap();
+            }
+        });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
