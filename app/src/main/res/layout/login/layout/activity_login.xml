@@ -9,16 +9,16 @@
     <EditText
         android:id="@+id/login_et_username"
         android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_above="@+id/login_et_password"
         android:layout_centerHorizontal="true"
-        android:hint="用户名"
+        android:hint="账号"
         android:paddingLeft="16dp" />
 
     <EditText
         android:id="@+id/login_et_password"
         android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
         android:hint="密码"
@@ -55,7 +55,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:background="#1E90FF" />
+        android:background="@drawable/kuaishou"
+        />
 
 
 </RelativeLayout>
