@@ -91,6 +91,7 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
                 bundle.putSerializable("thing", beanThing);
                 intent.putExtras(bundle);
                 this.setResult(10, intent);
+                finish();
 
                 break;
             case R.id.add_bt_setplace:
@@ -111,7 +112,7 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                add_bt_setplace.setText(result.address+" "+result.name);
+                add_bt_setplace.setText(result.address + " " + result.name);
             }
         });
     }

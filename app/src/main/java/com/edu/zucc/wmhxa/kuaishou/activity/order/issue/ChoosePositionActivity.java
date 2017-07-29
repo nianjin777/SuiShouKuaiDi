@@ -99,7 +99,9 @@ public class ChoosePositionActivity extends Activity implements
                     if (inFlash) {
                     } else {
                         adapter.notifyDataSetChanged();
-                        result = dataList.get(0);
+                        if (poiResult == null) {
+                            result = dataList.get(0);
+                        }
                     }
                     break;
                 case 1:

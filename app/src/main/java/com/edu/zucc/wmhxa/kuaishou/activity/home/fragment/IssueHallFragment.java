@@ -22,6 +22,7 @@ import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.activity.home.HomeActivity;
 import com.edu.zucc.wmhxa.kuaishou.control.MsgCenter;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
+import com.edu.zucc.wmhxa.kuaishou.util.ListViewUtil;
 import com.edu.zucc.wmhxa.kuaishou.util.adapter.ThingListAdapter;
 
 import java.util.ArrayList;
@@ -139,6 +140,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         BeanThing thing = (BeanThing) data.getExtras().get("thing");
         thingList.add(thing);
         issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
+        ListViewUtil.setListViewHeightBasedOnChildren(issue_lv);
     }
 
     //发布信息弹窗
