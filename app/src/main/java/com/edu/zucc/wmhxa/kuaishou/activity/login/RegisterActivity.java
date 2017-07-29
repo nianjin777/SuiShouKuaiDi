@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
 import com.edu.zucc.wmhxa.kuaishou.util.SysApplication;
@@ -21,8 +22,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText reg_et_mima;
     private EditText reg_et_remima;
     private EditText reg_et_name;
-    private CheckBox reg_cb_man;
-    private CheckBox reg_cb_women;
+    private RadioButton reg_rb_sexman;
+    private RadioButton ref_rb_sexwomen;
     private EditText reg_et_idcard;
     private EditText reg_et_phone;
     private EditText reg_et_email;
@@ -49,8 +50,8 @@ public class RegisterActivity extends AppCompatActivity {
         reg_et_mima=(EditText) findViewById(R.id.reg_et_mima);
         reg_et_remima=(EditText) findViewById(R.id.reg_et_remima);
         reg_et_name=(EditText) findViewById(R.id.reg_et_name);
-        reg_cb_man=(CheckBox) findViewById(R.id.reg_cb_man);
-        reg_cb_women=(CheckBox) findViewById(R.id.reg_cb_women);
+        reg_rb_sexman=(RadioButton) findViewById(R.id.reg_rb_sexman);
+        ref_rb_sexwomen=(RadioButton) findViewById(R.id.ref_rb_sexwomen);
         reg_et_idcard=(EditText) findViewById(R.id.reg_et_idcard);
         reg_et_phone=(EditText) findViewById(R.id.reg_et_phone);
         reg_et_email=(EditText) findViewById(R.id.reg_et_email);

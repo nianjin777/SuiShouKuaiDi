@@ -153,17 +153,26 @@
                       android:text="性别:"
                       android:gravity="center"
                       />
-                  <CheckBox
-                      android:id="@+id/reg_cb_man"
-                      android:layout_width="50dp"
-                      android:layout_height="50dp"
-                      android:hint="男"/>
-                  <CheckBox
-                      android:id="@+id/reg_cb_women"
-                      android:layout_width="50dp"
-                      android:layout_height="50dp"
-                      android:hint="女"
-                     />
+                 <RadioGroup
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:orientation="horizontal"
+                     >
+                     <RadioButton
+                         android:id="@+id/reg_rb_sexman"
+                         android:layout_width="50dp"
+                         android:layout_height="50dp"
+                         android:text="男"
+                         />
+                     <RadioButton
+                         android:id="@+id/ref_rb_sexwomen"
+                         android:layout_width="50dp"
+                         android:layout_height="50dp"
+                         android:text="女"
+                         />
+
+                 </RadioGroup>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
