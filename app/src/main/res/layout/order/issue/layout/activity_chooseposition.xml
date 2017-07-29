@@ -73,10 +73,10 @@
 
     <TextView
         android:id="@+id/dqwz"
-        android:text="aaaaaaaaaaaaaa"
-        android:textColor="#000000"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="20dp"
+        android:text="正在定位 ..."
+        android:textColor="#000000" />
 
     <LinearLayout
         android:layout_width="match_parent"

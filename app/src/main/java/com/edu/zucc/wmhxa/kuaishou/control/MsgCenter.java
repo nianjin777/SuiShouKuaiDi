@@ -59,18 +59,10 @@ public class MsgCenter {
             order.put("orderbounty", 1.0 + i);
             List<BeanThing> thingList = new ArrayList<BeanThing>();
             for (int j = 0; j < 5; j++) {
-//                Map<String, Object> thing = new HashMap<String, Object>();
-//                thing.put("thingname", "物品" + (j + 1));
-//                thing.put("thinglatitude", 30.329891);//纬度
-//                thing.put("thinglongitude", 120.157479);//经度
-//                thing.put("thinglocation", "源清中学" + i);
-//                thing.put("thingnum", 5);
-//                thing.put("thingmoney", 5 + i);
                 BeanThing beanThing = new BeanThing();
                 beanThing.setName("物品" + (j + 1));
                 beanThing.setNumber(5);
                 beanThing.setMoney(5.0 + i);
-                //30.3208407389,120.1413774490
                 beanThing.setLatitude(30.3208407389);
                 beanThing.setLongitude(120.1413774490);
                 beanThing.setAddress("源清中学" + i);

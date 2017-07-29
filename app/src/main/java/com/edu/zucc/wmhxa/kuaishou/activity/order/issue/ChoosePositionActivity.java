@@ -86,6 +86,7 @@ public class ChoosePositionActivity extends Activity implements
     private Button bt;
     private EditText et;
     private String sendAddress;
+    private TextView dqwz;
     PoiResult poiResult = null;
     PoiInfo result = null;
 
@@ -118,7 +119,6 @@ public class ChoosePositionActivity extends Activity implements
             }
         }
     };
-    private TextView dqwz;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -146,10 +146,16 @@ public class ChoosePositionActivity extends Activity implements
         mMapView = (MapView) findViewById(R.id.mMapView);
         bt = (Button) findViewById(R.id.bt);
         et = (EditText) findViewById(R.id.et);
-        dqwz = (TextView) findViewById(R.id.dqwz);
+        dqwz = (TextView) findViewById(R.id.dqwz);//当前位置
     }
 
     private void setListener() {
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initMap();
+            }
+        });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

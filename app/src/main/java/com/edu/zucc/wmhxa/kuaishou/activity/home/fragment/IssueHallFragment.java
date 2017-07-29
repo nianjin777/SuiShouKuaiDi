@@ -100,7 +100,6 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         //lv也要加监听
     }
 
-
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
@@ -113,13 +112,11 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
             case R.id.issue_bt_addthing:
                 //添加物品
                 intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.order.issue.ThingsAddActivity");
-//                startActivity(intent);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.issue_bt_cancel:
                 //点击取消
                 //重置数据
-
                 HomeActivity activity = HomeActivity.activity;
                 activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
                 activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
@@ -137,6 +134,9 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
         BeanThing thing = (BeanThing) data.getExtras().get("thing");
         thingList.add(thing);
         issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
@@ -169,6 +169,10 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
             }
         }).show();//在按键响应事件中显示此对话框
     }
+
+    /**
+     * 用MessageCenter与服务器交互
+     */
 
     private void getData() {
         String bossName = (String) issue_tv_name.getText();

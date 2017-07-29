@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
@@ -59,6 +60,7 @@ public class AcceptHallFragment extends Fragment {
     private ListView accept_lv;
     private List<Map<String, Object>> orderList;
     private ScrollView accept_sv;
+    private Button accept_location;
 
     public static Fragment getInstanceFragment() {
         if (instanceFragment == null) {
@@ -104,9 +106,16 @@ public class AcceptHallFragment extends Fragment {
     public void findViewById() {
         accept_sv = (ScrollView) view.findViewById(R.id.accept_sv);
         accept_lv = (ListView) view.findViewById(R.id.accept_lv);
+        accept_location = (Button) view.findViewById(R.id.accept_location);
     }
 
     public void setListener() {
+        accept_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initMap();
+            }
+        });
         //任务列表项目点击事件
         accept_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
