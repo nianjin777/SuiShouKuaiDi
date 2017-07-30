@@ -40,12 +40,26 @@
                       android:text="输入账号:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_zhanghao"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_zhanghao"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_zhanghao"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
@@ -69,12 +83,26 @@
                       android:text="密码:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_mima"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_mima"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_mima"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
@@ -97,12 +125,26 @@
                       android:text="再次输入密码:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_remima"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_remima"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_remima"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
@@ -125,12 +167,26 @@
                       android:text="姓名:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_name"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_name"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_name"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
@@ -154,6 +210,7 @@
                       android:gravity="center"
                       />
                  <RadioGroup
+                     android:id="@+id/reg_rg_sexgroup"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      android:orientation="horizontal"
@@ -165,7 +222,7 @@
                          android:text="男"
                          />
                      <RadioButton
-                         android:id="@+id/ref_rb_sexwomen"
+                         android:id="@+id/reg_rb_sexwomen"
                          android:layout_width="50dp"
                          android:layout_height="50dp"
                          android:text="女"
@@ -195,12 +252,26 @@
                       android:text="身份证号码:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_idcard"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_idcard"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_idcard"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
@@ -223,12 +294,26 @@
                       android:text="联系电话:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_phone"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_phone"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_phone"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
@@ -251,12 +336,26 @@
                       android:text="邮箱（选填）:"
                       android:gravity="center"
                       />
-                  <EditText
-                      android:id="@+id/reg_et_email"
+                  <RelativeLayout
                       android:layout_width="240dp"
-                      android:layout_height="50dp"
-                      android:background="@null"
-                      />
+                      android:layout_height="50dp">
+                      <EditText
+                          android:id="@+id/reg_et_email"
+                          android:layout_width="240dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          />
+                      <TextView
+                          android:id="@+id/reg_tv_email"
+                          android:layout_width="100dp"
+                          android:layout_height="50dp"
+                          android:background="@null"
+                          android:layout_alignParentRight="true"
+                          android:gravity="center"
+                          />
+
+                  </RelativeLayout>
+
               </LinearLayout>
               <View
                   android:layout_width="match_parent"
