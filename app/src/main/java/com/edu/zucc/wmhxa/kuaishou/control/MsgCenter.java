@@ -2,13 +2,22 @@ package com.edu.zucc.wmhxa.kuaishou.control;
 
 import android.util.Log;
 
+import com.baidu.mapapi.model.LatLng;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanThing;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.R.attr.order;
+import static com.baidu.location.d.j.m;
+import static com.baidu.location.d.j.u;
 
 /**
  * Created by KarlCyan on 2017/7/25.
@@ -36,6 +45,7 @@ public class MsgCenter {
     public static List<BeanThing> thingList = null;
     //朋友表
     public static List<BeanUser> friendList = null;
+
 
     private MsgCenter() {
         initData();
@@ -99,10 +109,118 @@ public class MsgCenter {
      */
 
     public boolean login(String userName, String password) {
+        //登陆 封装成json
+        String loginURL = "login";
+        JSONObject info = new JSONObject();
+        BeanUser loginUser;
+        try {
+            info.put("check", "remeber_client");
+            info.put("useraccount", userName);
+            info.put("userpassword", password);
+            JSONObject result = httpControl.postMethod(info, loginURL);//登陆的URL
+            Log.i(TAG, result.toString());
+            String error = (String) result.get("error");
+            if (error == null || error.isEmpty()) {
+//                登陆成功 把信息封装成bean对象
+                loginUser = new BeanUser();
+                loginUser.setUserID(result.getInt("userid"));
+                loginUser.setName(result.getString("username"));
+                loginUser.setSex(result.getString("usersex"));
+                loginUser.setID(result.getString("useridcard"));
+                loginUser.setPhone(result.getString("userphone"));
+                loginUser.setEmail(result.getString("usermail"));
+                loginUser.setGood(result.getInt("usergood"));
+                beanUser = loginUser;
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
+    public boolean regist(BeanUser regUser) {
+        String registURL = "regist";
+        //封装json对象
+        JSONObject userInfo = new JSONObject();
+        try {
+            userInfo.put("check", "remeber_client");
+            userInfo.put("username", regUser.getName());
+            userInfo.put("usersex", regUser.getSex());
+            userInfo.put("useridcard", regUser.getID());
+            userInfo.put("userphone", regUser.getPhone());
+            userInfo.put("usermail", regUser.getEmail());
+            userInfo.put("useraccount", regUser.getUsername());
+            userInfo.put("userpassword", regUser.getPassword());
+            JSONObject result = httpControl.postMethod(userInfo, registURL);
+            String error = (String) result.get("error");
+            if (error == null || error.isEmpty()) {
+                beanUser = regUser;
+                beanUser.setUserID(result.getInt("userid"));
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
-//        httpControl.postMethod();
-        return false;
+    public boolean getNearTask(LatLng position) {
+        //获取当前位置下的订单
+        String URL = "getneartask";
+
+        double latitude = position.latitude;
+        double longitude = position.longitude;
+        String useraccount = beanUser.getUsername();
+        //把数据封装成JSON
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("check", "remeber_client");
+            jsonObject.put("useraccount", useraccount);
+            jsonObject.put("userlongitude", longitude);
+            jsonObject.put("userlatitude", latitude);
+            JSONObject result = httpControl.postMethod(jsonObject, URL);
+            String error = (String) result.get("error");
+            if (error == null || error.isEmpty()) {
+                JSONArray orderList = result.getJSONArray("order");
+                List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
+                for (int i = 0; i < orderList.length(); i++) {
+                    JSONObject orderInfo = orderList.getJSONObject(i);
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("orderid", orderInfo.get("orderid"));
+                    map.put("ordername", orderInfo.get("ordername"));
+                    map.put("ordertext", orderInfo.get("ordertext"));
+                    map.put("ordermoney", orderInfo.get("ordermoney"));
+                    map.put("orderbounty", orderInfo.get("orderbounty"));
+                    //封装每个物品
+                    JSONArray things = orderInfo.getJSONArray("thing");
+                    List<BeanThing> thingList = new ArrayList<BeanThing>();
+                    for (int j = 0; j < things.length(); j++) {
+                        JSONObject thingObject = things.getJSONObject(j);
+                        BeanThing beanThing = new BeanThing();
+                        beanThing.setThingid(thingObject.getInt("thingid"));
+                        beanThing.setName(thingObject.getString("thingname"));
+                        beanThing.setLongitude(thingObject.getDouble("thinglongitude"));
+                        beanThing.setLatitude(thingObject.getDouble("thinglatitude"));
+                        beanThing.setAddress(thingObject.getString("thinglocation"));
+                        beanThing.setNumber(thingObject.getInt("thingnum"));
+                        beanThing.setMoney(thingObject.getDouble("thingmoney"));
+                        thingList.add(beanThing);
+                    }
+                    map.put("thing", thingList);
+                    mapList.add(map);
+                }
+                nearTaskList = mapList;
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
 }
