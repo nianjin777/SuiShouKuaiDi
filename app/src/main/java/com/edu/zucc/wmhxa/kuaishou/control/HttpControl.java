@@ -15,12 +15,12 @@ import java.net.URL;
 public class HttpControl {
     private static String serverPath = "";
 
-    public JSONObject postMethod(final JSONObject obj) {
+    public JSONObject postMethod(final JSONObject obj, final String path) {
         ByteArrayOutputStream bos = null;
         HttpURLConnection conn = null;
         JSONObject result = null;
         try {
-            conn = (HttpURLConnection) (new URL(serverPath).openConnection());
+            conn = (HttpURLConnection) (new URL(serverPath + path).openConnection());
             //设置延时
             conn.setReadTimeout(5 * 1000);
             conn.setRequestMethod("POST");
