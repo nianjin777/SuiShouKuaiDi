@@ -18,6 +18,7 @@ public class LoginActivity extends Activity {
 
     private long mExitTime;
     private Button register;
+    private Button login_bt_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class LoginActivity extends Activity {
     //获取控件
     private void findViewById() {
         register = (Button) findViewById(R.id.login_bt_newuser);
+        login_bt_login = (Button) findViewById(R.id.login_bt_login);
     }
 
     //设置监听
@@ -41,6 +43,12 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+        login_bt_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

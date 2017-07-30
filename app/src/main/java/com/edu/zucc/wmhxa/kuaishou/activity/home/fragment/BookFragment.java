@@ -34,6 +34,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
     private ListView book_lv_handle;
     private List<String> list;
     private List<BeanUser> friendsList;
+    private FriendAdapter friendAdapter;
 
     @Nullable
     @Override
@@ -50,8 +51,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         list = new ArrayList<String>();
-        list.add("添加好友");
-
+        list.add("新的朋友");
         friendsList = MsgCenter.friendList;
 
     }
@@ -61,7 +61,8 @@ public class BookFragment extends Fragment implements View.OnClickListener {
         book_lv_handle.setAdapter(new HandleAdapter(getContext(), list));
         ListViewUtil.setListViewHeightBasedOnChildren(book_lv_handle);
         book_lv_friends = (ListView) view.findViewById(R.id.book_lv_friends);
-        book_lv_friends.setAdapter(new FriendAdapter(getContext(), friendsList));
+        friendAdapter = new FriendAdapter(getContext(), friendsList);
+        book_lv_friends.setAdapter(friendAdapter);
         ListViewUtil.setListViewHeightBasedOnChildren(book_lv_friends);
     }
 
@@ -74,6 +75,19 @@ public class BookFragment extends Fragment implements View.OnClickListener {
                 //TODO 跳转到聊天界面
             }
         });
+        book_lv_handle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                switch (position) {
+                    case 0:
+                        intent.setClassName("com.edu.zucc.wmhxa.kuaishou", "com.edu.zucc.wmhxa.kuaishou.activity.comm.ApplyFriendActivity");
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
+
     }
 
     @Override

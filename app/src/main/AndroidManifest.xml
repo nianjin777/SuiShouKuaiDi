@@ -52,12 +52,14 @@
         <activity android:name=".activity.order.HistoryEvalActivity"></activity>
         <activity android:name=".activity.order.SeeOrderActivity"></activity>
         <activity android:name=".activity.order.issue.ChoosePositionActivity"></activity>
+        <activity android:name=".activity.comm.AddFriendActivity"></activity>
 
         <!-- comm -->
         <activity android:name=".activity.comm.DynamicActivity"></activity>
         <activity android:name=".activity.comm.FriendDynActivity"></activity>
         <activity android:name=".activity.comm.SendDynActivity"></activity>
         <activity android:name=".activity.comm.SendFriDynActivity"></activity>
+        <activity android:name=".activity.comm.ApplyFriendActivity"></activity>
 
         <!-- login -->
         <activity android:name=".activity.login.LoginActivity"></activity>

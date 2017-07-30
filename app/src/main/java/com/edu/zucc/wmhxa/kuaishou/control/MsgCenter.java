@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class MsgCenter {
     private static final String TAG = "MsgCenter";
+    private HttpControl httpControl = new HttpControl();
 
     //当前登陆用户
     public static BeanUser beanUser = null;
@@ -50,6 +51,7 @@ public class MsgCenter {
     private static void initData() {
         //模拟当前登陆用户
         beanUser = new BeanUser("admin", "admin", "123456", "管理员", "350702199705301818", "17774009906", true, "404290080@qq.com");
+//        beanUser = null;
         //模拟附近订单
         nearTaskList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < 10; i++) {
@@ -93,7 +95,14 @@ public class MsgCenter {
 
     /**
      * 功能模块
-     *      所有的HTTP请求都在一下部分实现数据更新
+     * 所有的HTTP请求都在一下部分实现数据更新
      */
+
+    public boolean login(String userName, String password) {
+
+
+//        httpControl.postMethod();
+        return false;
+    }
 
 }
