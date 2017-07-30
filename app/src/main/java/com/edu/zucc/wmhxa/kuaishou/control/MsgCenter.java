@@ -223,4 +223,10 @@ public class MsgCenter {
         return true;
     }
 
+    public boolean getAddrList() {
+
+
+        return false;
+    }
+
 }
