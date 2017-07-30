@@ -36,22 +36,6 @@ public class BeanUser {
         super();
     }
 
-    public String getSex(String s) {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public int getGood() {
-        return good;
-    }
-
-    public void setGood(int good) {
-        this.good = good;
-    }
-
     public int getUserID() {
         return userID;
     }
@@ -60,7 +44,7 @@ public class BeanUser {
         this.userID = userID;
     }
 
-    public String getUsername(String s) {
+    public String getUsername() {
         return username;
     }
 
@@ -68,7 +52,7 @@ public class BeanUser {
         this.username = username;
     }
 
-    public String getPassword(String s) {
+    public String getPassword() {
         return password;
     }
 
@@ -84,7 +68,7 @@ public class BeanUser {
         this.payPassword = payPassword;
     }
 
-    public String getName(String s) {
+    public String getName() {
         return name;
     }
 
@@ -92,7 +76,7 @@ public class BeanUser {
         this.name = name;
     }
 
-    public String getID(String s) {
+    public String getID() {
         return ID;
     }
 
@@ -100,7 +84,7 @@ public class BeanUser {
         this.ID = ID;
     }
 
-    public String getPhone(String s) {
+    public String getPhone() {
         return phone;
     }
 
@@ -116,11 +100,27 @@ public class BeanUser {
         isCourier = courier;
     }
 
-    public String getEmail(String s) {
+    public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public int getGood() {
+        return good;
+    }
+
+    public void setGood(int good) {
+        this.good = good;
     }
 }
