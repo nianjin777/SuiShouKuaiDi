@@ -60,8 +60,8 @@ public class MsgCenter {
 
     private static void initData() {
         //模拟当前登陆用户
-        beanUser = new BeanUser("admin", "admin", "123456", "管理员", "350702199705301818", "17774009906", true, "404290080@qq.com");
-//        beanUser = null;
+//        beanUser = new BeanUser("admin", "admin", "123456", "管理员", "350702199705301818", "17774009906", true, "404290080@qq.com");
+        beanUser = null;
         //模拟附近订单
         nearTaskList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < 10; i++) {
@@ -117,23 +117,24 @@ public class MsgCenter {
             info.put("check", "remeber_client");
             info.put("useraccount", userName);
             info.put("userpassword", password);
-            JSONObject result = httpControl.postMethod(info, loginURL);//登陆的URL
-            Log.i(TAG, result.toString());
-            String error = (String) result.get("error");
-            if (error == null || error.isEmpty()) {
-//                登陆成功 把信息封装成bean对象
-                loginUser = new BeanUser();
-                loginUser.setUserID(result.getInt("userid"));
-                loginUser.setName(result.getString("username"));
-                loginUser.setSex(result.getString("usersex"));
-                loginUser.setID(result.getString("useridcard"));
-                loginUser.setPhone(result.getString("userphone"));
-                loginUser.setEmail(result.getString("usermail"));
-                loginUser.setGood(result.getInt("usergood"));
-                beanUser = loginUser;
-            } else {
-                return false;
-            }
+            Log.i(TAG, info.toString());
+//            JSONObject result = httpControl.postMethod(info, loginURL);//登陆的URL
+//            Log.i(TAG, result.toString());
+//            String error = (String) result.get("error");
+//            if (error == null || error.isEmpty()) {
+////                登陆成功 把信息封装成bean对象
+//                loginUser = new BeanUser();
+//                loginUser.setUserID(result.getInt("userid"));
+//                loginUser.setName(result.getString("username"));
+//                loginUser.setSex(result.getString("usersex"));
+//                loginUser.setID(result.getString("useridcard"));
+//                loginUser.setPhone(result.getString("userphone"));
+//                loginUser.setEmail(result.getString("usermail"));
+//                loginUser.setGood(result.getInt("usergood"));
+//                beanUser = loginUser;
+//            } else {
+//                return false;
+//            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -153,14 +154,15 @@ public class MsgCenter {
             userInfo.put("usermail", regUser.getEmail());
             userInfo.put("useraccount", regUser.getUsername());
             userInfo.put("userpassword", regUser.getPassword());
-            JSONObject result = httpControl.postMethod(userInfo, registURL);
-            String error = (String) result.get("error");
-            if (error == null || error.isEmpty()) {
-                beanUser = regUser;
-                beanUser.setUserID(result.getInt("userid"));
-            } else {
-                return false;
-            }
+            Log.i(TAG, userInfo.toString());
+//            JSONObject result = httpControl.postMethod(userInfo, registURL);
+//            String error = (String) result.get("error");
+//            if (error == null || error.isEmpty()) {
+//                beanUser = regUser;
+//                beanUser.setUserID(result.getInt("userid"));
+//            } else {
+//                return false;
+//            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

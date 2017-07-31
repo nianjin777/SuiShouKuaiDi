@@ -2,6 +2,7 @@ package com.edu.zucc.wmhxa.kuaishou.activity.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +11,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.edu.zucc.wmhxa.kuaishou.R;
+import com.edu.zucc.wmhxa.kuaishou.control.MsgCenter;
 import com.edu.zucc.wmhxa.kuaishou.model.BeanUser;
 import com.edu.zucc.wmhxa.kuaishou.util.SysApplication;
 
 import static android.R.id.button1;
 import static android.R.id.closeButton;
+import static com.edu.zucc.wmhxa.kuaishou.R.id.reg_rb_sexman;
 
 public class RegisterActivity extends Activity {
 
@@ -26,13 +30,14 @@ public class RegisterActivity extends Activity {
     private EditText reg_et_remima;
     private EditText reg_et_name;
     private RadioGroup reg_rg_sexgroup;
-    private RadioButton reg_rb_sexman;
-    private RadioButton reg_rb_sexwomen;
+    private RadioButton checkButton;
     private EditText reg_et_idcard;
     private EditText reg_et_phone;
     private EditText reg_et_email;
     private Button register_bt_new;
     private BeanUser user;
+
+    private String sex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,47 +51,61 @@ public class RegisterActivity extends Activity {
 
     }
 
-
-    private void onCheckedChanged(RadioGroup reg_rg_sexgroup,int checkedID){
-        if(reg_rb_sexman.getId()==checkedID)
-            user.getSex(reg_rb_sexman.getText().toString());
-        else if (reg_rb_sexwomen.getId()==checkedID)
-            user.getSex(reg_rb_sexwomen.getText().toString());
-    }
-
-
     //获取控件
     private BeanUser findViewById() {
         regist = (Button) findViewById(R.id.register_bt_return);
         reg_et_zhanghao = (EditText) findViewById(R.id.reg_et_zhanghao);
-        user.getUsername(reg_et_zhanghao.getText().toString());
         reg_et_mima = (EditText) findViewById(R.id.reg_et_mima);
-        user.getPassword(reg_et_mima.getText().toString());
         reg_et_remima = (EditText) findViewById(R.id.reg_et_remima);
         reg_et_name = (EditText) findViewById(R.id.reg_et_name);
-        user.getName(reg_et_name.getText().toString());
         reg_rg_sexgroup = (RadioGroup) findViewById(R.id.reg_rg_sexgroup);
-        reg_rb_sexman = (RadioButton) findViewById(R.id.reg_rb_sexman);
-        reg_rb_sexwomen = (RadioButton) findViewById(R.id.reg_rb_sexwomen);
-
         reg_et_idcard = (EditText) findViewById(R.id.reg_et_idcard);
-        user.getID(reg_et_idcard.getText().toString());
         reg_et_phone = (EditText) findViewById(R.id.reg_et_phone);
-        user.getPhone(reg_et_phone.getText().toString());
         reg_et_email = (EditText) findViewById(R.id.reg_et_email);
-        user.getEmail(reg_et_email.getText().toString());
         register_bt_new = (Button) findViewById(R.id.register_bt_new);
         return user;
     }
 
     //设置监听
     private void setListener() {
+        register_bt_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user = getData();
+                boolean result = MsgCenter.getInstanceMsgCenter().regist(user);
+                if (result) {
+                    Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "注册失败", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+            }
+        });
+        reg_rg_sexgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                checkButton = (RadioButton) group.findViewById(checkedId);
+                sex = (String) checkButton.getText();
+            }
+        });
         regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
+
+    private BeanUser getData() {
+        BeanUser beanUser = new BeanUser();
+        beanUser.setUsername(reg_et_zhanghao.getText().toString());
+        beanUser.setPassword(reg_et_mima.getText().toString());
+        beanUser.setName(reg_et_name.getText().toString());
+        beanUser.setID(reg_et_idcard.getText().toString());
+        beanUser.setPhone(reg_et_phone.getText().toString());
+        beanUser.setEmail(reg_et_email.getText().toString());
+        beanUser.setSex(sex);
+        return beanUser;
     }
 
 }
