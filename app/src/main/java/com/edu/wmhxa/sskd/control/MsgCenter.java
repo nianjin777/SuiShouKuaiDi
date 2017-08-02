@@ -3,6 +3,7 @@ package com.edu.wmhxa.sskd.control;
 import android.util.Log;
 
 import com.baidu.mapapi.model.LatLng;
+import com.edu.wmhxa.sskd.model.BeanAddress;
 import com.edu.wmhxa.sskd.model.BeanThing;
 import com.edu.wmhxa.sskd.model.BeanUser;
 
@@ -43,6 +44,8 @@ public class MsgCenter {
     public static List<BeanUser> friendList = null;
     //好友申请表
     public static List<BeanUser> applyFriendList = null;
+    //地址列表
+    public static List<BeanAddress> addressList = null;
 
 
     private MsgCenter() {
@@ -113,6 +116,8 @@ public class MsgCenter {
      * 所有的HTTP请求都在一下部分实现数据更新
      */
 
+    //用户操作
+    //登陆
     public boolean login(String userName, String password) {
         //登陆 封装成json
         String loginURL = "login";
@@ -146,6 +151,7 @@ public class MsgCenter {
         return true;
     }
 
+    //注册
     public boolean regist(BeanUser regUser) {
         String registURL = "regist";
         //封装json对象
@@ -174,6 +180,135 @@ public class MsgCenter {
         return true;
     }
 
+    //获取好友列表
+    public boolean getFriendList() {
+        String registURL = "regist";
+        //封装json对象
+        JSONObject userInfo = new JSONObject();
+        try {
+            userInfo.put("check", "remeber_client");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    //地址操作
+    //获取地址列表
+    public boolean getAddrList() {
+
+        String URL = "getAddrList";
+        //封装json对象
+        JSONObject userInfo = new JSONObject();
+        try {
+            userInfo.put("check", "remeber_client");
+            userInfo.put("useraccount", beanUser.getUsername());
+            JSONObject result = httpControl.postMethod(userInfo, URL);
+            String error = result.getString("error");
+            if (error == null || error.isEmpty()) {
+                JSONArray addresslist = result.getJSONArray("addresslist");
+                List<BeanAddress> list = new ArrayList<BeanAddress>();
+                for (int i = 0; i < addresslist.length(); i++) {
+                    JSONObject addr = addresslist.getJSONObject(i);
+                    BeanAddress beanAddress = new BeanAddress();
+                    beanAddress.setAddrId(addr.getInt("addrid"));
+                    beanAddress.setLocation(addr.getString("addrlocation"));
+                    beanAddress.setInfo(addr.getString("addrinfo"));
+                    beanAddress.setName(addr.getString("addruser"));
+                    beanAddress.setPhone(addr.getString("addrphone"));
+                    beanAddress.setAddrDefault(addr.getBoolean("addrdefault"));
+                    list.add(beanAddress);
+                }
+                addressList = list;
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    //新增地址
+    public boolean addAddress(BeanAddress beanAddress) {
+        String URL = "addAddress";
+        //把bean对象封装成JSON
+        JSONObject info = new JSONObject();
+        try {
+            info.put("check", "remeber_client");
+            info.put("useraccount", beanUser.getUsername());
+            info.put("addrlocation", beanAddress.getLocation());
+            info.put("addrinfo", beanAddress.getInfo());
+            info.put("addruser", beanAddress.getName());
+            info.put("addrphone", beanAddress.getPhone());
+            info.put("addrdefault", beanAddress.isAddrDefault());
+
+            JSONObject result = httpControl.postMethod(info, URL);
+            int addrid = result.getInt("addrid");
+            if (addrid == -1) {
+                return false;
+            } else {
+                beanAddress.setAddrId(addrid);
+                addressList.add(beanAddress);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    //删除地址
+    public boolean deleteAddress(int addrId) {
+        String URL = "deleteAddress";
+        JSONObject info = new JSONObject();
+        try {
+            info.put("check", "remeber_client");
+            info.put("useraccount", beanUser.getUsername());
+            info.put("addrid", addrId);
+            JSONObject result = httpControl.postMethod(info, URL);
+            String error = result.getString("error");
+            if (error == null || error.isEmpty()) {
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    //修改地址
+    public boolean changeAddress(BeanAddress beanAddress) {
+        String URL = "addAddress";
+        //把bean对象封装成JSON
+        JSONObject info = new JSONObject();
+        try {
+            info.put("check", "remeber_client");
+            info.put("useraccount", beanUser.getUsername());
+            info.put("addrlocation", beanAddress.getLocation());
+            info.put("addrinfo", beanAddress.getInfo());
+            info.put("addruser", beanAddress.getName());
+            info.put("addrphone", beanAddress.getPhone());
+            info.put("addrdefault", beanAddress.isAddrDefault());
+
+            JSONObject result = httpControl.postMethod(info, URL);
+            String error = result.getString("error");
+            if (error == null || error.isEmpty()) {
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
+    //订单操作
     public boolean getNearTask(LatLng position) {
         //获取当前位置下的订单
         String URL = "getneartask";
@@ -230,10 +365,5 @@ public class MsgCenter {
         return true;
     }
 
-    public boolean getAddrList() {
-
-
-        return false;
-    }
 
 }

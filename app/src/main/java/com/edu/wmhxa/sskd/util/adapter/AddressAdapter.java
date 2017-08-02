@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.model.BeanAddress;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,19 +18,19 @@ import java.util.Map;
  */
 
 
-public class AddressAdapter extends BaseAdapter{
+public class AddressAdapter extends BaseAdapter {
     Context context;
-    Map<String, String> map;
+    List<BeanAddress> list;
 
-    public AddressAdapter(Context context, Map<String, String> map) {
+    public AddressAdapter(Context context, List<BeanAddress> list) {
         this.context = context;
-        this.map = map;
+        this.list = list;
     }
 
 
     @Override
     public int getCount() {
-        return map.size();
+        return list.size();
     }
 
     @Override
@@ -53,9 +55,11 @@ public class AddressAdapter extends BaseAdapter{
         TextView addPhone = (TextView) view.findViewById(R.id.item_tv_addphone);
         TextView addAddress = (TextView) view.findViewById(R.id.item_tv_addaddress);
 
-        addName.setText(map.get("username"));
-        addPhone.setText(map.get("uesrphone"));
-        addAddress.setText(map.get("address"));
+        BeanAddress beanAddress = list.get(position);
+
+        addName.setText(beanAddress.getName());
+        addPhone.setText(beanAddress.getPhone());
+        addAddress.setText(beanAddress.getLocation() + "\n" + beanAddress.getInfo());
 
         return view;
     }

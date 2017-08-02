@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.control.MsgCenter;
+import com.edu.wmhxa.sskd.util.adapter.AddressAdapter;
 
 /**
  * Created by Administrator on 2017/7/21.
@@ -41,6 +43,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
         title3_bt.setText("添加");
 
         manageaddre_lv = (ListView) findViewById(R.id.manageaddre_lv);
+        manageaddre_lv.setAdapter(new AddressAdapter(getApplicationContext(), MsgCenter.addressList));
     }
 
     private void setListener() {
