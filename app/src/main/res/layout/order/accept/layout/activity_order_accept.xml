@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.edu.wmhxa.kuaishou.activity.order.accept.AcceptOrderActivity">
+    tools:context="com.edu.wmhxa.sskd.activity.order.accept.AcceptOrderActivity">
 
     <include
         android:id="@+id/accept_title"
