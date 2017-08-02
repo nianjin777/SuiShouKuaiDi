@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.edu.zucc.wmhxa.kuaishou.activity.comm.AddFriendActivity">
+    tools:context="com.edu.wmhxa.kuaishou.activity.comm.AddFriendActivity">
 
     <include
         android:id="@+id/addfir_title"

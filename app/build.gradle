@@ -4,14 +4,14 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.edu.zucc.wmhxa.kuaishou"
+        applicationId 'com.edu.wmhxa.kuaishou'
         minSdkVersion 22
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        ndk{
-            abiFilters 'armeabi','armeabi-v7a','armeabi-v8a','x86','x86_64','mips','mips64'
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
         }
     }
     buildTypes {
@@ -53,6 +53,8 @@ android {
         lintOptions {
             abortOnError false
         }
+    }
+    productFlavors {
     }
 }
 

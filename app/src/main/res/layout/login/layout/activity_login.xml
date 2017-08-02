@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.edu.zucc.wmhxa.kuaishou.activity.login.LoginActivity">
+    tools:context="com.edu.wmhxa.kuaishou.activity.login.LoginActivity">
 
 
     <EditText
