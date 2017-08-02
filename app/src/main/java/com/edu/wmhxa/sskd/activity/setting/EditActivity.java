@@ -1,4 +1,4 @@
-package com.edu.wmhxa.kuaishou.activity.setting;
+package com.edu.wmhxa.sskd.activity.setting;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.edu.wmhxa.kuaishou.R;
+import com.edu.wmhxa.sskd.R;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -23,13 +23,14 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         findViewById();
     }
+
     private void findViewById() {
         View edit_title = findViewById(R.id.edit_title);
         TextView title1_tv = (TextView) edit_title.findViewById(R.id.title1_tv);
         title1_tv.setText("修改信息");
-        edit_et_phone=(EditText)findViewById(R.id.edit_et_phone);
-        edit_et_email=(EditText)findViewById(R.id.edit_et_email);
-        edit_tv_phone=(TextView) findViewById(R.id.edit_tv_phone);
-        edit_tv_email=(TextView) findViewById(R.id.edit_tv_email);
+        edit_et_phone = (EditText) findViewById(R.id.edit_et_phone);
+        edit_et_email = (EditText) findViewById(R.id.edit_et_email);
+        edit_tv_phone = (TextView) findViewById(R.id.edit_tv_phone);
+        edit_tv_email = (TextView) findViewById(R.id.edit_tv_email);
     }
 }
