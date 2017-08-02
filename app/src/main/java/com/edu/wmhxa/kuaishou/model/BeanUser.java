@@ -21,7 +21,8 @@ public class BeanUser {
     private String sex;
     private int good;
 
-    public BeanUser(String username, String password, String payPassword, String name, String ID, String phone, boolean isCourier, String email) {
+    public BeanUser(String username, String password, String payPassword,
+                    String name, String ID, String phone, boolean isCourier, String email, String sex) {
         this.username = username;
         this.password = password;
         this.payPassword = payPassword;
@@ -30,6 +31,7 @@ public class BeanUser {
         this.phone = phone;
         this.isCourier = isCourier;
         this.email = email;
+        this.sex = sex;
     }
 
     public BeanUser() {
