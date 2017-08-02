@@ -45,6 +45,14 @@
 
         </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/dyn_iv_senddyn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add"
+            android:layout_alignParentRight="true"
+            android:paddingRight="16dp"
+            />
     </RelativeLayout>
 
     <RelativeLayout
