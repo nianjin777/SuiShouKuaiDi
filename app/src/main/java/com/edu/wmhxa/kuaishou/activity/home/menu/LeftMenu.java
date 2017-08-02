@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.edu.wmhxa.kuaishou.R;
+import com.edu.wmhxa.kuaishou.control.MsgCenter;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.util.ArrayList;
@@ -47,12 +48,28 @@ public class LeftMenu {
         menu.setMenu(R.layout.activity_leftmenu);
         itemList = new ArrayList<String>();
         itemList.add("地址");
-        itemList.add("钱包");
         itemList.add("订单");
         itemList.add("设置");
         ListView menu_lv = (ListView) menu.findViewById(R.id.leftmenu_lv);
+        TextView name = (TextView) menu.findViewById(R.id.leftmenu_name);
+        if (MsgCenter.beanUser != null) {
+            String userName = MsgCenter.beanUser.getName();
+            String call = null;
+            if (userName != null) {
+                call = userName.substring(0,1);
+                if (MsgCenter.beanUser.getSex().equals("男")) {
+                    call += " 先生";
+                } else {
+                    call += " 女士";
+                }
+                call += "，你好啊!";
+            }
+            name.setText(call);
+        }
+
         menu_lv.setAdapter(new LeftMenuAdapter());
         menu_lv.setOnItemClickListener(new ItemClickListener());
+
 
         return menu;
     }
@@ -69,17 +86,13 @@ public class LeftMenu {
                     activity.startActivity(intent);
                     break;
                 case 1:
-                    //钱包
-                    intent.setClassName("com.edu.wmhxa.kuaishou", "com.edu.wmhxa.kuaishou.activity.setting.WalletActivity");
-                    activity.startActivity(intent);
-                    break;
-                case 2:
                     //订单
                     intent.setClassName("com.edu.wmhxa.kuaishou", "com.edu.wmhxa.kuaishou.activity.order.MyOrderActivity");
                     activity.startActivity(intent);
                     break;
-                case 3:
+                case 2:
                     //设置
+
                     break;
             }
         }
