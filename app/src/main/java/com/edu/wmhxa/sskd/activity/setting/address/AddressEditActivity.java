@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.wmhxa.sskd.R;
@@ -19,8 +21,9 @@ public class AddressEditActivity extends Activity {
     private EditText edit_ev_savephone;
     private EditText edit_ev_saveplace;
     private EditText edit_ev_savereplace;
-    private Button eidtaddress_tv_save;
     private Button editaddress_bt_del;
+    private Button title3_bt;
+    private ImageView title3_back;
 
     private int position;
     private BeanAddress beanAddress;
@@ -50,8 +53,13 @@ public class AddressEditActivity extends Activity {
         edit_ev_saveplace.setText(beanAddress.getLocation());
         edit_ev_savereplace = (EditText) findViewById(R.id.edit_ev_savereplace);
         edit_ev_savereplace.setText(beanAddress.getInfo());
-        eidtaddress_tv_save = (Button) findViewById(R.id.editaddress_tv_save);
         editaddress_bt_del = (Button) findViewById(R.id.editaddress_bt_del);
+        View editaddress_title = findViewById(R.id.editaddress_title);
+        title3_back = (ImageView) editaddress_title.findViewById(R.id.title3_back);
+        TextView title3_tv = (TextView) editaddress_title.findViewById(R.id.title3_tv);
+        title3_bt = (Button) editaddress_title.findViewById(R.id.title3_bt);
+        title3_bt.setText("保存");
+        title3_tv.setText("编辑地址");
     }
 
     private void setListener() {
@@ -68,7 +76,7 @@ public class AddressEditActivity extends Activity {
                 }
             }
         });
-        eidtaddress_tv_save.setOnClickListener(new View.OnClickListener() {
+        title3_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean result = MsgCenter.getInstanceMsgCenter().changeAddress(MsgCenter.addressList.get(position));
@@ -80,9 +88,15 @@ public class AddressEditActivity extends Activity {
                 }
             }
         });
+        title3_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
-    //检测是否
+    //检测是否更改
     private boolean checkInfo() {
 
         return false;
