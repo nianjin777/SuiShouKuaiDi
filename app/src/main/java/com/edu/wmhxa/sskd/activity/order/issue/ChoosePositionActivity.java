@@ -119,6 +119,7 @@ public class ChoosePositionActivity extends Activity implements
             }
         }
     };
+    private String address;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -168,6 +169,7 @@ public class ChoosePositionActivity extends Activity implements
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("result", result);
+                intent.putExtra("location", address);
                 setResult(10, intent);
                 finish();
             }
@@ -229,7 +231,7 @@ public class ChoosePositionActivity extends Activity implements
 
                     @Override
                     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
-                        String address = reverseGeoCodeResult.getAddress();
+                        address = reverseGeoCodeResult.getAddress();
                         if (address == null && address.isEmpty()) {
                             Toast.makeText(getContext(), "获取地址失败", Toast.LENGTH_SHORT).show();
                         } else {

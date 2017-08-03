@@ -3,6 +3,7 @@ package com.edu.wmhxa.sskd.activity.order.issue;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,6 +110,18 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
             return;
         }
         final PoiInfo result = (PoiInfo) data.getParcelableExtra("result");
+        if (result == null) {
+            //没选择POI的
+            final String location = data.getStringExtra("location");
+            Log.i("cyan", location);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    add_bt_setplace.setText(location);
+                }
+            });
+            return;
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
