@@ -463,14 +463,14 @@ public class MsgCenter {
     }
 
     //修改默认地址
-    public boolean changeDefaultAddress(BeanAddress beanAddress) {
+    public boolean changeDefaultAddress(int addrId) {
         String URL = "changeDefaultAddress";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();
         try {
             info.put("check", "remeber_client");
             info.put("useraccount", beanUser.getUsername());
-            info.put("addrid", beanAddress.getAddrId());
+            info.put("addrid", addrId);
 
             JSONObject result = httpControl.postMethod(info, URL);
             String error = result.getString("error");
