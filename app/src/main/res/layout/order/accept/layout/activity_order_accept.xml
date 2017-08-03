@@ -21,12 +21,38 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View
+            <RelativeLayout
+                android:id="@+id/accept_rl_address"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                android:background="#33000000" />
+                android:background="@drawable/border">
+
+                <TextView
+                    android:id="@+id/accetp_tv_addrword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="收货地址："
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/accept_tv_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/accetp_tv_addrword"
+                    android:maxLength="32"
+                    android:maxLines="2"
+                    android:text="浙江大学城市学院北校区"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/accept_tv_taskname"
