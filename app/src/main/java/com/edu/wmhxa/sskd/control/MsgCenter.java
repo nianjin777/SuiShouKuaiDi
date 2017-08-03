@@ -443,7 +443,28 @@ public class MsgCenter {
             info.put("addrinfo", beanAddress.getInfo());
             info.put("addruser", beanAddress.getName());
             info.put("addrphone", beanAddress.getPhone());
-            info.put("addrdefault", beanAddress.isAddrDefault());
+
+            JSONObject result = httpControl.postMethod(info, URL);
+            String error = result.getString("error");
+            if (error == null || error.isEmpty()) {
+            } else {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    //修改默认地址
+    public boolean changeDefaultAddress(BeanAddress beanAddress){
+        String URL = "changeDefaultAddress";
+        //把bean对象封装成JSON
+        JSONObject info = new JSONObject();
+        try {
+            info.put("check", "remeber_client");
+            info.put("useraccount", beanUser.getUsername());
+            info.put("addrid", beanAddress.getAddrId());
 
             JSONObject result = httpControl.postMethod(info, URL);
             String error = result.getString("error");
