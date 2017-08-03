@@ -31,15 +31,15 @@ public class EvaluateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_evaluate);
         findViewById();
     }
-    public void findViewById(){
-        eva_tv_save=(Button) view.findViewById(R.id.eva_tv_save);
-        eva_name = (TextView) view.findViewById(R.id.eva_name) ;
-        eva_state= (TextView) view.findViewById(R.id.eva_state);
-        eva_tv_task =(TextView) view.findViewById(R.id.eva_tv_task);
-        eva_tv_dis= (TextView) view.findViewById(R.id.eva_tv_dis);
-        eva_tv_text= (TextView) view.findViewById(R.id.eva_tv_text);
-        eva_tv_money =(TextView) view.findViewById(R.id.eva_tv_money);
-        eva_et_text=(EditText) view.findViewById(R.id.eva_et_text);
+
+    public void findViewById() {
+        eva_name = (TextView) view.findViewById(R.id.eva_name);
+        eva_state = (TextView) view.findViewById(R.id.eva_state);
+        eva_tv_task = (TextView) view.findViewById(R.id.eva_tv_task);
+        eva_tv_dis = (TextView) view.findViewById(R.id.eva_tv_dis);
+        eva_tv_text = (TextView) view.findViewById(R.id.eva_tv_text);
+        eva_tv_money = (TextView) view.findViewById(R.id.eva_tv_money);
+        eva_et_text = (EditText) view.findViewById(R.id.eva_et_text);
 
         View eval_title = findViewById(R.id.eval_title);
         title3_back = (ImageView) eval_title.findViewById(R.id.title3_back);
