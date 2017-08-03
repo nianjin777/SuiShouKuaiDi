@@ -128,6 +128,7 @@ public class MsgCenter {
             beanAddress.setPhone("110" + i);
             beanAddress.setLocation("定位" + i);
             beanAddress.setInfo("详细地址" + i);
+            beanAddress.setAddrId(i);
             if (i == 3) {
                 beanAddress.setAddrDefault(true);
                 BeanAddress.indexDeault = i;
@@ -416,6 +417,7 @@ public class MsgCenter {
             info.put("check", "remeber_client");
             info.put("useraccount", beanUser.getUsername());
             info.put("addrid", addrId);
+            Log.i(TAG, info.toString());
             JSONObject result = httpControl.postMethod(info, URL);
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
