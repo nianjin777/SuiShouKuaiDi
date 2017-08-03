@@ -394,6 +394,7 @@ public class MsgCenter {
             info.put("addruser", beanAddress.getName());
             info.put("addrphone", beanAddress.getPhone());
             info.put("addrdefault", beanAddress.isAddrDefault());
+            Log.i(TAG, info.toString());
 
             JSONObject result = httpControl.postMethod(info, URL);
             int addrid = result.getInt("addrid");
@@ -421,6 +422,11 @@ public class MsgCenter {
             JSONObject result = httpControl.postMethod(info, URL);
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
+                for (int i = 0; i < addressList.size(); i++) {
+                    if (addrId == addressList.get(i).getAddrId()) {
+                        addressList.remove(i);
+                    }
+                }
             } else {
                 return false;
             }
@@ -457,7 +463,7 @@ public class MsgCenter {
     }
 
     //修改默认地址
-    public boolean changeDefaultAddress(BeanAddress beanAddress){
+    public boolean changeDefaultAddress(BeanAddress beanAddress) {
         String URL = "changeDefaultAddress";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();

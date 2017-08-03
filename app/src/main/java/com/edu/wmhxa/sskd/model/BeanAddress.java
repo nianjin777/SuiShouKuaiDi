@@ -74,4 +74,17 @@ public class BeanAddress implements Serializable {
 //            }
 //        }
 //    }
+
+
+    @Override
+    public String toString() {
+        return "BeanAddress{" +
+                "addrId=" + addrId +
+                ", location='" + location + '\'' +
+                ", info='" + info + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", addrDefault=" + addrDefault +
+                '}';
+    }
 }

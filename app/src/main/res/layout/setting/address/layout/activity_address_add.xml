@@ -148,10 +148,10 @@
         android:background="#33000000" />
 
     <Button
-        android:id="@+id/addaddress_bt_del"
+        android:id="@+id/addaddress_bt_default"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@null"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="设为默认地址"
