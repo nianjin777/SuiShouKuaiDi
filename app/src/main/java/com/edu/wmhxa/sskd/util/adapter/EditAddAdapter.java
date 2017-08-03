@@ -52,12 +52,14 @@ public class EditAddAdapter extends BaseAdapter {
         TextView editName = (TextView) view.findViewById(R.id.item_tv_editname);
         TextView editPhone = (TextView) view.findViewById(R.id.item_tv_editphone);
         TextView editAddress = (TextView) view.findViewById(R.id.item_tv_editaddress);
+        TextView edit_tv_default = (TextView) view.findViewById(R.id.edit_tv_default);
         Button btEdit = (Button) view.findViewById(R.id.edit_bt_edit);
         Button btDel = (Button) view.findViewById(R.id.edit_bt_delete);
 
         editName.setText(map.get("username"));
         editPhone.setText(map.get("userphone"));
         editAddress.setText(map.get("useraddress"));
+        edit_tv_default.setText(map.get("默认地址"));
         btDel.setText(map.get("删除"));
         btEdit.setText(map.get("编辑"));
 

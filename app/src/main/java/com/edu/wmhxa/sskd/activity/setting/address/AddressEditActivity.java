@@ -25,6 +25,7 @@ public class AddressEditActivity extends Activity {
     private EditText edit_ev_saveplace;
     private EditText edit_ev_savereplace;
     private Button editaddress_bt_del;
+    private Button editaddress_bt_default;
     private Button title3_bt;
     private ImageView title3_back;
 
@@ -57,6 +58,7 @@ public class AddressEditActivity extends Activity {
         edit_ev_savereplace = (EditText) findViewById(R.id.edit_ev_savereplace);
         edit_ev_savereplace.setText(beanAddress.getInfo());
         editaddress_bt_del = (Button) findViewById(R.id.editaddress_bt_del);
+        editaddress_bt_default = (Button) findViewById(R.id.editaddress_bt_default);
         View editaddress_title = findViewById(R.id.editaddress_title);
         title3_back = (ImageView) editaddress_title.findViewById(R.id.title3_back);
         TextView title3_tv = (TextView) editaddress_title.findViewById(R.id.title3_tv);
