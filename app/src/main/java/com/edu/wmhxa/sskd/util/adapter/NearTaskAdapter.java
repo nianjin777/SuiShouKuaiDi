@@ -10,11 +10,14 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.edu.wmhxa.sskd.R;
 import com.edu.wmhxa.sskd.activity.home.fragment.AcceptHallFragment;
+import com.edu.wmhxa.sskd.model.BeanOrder;
 import com.edu.wmhxa.sskd.model.BeanThing;
 
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
+
+import static android.R.id.list;
 
 /**
  * Created by wssb on 2017/7/21.
@@ -22,9 +25,9 @@ import java.util.Map;
 
 public class NearTaskAdapter extends BaseAdapter {
     Context context;
-    List<Map<String, Object>> list = null;
+    List<BeanOrder> list = null;
 
-    public NearTaskAdapter(Context context, List<Map<String, Object>> list) {
+    public NearTaskAdapter(Context context, List<BeanOrder> list) {
         this.context = context;
         this.list = list;
     }
@@ -57,20 +60,19 @@ public class NearTaskAdapter extends BaseAdapter {
         TextView taskText = (TextView) view.findViewById(R.id.neartask_tv_text);
         TextView taskMoney = (TextView) view.findViewById(R.id.neartask_tv_money);
 
-        Map<String, Object> map = list.get(position);
-        List<BeanThing> thinglist = (List<BeanThing>) map.get("thinglist");
+        BeanOrder beanOrder = list.get(position);
+        List<BeanThing> thinglist = (List<BeanThing>) beanOrder.getThingList();
         LatLng thingXY = new LatLng(thinglist.get(0).getLatitude(), thinglist.get(0).getLongitude());
         LatLng userXY = AcceptHallFragment.xy;
-        taskNmae.setText((String) map.get("ordername"));
+        taskNmae.setText((String) beanOrder.getOrderName());
 //        taskDis.setText((String) map.get("distance"));//距离
 //        int distance = (int)DistanceUtil.getDistance(userXY, thingXY);
         double distance = (int) DistanceUtil.getDistance(userXY, thingXY) / 1000.0;
         DecimalFormat df = new DecimalFormat("0.00");
 
         taskDis.setText(df.format(distance) + " km");
-        taskText.setText((String) map.get("ordertext"));
-        taskMoney.setText(String.valueOf(map.get("orderbounty")));
-
+        taskText.setText((String) beanOrder.getOrderText());
+        taskMoney.setText(String.valueOf(beanOrder.getBounty()));
 
         return view;
     }

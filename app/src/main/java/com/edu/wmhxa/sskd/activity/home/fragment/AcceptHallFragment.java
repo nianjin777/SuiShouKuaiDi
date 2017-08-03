@@ -31,6 +31,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.edu.wmhxa.sskd.R;
 import com.edu.wmhxa.sskd.activity.home.HomeActivity;
 import com.edu.wmhxa.sskd.control.MsgCenter;
+import com.edu.wmhxa.sskd.model.BeanOrder;
 import com.edu.wmhxa.sskd.util.ListViewUtil;
 import com.edu.wmhxa.sskd.util.adapter.NearTaskAdapter;
 
@@ -55,7 +56,7 @@ public class AcceptHallFragment extends Fragment {
     private View view;
     private static Fragment instanceFragment = null;
     private ListView accept_lv;
-    private List<Map<String, Object>> orderList;
+    private List<BeanOrder> orderList;
     private ScrollView accept_sv;
     private Button accept_location;
 
@@ -119,7 +120,7 @@ public class AcceptHallFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.order.accept.AcceptOrderActivity");
-                intent.putExtra("info", (HashMap<String, Object>) orderList.get(position));
+                intent.putExtra("info", orderList.get(position));
                 startActivity(intent);
             }
         });

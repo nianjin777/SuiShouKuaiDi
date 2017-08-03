@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.model.BeanOrder;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class OrderIngAdapter extends BaseAdapter {
 
     private Context context = null;
-    private List<Map<String, Object>> list = null;
+    private List<BeanOrder> list = null;
     private View view;
 
     private TextView ordering_empname;
@@ -31,7 +32,7 @@ public class OrderIngAdapter extends BaseAdapter {
     private Button ordering_bt_cancel;
     private Button ordering_bt_ok;
 
-    public OrderIngAdapter(Context context, List<Map<String, Object>> list) {
+    public OrderIngAdapter(Context context, List<BeanOrder> list) {
         this.context = context;
         this.list = list;
     }
@@ -60,13 +61,13 @@ public class OrderIngAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        Map<String, Object> map = list.get(position);
+        BeanOrder beanOrder = list.get(position);
         findViewById();
-        ordering_empname.setText((String) map.get("empname"));
-        ordering_tv_task.setText((String) map.get("taskname"));
-        ordering_tv_text.setText((String) map.get("text"));
-        ordering_tv_dis.setText(String.valueOf(map.get("distance")));
-        ordering_tv_money.setText(String.valueOf(map.get("money")));
+        ordering_empname.setText(beanOrder.getEmpAccount());
+        ordering_tv_task.setText(beanOrder.getOrderName());
+        ordering_tv_text.setText(beanOrder.getOrderText());
+        ordering_tv_dis.setText(String.valueOf(beanOrder.getDistence()));
+        ordering_tv_money.setText(String.valueOf(beanOrder.getMoney()));
 
         ordering_bt_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

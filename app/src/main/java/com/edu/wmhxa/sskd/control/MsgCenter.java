@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.R.attr.order;
 import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 /**
@@ -72,30 +73,33 @@ public class MsgCenter {
 //        beanUser = null;
         //模拟附近订单
         nearTaskList = new ArrayList<BeanOrder>();
-//        for (int i = 0; i < 10; i++) {
-//            Map<String, Object> order = new HashMap<String, Object>();
-//            order.put("orderboss", "luren" + i);
-//            order.put("ordername", "任务" + i);
-//            order.put("ordertext", "备注" + i);
-//            order.put("ordermoney", 10.0 + i);
-//            order.put("orderbounty", 1.0 + i);
-//            List<BeanThing> thingList = new ArrayList<BeanThing>();
-//            for (int j = 0; j < 5; j++) {
-//                BeanThing beanThing = new BeanThing();
-//                beanThing.setName("物品" + (j + 1));
-//                beanThing.setNumber(5);
-//                beanThing.setMoney(5.0 + i);
-//                beanThing.setLatitude(30.3208407389);
-//                beanThing.setLongitude(120.1413774490);
-//                beanThing.setAddress("源清中学" + i);
-//
-//                thingList.add(beanThing);
-//                Log.i(TAG, "添加一个物品");
-//            }
-//            order.put("thinglist", thingList);
-//            nearTaskList.add(order);
-//            Log.i(TAG, "添加一个订单");
-//        }
+        for (int i = 0; i < 10; i++) {
+            BeanOrder order = new BeanOrder();
+            order.setBossAccount("luren" + i);
+            order.setOrderName("任务" + i);
+            order.setOrderText("备注" + i);
+            order.setMoney(10.0 + i);
+            order.setBounty(1.0 + i);
+            List<BeanThing> thingList = new ArrayList<BeanThing>();
+            for (int j = 0; j < 5; j++) {
+                BeanThing beanThing = new BeanThing();
+                beanThing.setName("物品" + (j + 1));
+                beanThing.setNumber(5);
+                beanThing.setMoney(5.0 + i);
+                beanThing.setLatitude(30.3208407389);
+                beanThing.setLongitude(120.1413774490);
+                beanThing.setAddress("源清中学" + i);
+                thingList.add(beanThing);
+                Log.i(TAG, "添加一个物品");
+            }
+            order.setThingList(thingList);
+            BeanAddress beanAddress = new BeanAddress();
+            beanAddress.setLocation("地点" + i);
+            order.setAddress(beanAddress);
+
+            nearTaskList.add(order);
+            Log.i(TAG, "添加一个订单");
+        }
 
         friendList = new ArrayList<BeanUser>();
         for (int i = 0; i < 20; i++) {
@@ -115,6 +119,23 @@ public class MsgCenter {
         addUser.setSex("男");
         addUser.setGood(100);
         applyFriendList.add(addUser);
+
+        //地址
+        addressList = new ArrayList<BeanAddress>();
+        for (int i = 0; i < 6; i++) {
+            BeanAddress beanAddress = new BeanAddress();
+            beanAddress.setName("收货人" + i);
+            beanAddress.setPhone("110" + i);
+            beanAddress.setLocation("定位" + i);
+            beanAddress.setInfo("详细地址" + i);
+            if (i == 3) {
+                beanAddress.setAddrDefault(true);
+                BeanAddress.indexDeault = i;
+            } else {
+                beanAddress.setAddrDefault(false);
+            }
+            addressList.add(beanAddress);
+        }
 
     }
 

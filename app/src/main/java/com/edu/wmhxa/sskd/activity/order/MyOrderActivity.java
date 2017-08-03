@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.model.BeanOrder;
 import com.edu.wmhxa.sskd.util.ListViewUtil;
 import com.edu.wmhxa.sskd.util.adapter.OrderFinishAdapter;
 import com.edu.wmhxa.sskd.util.adapter.OrderIngAdapter;
@@ -28,7 +29,7 @@ public class MyOrderActivity extends Activity implements View.OnClickListener {
     private ListView order_lv_finish;
     private ImageView back;
 
-    private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+    private List<BeanOrder> list = new ArrayList<BeanOrder>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +89,19 @@ public class MyOrderActivity extends Activity implements View.OnClickListener {
 //        orderfinish_tv_dis.setText((String) map.get("distance"));
 //        orderfinish_tv_money.setText((String) map.get("money"));
         for (int i = 0; i < 5; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("empname", "快递员" + i);
-            map.put("taskname", "任务" + i);
-            map.put("text", "备注" + i);
-            map.put("distance", 1.0);
-            map.put("money", 1.0);
-            list.add(map);
+//            Map<String, Object> map = new HashMap<String, Object>();
+//            map.put("empname", "快递员" + i);
+//            map.put("taskname", "任务" + i);
+//            map.put("text", "备注" + i);
+//            map.put("distance", 1.0);
+//            map.put("money", 1.0);
+            BeanOrder beanOrder = new BeanOrder();
+            beanOrder.setEmpAccount("kuaidiyuan" + i);
+            beanOrder.setOrderName("任务" + i);
+            beanOrder.setOrderText("备注" + i);
+            beanOrder.setDistence(1.0);
+            beanOrder.setMoney(1.0);
+            list.add(beanOrder);
         }
     }
 

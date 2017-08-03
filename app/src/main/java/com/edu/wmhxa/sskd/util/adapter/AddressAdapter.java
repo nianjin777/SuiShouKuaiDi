@@ -46,7 +46,7 @@ public class AddressAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = View.inflate(context, R.layout.item_address, parent);
+            view = View.inflate(context, R.layout.item_address, null);
         } else {
             view = convertView;
         }
@@ -55,7 +55,18 @@ public class AddressAdapter extends BaseAdapter {
         TextView addPhone = (TextView) view.findViewById(R.id.item_tv_addphone);
         TextView addAddress = (TextView) view.findViewById(R.id.item_tv_addaddress);
 
-        BeanAddress beanAddress = list.get(position);
+        BeanAddress beanAddress;
+        if (position == 0) {
+            //第一个位置显示默认地址
+            beanAddress = list.get(BeanAddress.indexDeault);
+        } else {
+            //如果不是第一个位置
+            if (position <= BeanAddress.indexDeault) {
+                //但他是默认地址的位置或之后的位置
+                position -= 1;
+            }
+            beanAddress = list.get(position);
+        }
 
         addName.setText(beanAddress.getName());
         addPhone.setText(beanAddress.getPhone());

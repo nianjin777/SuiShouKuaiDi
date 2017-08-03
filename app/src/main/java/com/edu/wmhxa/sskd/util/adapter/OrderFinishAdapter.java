@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.model.BeanOrder;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class OrderFinishAdapter extends BaseAdapter {
 
     private Context context = null;
-    private List<Map<String, Object>> list = null;
+    private List<BeanOrder> list = null;
     private View view;
     private TextView orderfinish_empname;
     private TextView orderfinish_tv_task;
@@ -29,7 +30,7 @@ public class OrderFinishAdapter extends BaseAdapter {
     private Button orderfinish_bt_friend;
     private Button orderfinish_bt_evaluate;
 
-    public OrderFinishAdapter(Context context, List<Map<String, Object>> list) {
+    public OrderFinishAdapter(Context context, List<BeanOrder> list) {
         this.context = context;
         this.list = list;
     }
@@ -58,14 +59,14 @@ public class OrderFinishAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        Map<String, Object> map = list.get(position);
+        BeanOrder beanOrder = list.get(position);
         findViewById();
 
-        orderfinish_empname.setText((String) map.get("empname"));
-        orderfinish_tv_task.setText((String) map.get("taskname"));
-        orderfinish_tv_text.setText((String) map.get("text"));
-        orderfinish_tv_dis.setText(String.valueOf(map.get("distance")));
-        orderfinish_tv_money.setText(String.valueOf(map.get("money")));
+        orderfinish_empname.setText(beanOrder.getEmpAccount());
+        orderfinish_tv_task.setText(beanOrder.getOrderName());
+        orderfinish_tv_text.setText(beanOrder.getOrderText());
+        orderfinish_tv_dis.setText(String.valueOf(beanOrder.getDistence()));
+        orderfinish_tv_money.setText(String.valueOf(beanOrder.getMoney()));
 
         orderfinish_bt_friend.setOnClickListener(new View.OnClickListener() {
             @Override

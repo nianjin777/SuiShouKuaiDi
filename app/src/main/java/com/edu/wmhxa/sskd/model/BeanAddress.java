@@ -1,12 +1,15 @@
 package com.edu.wmhxa.sskd.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/2.
  */
 
 public class BeanAddress implements Serializable {
+
+    public static int indexDeault;
 
     private int addrId;
     private String location;
@@ -63,4 +66,12 @@ public class BeanAddress implements Serializable {
         this.addrDefault = addrDefault;
     }
 
+//    public static void addList(List<BeanAddress> addressList, BeanAddress address) {
+//        int inDefault = 0;
+//        for (int i = 0; i < addressList.size(); i++) {
+//            if (addressList.get(i).isAddrDefault()) {
+//                inDefault = i;
+//            }
+//        }
+//    }
 }

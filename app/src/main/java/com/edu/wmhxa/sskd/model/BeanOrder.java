@@ -11,6 +11,7 @@ import java.util.List;
 
 public class BeanOrder implements Serializable {
     private int orderId;
+    private String bossAccount;
     private String empAccount;
     private Calendar startTime;
     private Calendar endTime;
@@ -22,6 +23,7 @@ public class BeanOrder implements Serializable {
     private String orderText;
     private List<BeanThing> thingList = new ArrayList<BeanThing>();
     private BeanAddress address;
+    private double distence;
 
     public int getOrderId() {
         return orderId;
@@ -117,5 +119,21 @@ public class BeanOrder implements Serializable {
 
     public void setAddress(BeanAddress address) {
         this.address = address;
+    }
+
+    public String getBossAccount() {
+        return bossAccount;
+    }
+
+    public void setBossAccount(String bossAccount) {
+        this.bossAccount = bossAccount;
+    }
+
+    public double getDistence() {
+        return distence;
+    }
+
+    public void setDistence(double distence) {
+        this.distence = distence;
     }
 }
