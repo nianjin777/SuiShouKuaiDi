@@ -83,18 +83,7 @@ public class MyOrderActivity extends Activity implements View.OnClickListener {
     }
 
     private void initData() {
-//        orderfinish_empname.setText((String) map.get("empname"));
-//        orderfinish_tv_task.setText((String) map.get("taskname"));
-//        orderfinish_tv_text.setText((String) map.get("text"));
-//        orderfinish_tv_dis.setText((String) map.get("distance"));
-//        orderfinish_tv_money.setText((String) map.get("money"));
         for (int i = 0; i < 5; i++) {
-//            Map<String, Object> map = new HashMap<String, Object>();
-//            map.put("empname", "快递员" + i);
-//            map.put("taskname", "任务" + i);
-//            map.put("text", "备注" + i);
-//            map.put("distance", 1.0);
-//            map.put("money", 1.0);
             BeanOrder beanOrder = new BeanOrder();
             beanOrder.setEmpAccount("kuaidiyuan" + i);
             beanOrder.setOrderName("任务" + i);
