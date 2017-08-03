@@ -23,6 +23,7 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
     private TextView accrpt_tv_text;
     private TextView accept_tv_money;
     private TextView accept_tv_totle;
+    private TextView accept_tv_addr;
     private Button accept_bt_back;
     private Button accept_bt_accept;
     private Map<String, Object> order;
@@ -52,6 +53,9 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
             totle += beanThing.getMoney();
         }
 
+        //大致地址
+        accept_tv_addr = (TextView) findViewById(R.id.accept_tv_addr);
+        accept_tv_addr.setText((String) order.get("orderaddress"));
         //任务名
         accept_tv_taskname = (TextView) findViewById(R.id.accept_tv_taskname);
         accept_tv_taskname.setText((String) order.get("ordername"));
