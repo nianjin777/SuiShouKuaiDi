@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.edu.wmhxa.sskd.R;
 import com.edu.wmhxa.sskd.activity.home.HomeActivity;
+import com.edu.wmhxa.sskd.control.MsgCenter;
+import com.edu.wmhxa.sskd.model.BeanAddress;
 import com.edu.wmhxa.sskd.model.BeanThing;
 import com.edu.wmhxa.sskd.util.ListViewUtil;
 import com.edu.wmhxa.sskd.util.adapter.ThingListAdapter;
@@ -71,9 +73,14 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
     }
 
     private void findViewById() {
+        BeanAddress beanAddress = MsgCenter.addressList.get(BeanAddress.indexDeault);
         issue_tv_name = (TextView) view.findViewById(R.id.issue_tv_name);
         issue_tv_phone = (TextView) view.findViewById(R.id.issue_tv_phone);
         issue_tv_addr = (TextView) view.findViewById(R.id.issue_tv_addr);
+        issue_tv_name.setText(beanAddress.getName());
+        issue_tv_phone.setText(beanAddress.getPhone());
+        issue_tv_addr.setText(beanAddress.getLocation() + "\n" + beanAddress.getInfo());
+
         issue_rl_address = view.findViewById(R.id.issue_rl_address);
         issue_et_taskname = (EditText) view.findViewById(R.id.issue_et_taskname);
         //设置lv
@@ -104,7 +111,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
             case R.id.issue_rl_address:
                 //选择地址
                 intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.setting.address.AddressChooseAcrtivity");
-                startActivity(intent);
+                startActivityForResult(intent, 2);
                 break;
             case R.id.issue_bt_addthing:
                 //添加物品
@@ -131,13 +138,29 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null) {
-            return;
+        if (requestCode == 1) {
+            if (data == null) {
+                return;
+            }
+            BeanThing thing = (BeanThing) data.getExtras().get("thing");
+            thingList.add(thing);
+            issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
+            ListViewUtil.setListViewHeightBasedOnChildren(issue_lv);
+        } else if (requestCode == 2) {
+            int position = data.getIntExtra("position", BeanAddress.indexDeault);
+            if (position <= BeanAddress.indexDeault) {
+                if (position == 0) {
+                    position = BeanAddress.indexDeault;
+                } else {
+                    position -= 1;
+                }
+            }
+
+            BeanAddress beanAddress = MsgCenter.addressList.get(position);
+            issue_tv_name.setText(beanAddress.getName());
+            issue_tv_phone.setText(beanAddress.getPhone());
+            issue_tv_addr.setText(beanAddress.getLocation() + "\n" + beanAddress.getInfo());
         }
-        BeanThing thing = (BeanThing) data.getExtras().get("thing");
-        thingList.add(thing);
-        issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
-        ListViewUtil.setListViewHeightBasedOnChildren(issue_lv);
     }
 
     //发布信息弹窗
@@ -172,12 +195,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
      */
 
     private void getData() {
-        String bossName = (String) issue_tv_name.getText();
-        String phone = (String) issue_tv_phone.getText();
-        String Address = (String) issue_tv_addr.getText();
-        String orderName = String.valueOf(issue_et_taskname.getText());
-        // thingList 可以直接拿过去发
-        String orderText = String.valueOf(issue_et_text.getText());
+
     }
 
     private void sendData() {

@@ -26,20 +26,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="收货人："
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/issue_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/issue_tv_addr"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="欢欢"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/issue_tv_phone"
@@ -47,35 +47,35 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="32dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="15858258596"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/issue_tv_addrword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="16dp"
+                    android:layout_below="@+id/issue_tv_word3"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
                     android:text="收货地址："
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/issue_tv_addr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="16dp"
+                    android:layout_below="@+id/issue_tv_name"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/issue_tv_addrword"
                     android:maxLength="32"
-                    android:maxLines="2"
                     android:text="浙江大学城市学院北校区"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <View

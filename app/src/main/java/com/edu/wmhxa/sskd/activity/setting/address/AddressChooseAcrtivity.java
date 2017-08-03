@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.control.MsgCenter;
+import com.edu.wmhxa.sskd.util.adapter.AddressAdapter;
 
 
 /**
@@ -41,11 +44,21 @@ public class AddressChooseAcrtivity extends Activity implements View.OnClickList
         title3_bt.setText("管理");
         title3_tv.setText("选择收货地址");
         chooseaddre_lv = (ListView) findViewById(R.id.chooseaddre_lv);
+        chooseaddre_lv.setAdapter(new AddressAdapter(getApplicationContext(), MsgCenter.addressList));
     }
 
     private void setListener() {
         title3_bt.setOnClickListener(this);
         title3_back.setOnClickListener(this);
+        chooseaddre_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra("position", position);
+                setResult(10, intent);
+                finish();
+            }
+        });
     }
 
     @Override

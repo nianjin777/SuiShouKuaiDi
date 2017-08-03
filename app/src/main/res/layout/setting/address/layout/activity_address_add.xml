@@ -15,13 +15,13 @@
 
         <TextView
             android:id="@+id/addaddress_tv_1"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="16dp"
             android:text="收货人"
             android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/add_et_savename"
@@ -32,7 +32,7 @@
             android:background="@null"
             android:hint="输入姓名"
             android:paddingLeft="16dp"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
@@ -48,13 +48,13 @@
 
         <TextView
             android:id="@+id/addaddress_tv_2"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="16dp"
             android:text="联系电话"
             android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/add_et_savephone"
@@ -65,7 +65,7 @@
             android:background="@null"
             android:hint="输入联系电话"
             android:paddingLeft="16dp"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
@@ -77,28 +77,30 @@
     <RelativeLayout
         android:id="@+id/addaddress_rl_place"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/addaddress_tv_3"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="16dp"
             android:text="所在地区"
             android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
-        <EditText
+        <Button
             android:id="@+id/add_et_saveplace"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/addaddress_tv_3"
             android:background="@null"
+            android:gravity="left|center_vertical"
             android:hint=""
             android:paddingLeft="16dp"
-            android:textSize="24sp" />
+            android:text="点击选择"
+            android:textSize="15sp" />
     </RelativeLayout>
 
     <View
@@ -114,13 +116,13 @@
 
         <TextView
             android:id="@+id/addaddress_tv_4"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="16dp"
             android:text="地址"
             android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -137,8 +139,10 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/addaddress_tv_4"
         android:background="@null"
+        android:gravity="start"
         android:hint="请输入具体地址"
         android:paddingLeft="16dp"
+        android:paddingTop="8dp"
         android:textSize="20sp" />
 
     <View
@@ -156,7 +160,7 @@
         android:paddingLeft="16dp"
         android:text="设为默认地址"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="20sp"
 
         />
 

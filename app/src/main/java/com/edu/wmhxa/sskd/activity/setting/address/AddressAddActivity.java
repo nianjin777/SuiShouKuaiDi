@@ -1,6 +1,7 @@
 package com.edu.wmhxa.sskd.activity.setting.address;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,9 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.activity.order.issue.ChoosePositionActivity;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 import com.edu.wmhxa.sskd.model.BeanAddress;
+
+import static com.edu.wmhxa.sskd.R.id.add_bt_setplace;
 
 
 public class AddressAddActivity extends Activity implements View.OnClickListener {
@@ -22,7 +27,7 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
     private View view;
     private EditText add_et_savename;
     private EditText add_et_savephone;
-    private EditText add_et_saveplace;
+    private Button add_et_saveplace;
     private EditText add_et_savereplace;
     private Button addaddress_bt_default;
     private ImageView back;
@@ -50,7 +55,7 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
 
         add_et_savename = (EditText) findViewById(R.id.add_et_savename);
         add_et_savephone = (EditText) findViewById(R.id.add_et_savephone);
-        add_et_saveplace = (EditText) findViewById(R.id.add_et_saveplace);
+        add_et_saveplace = (Button) findViewById(R.id.add_et_saveplace);
         add_et_savereplace = (EditText) findViewById(R.id.add_et_savereplace);
         addaddress_bt_default = (Button) findViewById(R.id.addaddress_bt_default);
     }
@@ -59,6 +64,7 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
         title3_bt.setOnClickListener(this);
         back.setOnClickListener(this);
         addaddress_bt_default.setOnClickListener(this);
+        add_et_saveplace.setOnClickListener(this);
     }
 
     @Override
@@ -87,6 +93,10 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
                     addaddress_bt_default.setBackgroundColor(Color.GRAY);
                 }
                 break;
+            case R.id.add_et_saveplace:
+                Intent intent = new Intent(AddressAddActivity.this, ChoosePositionActivity.class);
+                startActivityForResult(intent, 1);
+                break;
         }
     }
 
@@ -99,5 +109,34 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
         beanAddress.setAddrDefault(isDefault);
 
         return beanAddress;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (data == null) {
+                //取消回来的 啥也不做
+                return;
+            }
+            final PoiInfo result = (PoiInfo) data.getParcelableExtra("result");
+            if (result == null) {
+                //没选择POI的
+                final String location = data.getStringExtra("location");
+                Log.i("cyan", location);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        add_et_saveplace.setText(location);
+                    }
+                });
+                return;
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    add_et_saveplace.setText(result.address + " " + result.name);
+                }
+            });
+        }
     }
 }
