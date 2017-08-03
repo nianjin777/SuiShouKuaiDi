@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,6 +50,14 @@ public class AddressManageActivity extends Activity implements OnClickListener {
     private void setListener() {
         title3_back.setOnClickListener(this);
         title3_bt.setOnClickListener(this);
+        manageaddre_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(AddressManageActivity.this, AddressEditActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
