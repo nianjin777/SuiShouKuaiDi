@@ -14,6 +14,9 @@ import com.edu.wmhxa.sskd.R;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 import com.edu.wmhxa.sskd.model.BeanAddress;
 
+import static android.R.attr.name;
+import static com.baidu.location.d.j.v;
+
 
 public class AddressEditActivity extends Activity {
 
@@ -58,7 +61,7 @@ public class AddressEditActivity extends Activity {
         title3_back = (ImageView) editaddress_title.findViewById(R.id.title3_back);
         TextView title3_tv = (TextView) editaddress_title.findViewById(R.id.title3_tv);
         title3_bt = (Button) editaddress_title.findViewById(R.id.title3_bt);
-        title3_bt.setText("保存");
+        title3_bt.setText("保存修改");
         title3_tv.setText("编辑地址");
     }
 
@@ -79,12 +82,18 @@ public class AddressEditActivity extends Activity {
         title3_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean result = MsgCenter.getInstanceMsgCenter().changeAddress(MsgCenter.addressList.get(position));
-                if (result) {
-                    Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
-                    finish();
+                BeanAddress check = checkInfo();
+                if (check == null) {
+                    Toast.makeText(getApplicationContext(), "没有做任何修改", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
-                    Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
+                    boolean result = MsgCenter.getInstanceMsgCenter().changeAddress(MsgCenter.addressList.get(position));
+                    if (result) {
+                        Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -97,9 +106,36 @@ public class AddressEditActivity extends Activity {
     }
 
     //检测是否更改
-    private boolean checkInfo() {
+    private BeanAddress checkInfo() {
+        boolean flag = false;
+        BeanAddress change = beanAddress;
 
-        return false;
+        String name = edit_ev_savename.getText().toString();
+        String phone = edit_ev_savephone.getText().toString();
+        String place = edit_ev_saveplace.getText().toString();
+        String replace = edit_ev_savereplace.getText().toString();
+
+        if (!change.getName().equals(name)) {
+            flag = true;
+            change.setName(name);
+        }
+        if (!change.getPhone().equals(phone)) {
+            flag = true;
+            change.setPhone(phone);
+        }
+        if (!change.getLocation().equals(place)) {
+            flag = true;
+            change.setLocation(place);
+        }
+        if (!change.getInfo().equals(replace)) {
+            flag = true;
+            change.setInfo(replace);
+        }
+        if (flag) {
+            return change;
+        } else {
+            return null;
+        }
     }
 
 
