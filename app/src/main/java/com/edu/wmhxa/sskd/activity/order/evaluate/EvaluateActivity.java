@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edu.wmhxa.sskd.R;
@@ -21,6 +22,8 @@ public class EvaluateActivity extends AppCompatActivity {
     private TextView eva_tv_text;
     private TextView eva_tv_money;
     private EditText eva_et_text;
+    private Button title3_bt;
+    private ImageView title3_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +40,12 @@ public class EvaluateActivity extends AppCompatActivity {
         eva_tv_text= (TextView) view.findViewById(R.id.eva_tv_text);
         eva_tv_money =(TextView) view.findViewById(R.id.eva_tv_money);
         eva_et_text=(EditText) view.findViewById(R.id.eva_et_text);
+
+        View eval_title = findViewById(R.id.eval_title);
+        title3_back = (ImageView) eval_title.findViewById(R.id.title3_back);
+        TextView title3_tv = (TextView) eval_title.findViewById(R.id.title3_tv);
+        title3_bt = (Button) eval_title.findViewById(R.id.title3_bt);
+        title3_bt.setText("发布");
+        title3_tv.setText("订单评价");
     }
 }

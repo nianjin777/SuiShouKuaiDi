@@ -7,35 +7,9 @@
     android:layout_height="match_parent"
     >
 
-    <RelativeLayout
-        android:id="@+id/eva_ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#D7D7D7"
-        >
-        <TextView
-            android:id="@+id/eva_tv_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="评价"
-            android:textSize="24sp"
-            android:layout_centerInParent="true"
-            android:textColor="#000000"
-            />
-        <Button
-            android:id="@+id/eva_tv_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="发布"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:background="@null"
-            />
-
-    </RelativeLayout>
+    <include
+        android:id="@+id/eval_title"
+        layout="@layout/item_title3"></include>
 
     <RelativeLayout
         android:id="@+id/eva_rl_top"

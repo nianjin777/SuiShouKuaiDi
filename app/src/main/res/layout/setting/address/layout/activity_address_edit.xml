@@ -4,33 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/eidtaddress_ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#D7D7D7">
 
-        <TextView
-            android:id="@+id/editaddress_tv_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="编辑地址"
-            android:textColor="#000000"
-            android:textSize="24sp" />
+        <include
+            android:id="@+id/editaddress_title"
+            layout="@layout/item_title3"></include>
 
-        <Button
-            android:id="@+id/editaddress_tv_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:paddingRight="16dp"
-            android:text="保存"
-            android:textSize="20sp" />
 
-    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/editaddress_rl_name"
