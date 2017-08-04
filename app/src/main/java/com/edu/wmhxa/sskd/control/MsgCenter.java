@@ -104,7 +104,6 @@ public class MsgCenter {
         friendList = new ArrayList<BeanUser>();
         for (int i = 0; i < 20; i++) {
             BeanUser beanUser = new BeanUser();
-            beanUser.setUserID(i);
             beanUser.setName("朋友" + i);
             beanUser.setSex("女");
             beanUser.setPhone("110" + i);
@@ -166,7 +165,6 @@ public class MsgCenter {
             if (error == null || error.isEmpty()) {
 //                登陆成功 把信息封装成bean对象
                 loginUser = new BeanUser();
-                loginUser.setUserID(result.getInt("userid"));
                 loginUser.setName(result.getString("username"));
                 loginUser.setSex(result.getString("usersex"));
                 loginUser.setID(result.getString("useridcard"));
@@ -235,7 +233,6 @@ public class MsgCenter {
                 for (int i = 0; i < friendlist.length(); i++) {
                     JSONObject jsonObject = friendlist.getJSONObject(i);
                     BeanUser beanUser = new BeanUser();
-                    beanUser.setUserID(jsonObject.getInt("userid"));
                     beanUser.setName(jsonObject.getString("username"));
                     beanUser.setSex(jsonObject.getString("usersex"));
                     beanUser.setPhone(jsonObject.getString("userphone"));
@@ -519,7 +516,6 @@ public class MsgCenter {
         }
         return true;
     }
-
 
     //订单操作
     //获取位置周边订单信息
