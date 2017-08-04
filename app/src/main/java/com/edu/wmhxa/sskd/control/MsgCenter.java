@@ -39,12 +39,12 @@ public class MsgCenter {
      * 附近任务表
      * 用户获取到位置后会向服务器拉取附近所有任务的任务信息存在List中
      */
-    public static List<BeanOrder> nearTaskList = null;
-    public static List<BeanOrder> myOrderList = null;
-    public static List<BeanOrder> ingOrderList = null;
-    public static List<BeanOrder> waitOrderList = null;
-    public static List<BeanOrder> finishOrderList = null;
-    public static List<BeanOrder> empOrderList = null;
+    public static List<BeanOrder> nearTaskList = new ArrayList<BeanOrder>();
+    public static List<BeanOrder> myOrderList = new ArrayList<BeanOrder>();
+    public static List<BeanOrder> ingOrderList = new ArrayList<BeanOrder>();
+    public static List<BeanOrder> waitOrderList = new ArrayList<BeanOrder>();
+    public static List<BeanOrder> finishOrderList = new ArrayList<BeanOrder>();
+    public static List<BeanOrder> empOrderList = new ArrayList<BeanOrder>();
     //订单详情
     public static Map<String, Object> orderInfo = null;
     //物品清单
@@ -69,8 +69,8 @@ public class MsgCenter {
 
     private static void initData() {
         //模拟当前登陆用户
-//        beanUser = new BeanUser("admin", "admin", "123456", "陈幼安", "350702199705301818", "17774009906", true, "404290080@qq.com", "男");
-        beanUser = null;
+        beanUser = new BeanUser("admin", "admin", "123456", "陈幼安", "350702199705301818", "17774009906", true, "404290080@qq.com", "男");
+//        beanUser = null;
         //模拟附近订单
         nearTaskList = new ArrayList<BeanOrder>();
         for (int i = 0; i < 10; i++) {
@@ -734,7 +734,7 @@ public class MsgCenter {
     }
 
     //修改订单
-    public int changeOrder(BeanOrder order, int addrId) {
+    public int changeOrder(BeanOrder order) {
         int orderid = -1;
         String URL = "changeOrder";
         //把bean对象封装成JSON
@@ -760,7 +760,7 @@ public class MsgCenter {
                 thing.put(thingInfo);
             }
             info.put("thing", thing);
-            info.put("addrid", addrId);
+            info.put("addrid", order.getAddress().getAddrId());
             JSONObject result = httpControl.postMethod(info, URL);
             if (result == null) {
                 return -1;

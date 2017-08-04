@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -61,6 +63,29 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
     private List<BeanThing> thingList = new ArrayList<BeanThing>();
     private BeanAddress beanAddress;
     private double totle = 0;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    //网络请求回调
+                    int result = (int) msg.obj;
+                    if (result == -1) {
+                        Toast.makeText(getContext(), "网络错误", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //跳转
+                        HomeActivity activity = HomeActivity.activity;
+                        HomeActivity.click = 0;
+                        activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
+                        activity.bottomAdapter.notifyDataSetChanged();
+                        activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
+                        activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
+                    }
+                    break;
+            }
+        }
+    };
 
     public static IssueHallFragment getInstanceFragment() {
         if (instanceFragment == null) {
@@ -241,17 +266,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
                         //发送数据
-                        int result = sendData(beanOrder);
-                        if (result == -1) {
-                        } else {
-                            //跳转
-                            HomeActivity activity = HomeActivity.activity;
-                            HomeActivity.click = 0;
-                            activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
-                            activity.bottomAdapter.notifyDataSetChanged();
-                            activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
-                            activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
-                        }
+                        sendData(beanOrder);
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加返回按钮
             @Override
@@ -299,15 +314,18 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         return beanOrder;
     }
 
-    private int sendData(BeanOrder beanOrder) {
+    private void sendData(final BeanOrder beanOrder) {
         //TODO 发送一条订单数据到服务器
-        int result = MsgCenter.getInstanceMsgCenter().addOrder(beanOrder);
-        if (result == -1) {
-            Toast.makeText(getContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
-        }
-        return result;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int result = MsgCenter.getInstanceMsgCenter().addOrder(beanOrder);
+                Message message = new Message();
+                message.what = 1;
+                message.obj = result;
+                handler.sendMessage(message);
+            }
+        }).start();
     }
 
     @Nullable

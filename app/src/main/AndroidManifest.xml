@@ -52,6 +52,7 @@
         <activity android:name="com.edu.wmhxa.sskd.activity.order.HistoryEvalActivity"></activity>
         <activity android:name="com.edu.wmhxa.sskd.activity.order.SeeOrderActivity"></activity>
         <activity android:name="com.edu.wmhxa.sskd.activity.order.issue.ChoosePositionActivity"></activity>
+        <activity android:name=".activity.order.OrderResultActivity"></activity>
 
         <!-- comm -->
         <activity android:name="com.edu.wmhxa.sskd.activity.comm.DynamicActivity"></activity>
