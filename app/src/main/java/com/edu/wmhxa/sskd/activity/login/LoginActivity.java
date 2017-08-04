@@ -3,6 +3,9 @@ package com.edu.wmhxa.sskd.activity.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +17,9 @@ import com.edu.wmhxa.sskd.activity.home.HomeActivity;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 import com.edu.wmhxa.sskd.util.SysApplication;
 
+import static com.baidu.location.d.j.P;
+import static com.baidu.location.d.j.T;
+
 public class LoginActivity extends Activity {
 
     private long mExitTime;
@@ -24,6 +30,21 @@ public class LoginActivity extends Activity {
 
     private String username;
     private String password;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            boolean obj = (boolean) msg.obj;
+            if (obj) {
+                Toast.makeText(getApplicationContext(), "登陆成功\n正在为您跳转到主页", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "登陆失败,网络异常", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +79,17 @@ public class LoginActivity extends Activity {
                 getData();
                 boolean result = MsgCenter.getInstanceMsgCenter().login(username, password);
                 if (result) {
-                    Toast.makeText(getApplicationContext(), "登陆成功\n正在为您跳转到主页", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    //获取数据
+                    Toast.makeText(getApplicationContext(), "登陆中...", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            boolean result = getServer();
+                            Message message = new Message();
+                            message.obj = result;
+                            handler.sendMessage(message);
+                        }
+                    }).start();
                 } else {
                     Toast.makeText(getApplicationContext(), "登陆失败", Toast.LENGTH_SHORT).show();
                 }
@@ -90,6 +119,24 @@ public class LoginActivity extends Activity {
         } else {
             SysApplication.getInstance().exit();
         }
+    }
+
+    private boolean getServer() {
+        boolean friendListResult = MsgCenter.getInstanceMsgCenter().getFriendList();
+        if (!friendListResult) {
+            Log.i("login", "获取好友列表出错");
+            return false;
+        }
+        boolean addrListResult = MsgCenter.getInstanceMsgCenter().getAddrList();
+        if (!addrListResult) {
+            Log.i("login", "获取地址列表出错");
+            return false;
+        }
+        return true;
+    }
+
+    private void errorToast() {
+        Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
     }
 
 }
