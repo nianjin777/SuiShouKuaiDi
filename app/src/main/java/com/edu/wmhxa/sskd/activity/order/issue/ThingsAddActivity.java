@@ -69,7 +69,12 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
         thing.setLatitude(latitude);
         thing.setAddress(address);
         thing.setMoney(Double.valueOf(String.valueOf(add_et_setmoney.getText())));
-        thing.setNumber(Integer.valueOf(String.valueOf(add_et_setnumber.getText())));
+        String s = String.valueOf(add_et_setnumber.getText());
+        if (s == null || s.isEmpty()) {
+            thing.setNumber(0);
+        } else {
+            thing.setNumber(Integer.valueOf(s));
+        }
 
         return thing;
     }
@@ -113,11 +118,13 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
         if (result == null) {
             //没选择POI的
             final String location = data.getStringExtra("location");
-            Log.i("cyan", location);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    add_bt_setplace.setText(location);
+                    if (location == null) {
+                    } else {
+                        add_bt_setplace.setText(location);
+                    }
                 }
             });
             return;
