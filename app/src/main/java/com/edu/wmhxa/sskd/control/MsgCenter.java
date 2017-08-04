@@ -16,12 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static android.R.attr.order;
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 /**
  * Created by KarlCyan on 2017/7/25.
@@ -45,6 +41,10 @@ public class MsgCenter {
      */
     public static List<BeanOrder> nearTaskList = null;
     public static List<BeanOrder> myOrderList = null;
+    public static List<BeanOrder> ingOrderList = null;
+    public static List<BeanOrder> waitOrderList = null;
+    public static List<BeanOrder> finishOrderList = null;
+    public static List<BeanOrder> empOrderList = null;
     //订单详情
     public static Map<String, Object> orderInfo = null;
     //物品清单
@@ -225,8 +225,8 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
 
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -265,8 +265,8 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("friendaccount", friendAccount);
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -291,8 +291,8 @@ public class MsgCenter {
             info.put("check", "remeber_client");
             info.put("username", userAccount);
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return null ;
+            if (result == null) {
+                return null;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -325,8 +325,8 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("userphone", phone);
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -351,8 +351,8 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("usermail", email);
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -376,8 +376,8 @@ public class MsgCenter {
             userInfo.put("check", "remeber_client");
             userInfo.put("useraccount", beanUser.getUsername());
             JSONObject result = httpControl.postMethod(userInfo, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -421,8 +421,8 @@ public class MsgCenter {
             Log.i(TAG, info.toString());
 
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             int addrid = result.getInt("addrid");
             if (addrid == -1) {
@@ -447,8 +447,8 @@ public class MsgCenter {
             info.put("addrid", addrId);
             Log.i(TAG, info.toString());
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -481,8 +481,8 @@ public class MsgCenter {
             info.put("addrphone", beanAddress.getPhone());
 
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -506,8 +506,8 @@ public class MsgCenter {
             info.put("addrid", addrId);
 
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -538,8 +538,8 @@ public class MsgCenter {
             jsonObject.put("userlongitude", longitude);
             jsonObject.put("userlatitude", latitude);
             JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             if (result == null) {
                 return false;
@@ -597,8 +597,8 @@ public class MsgCenter {
             jsonObject.put("check", "remeber_client");
             jsonObject.put("useraccount", useraccount);
             JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = (String) result.get("error");
             if (error == null || error.isEmpty()) {
@@ -651,6 +651,7 @@ public class MsgCenter {
                     orderList.add(beanOrder);
                 }
                 myOrderList = orderList;
+                sortOrderList();
             } else {
                 return false;
             }
@@ -660,6 +661,35 @@ public class MsgCenter {
             e.printStackTrace();
         }
         return true;
+    }
+
+    private void sortOrderList() {
+        ingOrderList = new ArrayList<BeanOrder>();
+        finishOrderList = new ArrayList<BeanOrder>();
+        waitOrderList = new ArrayList<BeanOrder>();
+        empOrderList = new ArrayList<BeanOrder>();
+
+        for (int i = 0; i < myOrderList.size(); i++) {
+            BeanOrder beanOrder = myOrderList.get(i);
+            if (beanOrder.getStartTime() == null) {
+                //没有开始时间 是等待接单 一定是自己的
+                waitOrderList.add(beanOrder);
+                continue;
+            } else if (beanOrder.getStartTime() != null && beanOrder.getEndTime() == null) {
+                //有开始时间 没有结束时间 正在进行 有可能是当前用户自己的,也有可能是他在快递的
+                if (beanOrder.getEmpAccount() == beanUser.getUsername()) {
+                    //是自己在负责的
+                    empOrderList.add(beanOrder);
+                } else {
+                    //如果不是自己负责的 那就是自己的
+                    ingOrderList.add(beanOrder);
+                }
+                continue;
+            } else if (beanOrder.getStartTime() != null && beanOrder.getEndTime() != null) {
+                //开始和结束时间都有了 那就是已经结束的订单 不考虑有没评价过
+                finishOrderList.add(beanOrder);
+            }
+        }
     }
 
     //新增订单
@@ -691,8 +721,8 @@ public class MsgCenter {
             info.put("thing", thing);
             info.put("addrid", order.getAddress().getAddrId());
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return -1 ;
+            if (result == null) {
+                return -1;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -737,8 +767,8 @@ public class MsgCenter {
             info.put("thing", thing);
             info.put("addrid", addrId);
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return -1 ;
+            if (result == null) {
+                return -1;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -765,8 +795,8 @@ public class MsgCenter {
             info.put("useraccount", useraccount);
             info.put("orderid", order.getOrderId());
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return null ;
+            if (result == null) {
+                return null;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -793,8 +823,8 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("orderid", order.getOrderId());
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return null ;
+            if (result == null) {
+                return null;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
@@ -825,8 +855,8 @@ public class MsgCenter {
             info.put("evalaccount", order.getEmpAccount());
             info.put("text", eval);
             JSONObject result = httpControl.postMethod(info, URL);
-            if(result == null ){
-                return false ;
+            if (result == null) {
+                return false;
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
