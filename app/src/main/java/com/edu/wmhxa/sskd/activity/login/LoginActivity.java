@@ -77,22 +77,15 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 getData();
-                boolean result = MsgCenter.getInstanceMsgCenter().login(username, password);
-                if (result) {
-                    //获取数据
-                    Toast.makeText(getApplicationContext(), "登陆中...", Toast.LENGTH_SHORT).show();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            boolean result = getServer();
-                            Message message = new Message();
-                            message.obj = result;
-                            handler.sendMessage(message);
-                        }
-                    }).start();
-                } else {
-                    Toast.makeText(getApplicationContext(), "登陆失败", Toast.LENGTH_SHORT).show();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean result = MsgCenter.getInstanceMsgCenter().login(username, password);
+                        Message message = new Message();
+                        message.obj = result;
+                        handler.sendMessage(message);
+                    }
+                }).start();
             }
         });
     }
@@ -119,20 +112,6 @@ public class LoginActivity extends Activity {
         } else {
             SysApplication.getInstance().exit();
         }
-    }
-
-    private boolean getServer() {
-        boolean friendListResult = MsgCenter.getInstanceMsgCenter().getFriendList();
-        if (!friendListResult) {
-            Log.i("login", "获取好友列表出错");
-            return false;
-        }
-        boolean addrListResult = MsgCenter.getInstanceMsgCenter().getAddrList();
-        if (!addrListResult) {
-            Log.i("login", "获取地址列表出错");
-            return false;
-        }
-        return true;
     }
 
     private void errorToast() {
