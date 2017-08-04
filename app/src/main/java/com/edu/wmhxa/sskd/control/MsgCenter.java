@@ -649,6 +649,9 @@ public class MsgCenter {
             info.put("thing", thing);
             info.put("addrid", order.getAddress().getAddrId());
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return -1 ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 orderid = result.getInt("orderid");
@@ -692,6 +695,9 @@ public class MsgCenter {
             info.put("thing", thing);
             info.put("addrid", addrId);
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return -1 ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 orderid = result.getInt("orderid");
@@ -717,6 +723,9 @@ public class MsgCenter {
             info.put("useraccount", useraccount);
             info.put("orderid", order.getOrderId());
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return null ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 beanAddress = new BeanAddress();
@@ -742,6 +751,9 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("orderid", order.getOrderId());
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return null ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 String orderendtime = result.getString("orderendtime");
@@ -771,6 +783,9 @@ public class MsgCenter {
             info.put("evalaccount", order.getEmpAccount());
             info.put("text", eval);
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
             } else {
