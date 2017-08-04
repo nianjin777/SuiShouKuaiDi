@@ -157,26 +157,26 @@ public class MsgCenter {
             info.put("useraccount", userName);
             info.put("userpassword", password);
             Log.i(TAG, info.toString());
-//            JSONObject result = httpControl.postMethod(info, loginURL);//登陆的URL
-//            if(result == null ){
-//                return false ;
-//            }
-//            Log.i(TAG, result.toString());
-//            String error = (String) result.get("error");
-//            if (error == null || error.isEmpty()) {
-////                登陆成功 把信息封装成bean对象
-//                loginUser = new BeanUser();
-//                loginUser.setUserID(result.getInt("userid"));
-//                loginUser.setName(result.getString("username"));
-//                loginUser.setSex(result.getString("usersex"));
-//                loginUser.setID(result.getString("useridcard"));
-//                loginUser.setPhone(result.getString("userphone"));
-//                loginUser.setEmail(result.getString("usermail"));
-//                loginUser.setGood(result.getInt("usergood"));
-//                beanUser = loginUser;
-//            } else {
-//                return false;
-//            }
+            JSONObject result = httpControl.postMethod(info, loginURL);//登陆的URL
+            if (result == null) {
+                return false;
+            }
+            Log.i(TAG, result.toString());
+            String error = (String) result.get("error");
+            if (error == null || error.isEmpty()) {
+//                登陆成功 把信息封装成bean对象
+                loginUser = new BeanUser();
+                loginUser.setUserID(result.getInt("userid"));
+                loginUser.setName(result.getString("username"));
+                loginUser.setSex(result.getString("usersex"));
+                loginUser.setID(result.getString("useridcard"));
+                loginUser.setPhone(result.getString("userphone"));
+                loginUser.setEmail(result.getString("usermail"));
+                loginUser.setGood(result.getInt("usergood"));
+                beanUser = loginUser;
+            } else {
+                return false;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
