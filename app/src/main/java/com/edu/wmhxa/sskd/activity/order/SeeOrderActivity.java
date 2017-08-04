@@ -19,6 +19,7 @@ public class SeeOrderActivity extends AppCompatActivity {
     private TextView see_tv_text;
     private TextView see_tv_money;
     private TextView see_tv_totle;
+    private View see_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,9 @@ public class SeeOrderActivity extends AppCompatActivity {
         findViewById();
     }
     public void findViewById(){
+        see_title = findViewById(R.id.see_title);
+        TextView title1_tv = (TextView) see_title.findViewById(R.id.title1_tv);
+        title1_tv.setText("订单详情");
         see_tv_name=(TextView)view.findViewById(R.id.see_tv_name);
         see_tv_phone=(TextView)view.findViewById(R.id.see_tv_phone);
         see_tv_taskname=(TextView)view.findViewById(R.id.see_tv_taskname);

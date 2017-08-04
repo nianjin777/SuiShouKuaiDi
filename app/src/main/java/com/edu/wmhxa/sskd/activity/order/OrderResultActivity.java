@@ -3,6 +3,7 @@ package com.edu.wmhxa.sskd.activity.order;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class OrderResultActivity extends Activity {
     private TextView orderresult_tv_taskname;
     private ListView orderresult_lv;
     private TextView orderresult_tv_text;
+    private View orderresult_title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class OrderResultActivity extends Activity {
     }
 
     private void findViewById() {
+        orderresult_title = findViewById(R.id.orderresult_title);
+        TextView title1_tv = (TextView) orderresult_title.findViewById(R.id.title1_tv);
+        title1_tv.setText("订单详情");
         orderresult_tv_name = (TextView) findViewById(R.id.orderresult_tv_name);
         orderresult_tv_phone = (TextView) findViewById(R.id.orderresult_tv_phone);
         orderresult_tv_addr = (TextView) findViewById(R.id.orderresult_tv_addr);
