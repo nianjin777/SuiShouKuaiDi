@@ -43,7 +43,8 @@ public class HttpControl {
                 in.close();
                 bos.close();
             } else {
-                throw new Exception("服务器正忙！请稍后再试...");
+                return null;
+//                throw new Exception("服务器正忙！请稍后再试...");
             }
         } catch (Exception e) {
             e.printStackTrace();
