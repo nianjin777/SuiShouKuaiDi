@@ -502,6 +502,9 @@ public class MsgCenter {
             jsonObject.put("userlongitude", longitude);
             jsonObject.put("userlatitude", latitude);
             JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
+            if (result == null) {
+                return false;
+            }
             String error = (String) result.get("error");
             if (error == null || error.isEmpty()) {
                 JSONArray order = result.getJSONArray("order");
@@ -618,7 +621,7 @@ public class MsgCenter {
     }
 
     //新增订单
-    public int addOrder(BeanOrder order, int addrId) {
+    public int addOrder(BeanOrder order) {
         int orderid = -1;
         String URL = "addOrder";
         //把bean对象封装成JSON
@@ -644,13 +647,15 @@ public class MsgCenter {
                 thing.put(thingInfo);
             }
             info.put("thing", thing);
-            info.put("addrid", addrId);
+            info.put("addrid", order.getAddress().getAddrId());
             JSONObject result = httpControl.postMethod(info, URL);
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 orderid = result.getInt("orderid");
+                order.setOrderId(orderid);
+                myOrderList.add(order);
             } else {
-                return orderid = -1;
+                return -1;
             }
         } catch (JSONException e) {
             e.printStackTrace();
