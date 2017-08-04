@@ -68,8 +68,11 @@ public class BookFragment extends Fragment implements View.OnClickListener {
         book_lv_friends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //跳转到聊天界面
                 Intent intent = new Intent();
-                //TODO 跳转到聊天界面
+                intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.comm.DetailFriendActivity");
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
         });
         book_lv_handle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
