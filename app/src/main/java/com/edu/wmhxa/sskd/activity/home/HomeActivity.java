@@ -70,10 +70,10 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         alphaTabsIndicator.setViewPager(mViewPager);
 
         //设置假数据
-        alphaTabsIndicator.getTabView(0).showNumber(6);
-        alphaTabsIndicator.getTabView(1).showNumber(888);
-        alphaTabsIndicator.getTabView(2).showNumber(88);
-        alphaTabsIndicator.getTabView(3).showPoint();
+//        alphaTabsIndicator.getTabView(0).showNumber(6);
+//        alphaTabsIndicator.getTabView(1).showNumber(888);
+//        alphaTabsIndicator.getTabView(2).showNumber(88);
+//        alphaTabsIndicator.getTabView(3).showPoint();
     }
 
     private void findViewById() {
