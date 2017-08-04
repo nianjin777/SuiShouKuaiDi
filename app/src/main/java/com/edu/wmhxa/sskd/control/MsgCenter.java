@@ -158,6 +158,9 @@ public class MsgCenter {
             info.put("userpassword", password);
             Log.i(TAG, info.toString());
 //            JSONObject result = httpControl.postMethod(info, loginURL);//登陆的URL
+//            if(result == null ){
+//                return false ;
+//            }
 //            Log.i(TAG, result.toString());
 //            String error = (String) result.get("error");
 //            if (error == null || error.isEmpty()) {
@@ -196,6 +199,9 @@ public class MsgCenter {
             userInfo.put("userpassword", regUser.getPassword());
             Log.i(TAG, userInfo.toString());
 //            JSONObject result = httpControl.postMethod(userInfo, registURL);
+//            if(result == null ){
+//                return false ;
+//            }
 //            String error = (String) result.get("error");
 //            if (error == null || error.isEmpty()) {
 //                beanUser = regUser;
@@ -219,6 +225,9 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
 
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 JSONArray friendlist = result.getJSONArray("friendlist");
@@ -256,6 +265,9 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("friendaccount", friendAccount);
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 //返回正确
@@ -279,6 +291,9 @@ public class MsgCenter {
             info.put("check", "remeber_client");
             info.put("username", userAccount);
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return null ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 //返回正确
@@ -310,6 +325,9 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("userphone", phone);
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
             } else {
@@ -333,6 +351,9 @@ public class MsgCenter {
             info.put("useraccount", beanUser.getUsername());
             info.put("usermail", email);
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
             } else {
@@ -355,6 +376,9 @@ public class MsgCenter {
             userInfo.put("check", "remeber_client");
             userInfo.put("useraccount", beanUser.getUsername());
             JSONObject result = httpControl.postMethod(userInfo, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 JSONArray addresslist = result.getJSONArray("addresslist");
@@ -397,6 +421,9 @@ public class MsgCenter {
             Log.i(TAG, info.toString());
 
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             int addrid = result.getInt("addrid");
             if (addrid == -1) {
                 return false;
@@ -420,6 +447,9 @@ public class MsgCenter {
             info.put("addrid", addrId);
             Log.i(TAG, info.toString());
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 for (int i = 0; i < addressList.size(); i++) {
@@ -451,6 +481,9 @@ public class MsgCenter {
             info.put("addrphone", beanAddress.getPhone());
 
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
             } else {
@@ -473,6 +506,9 @@ public class MsgCenter {
             info.put("addrid", addrId);
 
             JSONObject result = httpControl.postMethod(info, URL);
+            if(result == null ){
+                return false ;
+            }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
             } else {
@@ -502,6 +538,9 @@ public class MsgCenter {
             jsonObject.put("userlongitude", longitude);
             jsonObject.put("userlatitude", latitude);
             JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
+            if(result == null ){
+                return false ;
+            }
             if (result == null) {
                 return false;
             }
@@ -558,6 +597,9 @@ public class MsgCenter {
             jsonObject.put("check", "remeber_client");
             jsonObject.put("useraccount", useraccount);
             JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
+            if(result == null ){
+                return false ;
+            }
             String error = (String) result.get("error");
             if (error == null || error.isEmpty()) {
                 JSONArray order = result.getJSONArray("order");
