@@ -51,6 +51,8 @@ public class MsgCenter {
     public static List<BeanThing> thingList = null;
     //朋友表
     public static List<BeanUser> friendList = null;
+    //正在进行的订单对话
+    public static List<BeanUser> orderMsgList = new ArrayList<BeanUser>();
     //好友申请表
     public static List<BeanUser> applyFriendList = null;
     //地址列表
@@ -311,33 +313,7 @@ public class MsgCenter {
         return beanUser;
     }
 
-    //修改手机
-//    public boolean changePhone(String phone) {
-//        String URL = "changePhone";
-//        //封装json对象
-//        JSONObject info = new JSONObject();
-//        try {
-//            info.put("check", "remeber_client");
-//            info.put("useraccount", beanUser.getUsername());
-//            info.put("userphone", phone);
-//            JSONObject result = httpControl.postMethod(info, URL);
-//            if (result == null) {
-//                return false;
-//            }
-//            String error = result.getString("error");
-//            if (error == null || error.isEmpty()) {
-//            } else {
-//                return false;
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        return true;
-//    }
-
-    //修改手机
+    //修改手机 和邮箱
     public boolean changeEmailAndPhone(String email, String phone) {
         String URL = "changeEmail";
         //封装json对象

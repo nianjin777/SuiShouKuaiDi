@@ -1,11 +1,13 @@
 package com.edu.wmhxa.sskd.activity.home.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.edu.wmhxa.sskd.R;
@@ -36,7 +38,7 @@ public class MsgFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_msg, container, false);
 
-        initData();
+//        initData();
         findViewById();
 
         return view;
@@ -49,6 +51,29 @@ public class MsgFragment extends Fragment {
         msg_lv_friends = (ListView) view.findViewById(R.id.msg_lv_friends);
         msg_lv_friends.setAdapter(new MessageAdapter(getContext(), friendsList));
         ListViewUtil.setListViewHeightBasedOnChildren(msg_lv_friends);
+    }
+
+    private void setListener() {
+        msg_lv_orders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.comm.MesFriActivity");
+                intent.putExtra("position", position);
+                intent.putExtra("type", "order");
+                startActivity(intent);
+            }
+        });
+        msg_lv_friends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.comm.MesFriActivity");
+                intent.putExtra("position", position);
+                intent.putExtra("type", "friend");
+                startActivity(intent);
+            }
+        });
     }
 
     private void initData() {
