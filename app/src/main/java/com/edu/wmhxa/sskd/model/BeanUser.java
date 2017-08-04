@@ -11,8 +11,8 @@ public class BeanUser implements Serializable{
 //    public static BeanUser localUser = new BeanUser();
 //    public static BeanUser localUser = null ;
 
-    private int userID;//用户编号
-    private String username;
+//    private int userID;//用户编号
+    private String username;//帐号
     private String password;
     private String payPassword;
     private String name;//姓名
@@ -40,13 +40,13 @@ public class BeanUser implements Serializable{
         super();
     }
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
+//    public int getUserID() {
+//        return userID;
+//    }
+//
+//    public void setUserID(int userID) {
+//        this.userID = userID;
+//    }
 
     public String getUsername() {
         return username;
