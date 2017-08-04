@@ -26,7 +26,6 @@ import static com.edu.wmhxa.sskd.R.id.add_bt_setplace;
 
 public class AddressAddActivity extends Activity implements View.OnClickListener {
 
-    private View view;
     private EditText add_et_savename;
     private EditText add_et_savephone;
     private Button add_et_saveplace;
@@ -42,6 +41,7 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
             boolean result = (boolean) msg.obj;
             if (result) {
                 Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
                 finish();

@@ -53,6 +53,15 @@ public class AddressEditActivity extends Activity {
                     boolean result2 = (boolean) msg.obj;
                     if (result2) {
                         Toast.makeText(getApplicationContext(), "设置成功", Toast.LENGTH_SHORT).show();
+                        editaddress_bt_default.setBackgroundColor(Color.GRAY);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 3:
+                    boolean result = (boolean) msg.obj;
+                    if (result) {
+                        Toast.makeText(getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
@@ -116,13 +125,16 @@ public class AddressEditActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO 删除地址操作
-                boolean result = MsgCenter.getInstanceMsgCenter().deleteAddress(MsgCenter.addressList.get(position).getAddrId());
-                if (result) {
-                    Toast.makeText(getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean result = MsgCenter.getInstanceMsgCenter().deleteAddress(MsgCenter.addressList.get(position).getAddrId());
+                        Message message = new Message();
+                        message.what = 3;
+                        message.obj = result;
+                        handler.sendMessage(message);
+                    }
+                }).start();
             }
         });
         title3_bt.setOnClickListener(new View.OnClickListener() {

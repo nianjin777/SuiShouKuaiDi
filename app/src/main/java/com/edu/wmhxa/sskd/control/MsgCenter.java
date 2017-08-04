@@ -175,6 +175,7 @@ public class MsgCenter {
 //                登陆成功 把信息封装成bean对象
                 JSONObject userJSONObject = result.getJSONObject("user");
                 loginUser = new BeanUser();
+                loginUser.setUsername(userName);
                 loginUser.setName(userJSONObject.getString("userName"));
                 loginUser.setSex(userJSONObject.getString("userSex"));
                 loginUser.setID(userJSONObject.getString("userIdcard"));
@@ -212,6 +213,7 @@ public class MsgCenter {
                     int addrDefault = addr.getInt("addrDefault");
                     if (addrDefault == 1) {
                         beanAddress.setAddrDefault(true);
+                        BeanAddress.indexDeault = i;
                     } else {
                         beanAddress.setAddrDefault(false);
                     }
@@ -427,19 +429,28 @@ public class MsgCenter {
             info.put("addrinfo", beanAddress.getInfo());
             info.put("addruser", beanAddress.getName());
             info.put("addrphone", beanAddress.getPhone());
-            info.put("addrdefault", beanAddress.isAddrDefault());
+            if (beanAddress.isAddrDefault()) {
+                info.put("addrdefault", 1);
+            } else {
+                info.put("addrdefault", 0);
+            }
+
             Log.i(TAG, info.toString());
 
             JSONObject result = httpControl.postMethod(info, URL);
             if (result == null) {
                 return false;
             }
-            int addrid = result.getInt("addrid");
-            if (addrid == -1) {
-                return false;
-            } else {
+            String error = result.getString("error");
+            if (error == null || error.isEmpty()) {
+                int addrid = result.getInt("addrId");
                 beanAddress.setAddrId(addrid);
                 addressList.add(beanAddress);
+                if (beanAddress.isAddrDefault()) {
+                    BeanAddress.indexDeault = addressList.size() - 1;
+                }
+            } else {
+                return false;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -461,10 +472,14 @@ public class MsgCenter {
                 return false;
             }
             String error = result.getString("error");
+            Log.i(TAG, "deleteAddress:error" + error);
             if (error == null || error.isEmpty()) {
                 for (int i = 0; i < addressList.size(); i++) {
                     if (addrId == addressList.get(i).getAddrId()) {
                         addressList.remove(i);
+                        if (i < BeanAddress.indexDeault) {
+                            BeanAddress.indexDeault -= 1;
+                        }
                     }
                 }
             } else {
@@ -484,17 +499,20 @@ public class MsgCenter {
         JSONObject info = new JSONObject();
         try {
             info.put("check", "remeber_client");
+            info.put("addrid", beanAddress.getAddrId());
             info.put("useraccount", beanUser.getUsername());
             info.put("addrlocation", beanAddress.getLocation());
             info.put("addrinfo", beanAddress.getInfo());
             info.put("addruser", beanAddress.getName());
             info.put("addrphone", beanAddress.getPhone());
+            Log.i(TAG, "changeAddress_info:" + info);
 
             JSONObject result = httpControl.postMethod(info, URL);
             if (result == null) {
                 return false;
             }
             String error = result.getString("error");
+            Log.i(TAG, "changeAddress_error:" + error);
             if (error == null || error.isEmpty()) {
             } else {
                 return false;
@@ -520,7 +538,16 @@ public class MsgCenter {
                 return false;
             }
             String error = result.getString("error");
+            Log.i(TAG, "changeDefaultAddress_error:" + error);
             if (error == null || error.isEmpty()) {
+                for (int i = 0; i < addressList.size(); i++) {
+                    if (addrId == addressList.get(i).getAddrId()) {
+                        addressList.get(BeanAddress.indexDeault).setAddrDefault(false);
+                        //找到对应地址
+                        BeanAddress.indexDeault = i;
+                        addressList.get(i).setAddrDefault(true);
+                    }
+                }
             } else {
                 return false;
             }
@@ -560,28 +587,28 @@ public class MsgCenter {
                 for (int i = 0; i < order.length(); i++) {
                     JSONObject orderInfo = order.getJSONObject(i);
                     BeanOrder beanOrder = new BeanOrder();
-                    beanOrder.setOrderId(orderInfo.getInt("orderid"));
-                    beanOrder.setOrderName(orderInfo.getString("ordername"));
-                    beanOrder.setOrderText(orderInfo.getString("ordertext"));
-                    beanOrder.setMoney(orderInfo.getDouble("ordermoney"));
-                    beanOrder.setBounty(orderInfo.getDouble("orderbounty"));
+                    beanOrder.setOrderId(orderInfo.getInt("orderId"));
+                    beanOrder.setOrderName(orderInfo.getString("orderName"));
+                    beanOrder.setOrderText(orderInfo.getString("orderText"));
+                    beanOrder.setMoney(orderInfo.getDouble("orderMoney"));
+                    beanOrder.setBounty(orderInfo.getDouble("orderBounty"));
                     //封装物品表
                     JSONArray thing = orderInfo.getJSONArray("thing");
                     List<BeanThing> thingList = new ArrayList<BeanThing>();
                     for (int j = 0; j < thing.length(); j++) {
                         JSONObject thingInfo = thing.getJSONObject(j);
                         BeanThing beanThing = new BeanThing();
-                        beanThing.setName(thingInfo.getString("thingname"));
-                        beanThing.setLongitude(thingInfo.getDouble("thinglongitude"));
-                        beanThing.setLatitude(thingInfo.getDouble("thinglatitude"));
-                        beanThing.setAddress(thingInfo.getString("thinglocation"));
-                        beanThing.setNumber(thingInfo.getInt("thingnum"));
-                        beanThing.setMoney(thingInfo.getDouble("thingmoney"));
+                        beanThing.setName(thingInfo.getString("thingName"));
+                        beanThing.setLongitude(thingInfo.getDouble("thingLongitude"));
+                        beanThing.setLatitude(thingInfo.getDouble("thingLatitude"));
+                        beanThing.setAddress(thingInfo.getString("thingLocation"));
+                        beanThing.setNumber(thingInfo.getInt("thingNum"));
+                        beanThing.setMoney(thingInfo.getDouble("thingMoney"));
                         thingList.add(beanThing);
                     }
                     beanOrder.setThingList(thingList);
                     BeanAddress beanAddress = new BeanAddress();
-                    beanAddress.setLocation(orderInfo.getString("addrlocation"));
+                    beanAddress.setLocation(orderInfo.getString("addrLocation"));
                     beanOrder.setAddress(beanAddress);
                     orderList.add(beanOrder);
                 }
@@ -590,83 +617,6 @@ public class MsgCenter {
                 return false;
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    //获取我的订单(包括所有状态)
-    public boolean getMyOrderList() {
-        //获取当前位置下的订单
-        String URL = "getMyOrderList";
-        String useraccount = beanUser.getUsername();
-        //把数据封装成JSON
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("check", "remeber_client");
-            jsonObject.put("useraccount", useraccount);
-            JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
-            if (result == null) {
-                return false;
-            }
-            String error = (String) result.get("error");
-            if (error == null || error.isEmpty()) {
-                JSONArray order = result.getJSONArray("order");
-                List<BeanOrder> orderList = new ArrayList<BeanOrder>();
-                for (int i = 0; i < order.length(); i++) {
-                    JSONObject orderInfo = order.getJSONObject(i);
-                    BeanOrder beanOrder = new BeanOrder();
-                    beanOrder.setOrderId(orderInfo.getInt("orderid"));
-                    beanOrder.setEmpAccount(orderInfo.getString("orderempaccount"));
-
-                    Calendar startTime = Calendar.getInstance();
-                    startTime.setTime(format.parse(orderInfo.getString("orderstarttime")));
-                    beanOrder.setStartTime(startTime);
-                    Calendar endTime = Calendar.getInstance();
-                    endTime.setTime(format.parse(orderInfo.getString("oederendtime")));
-                    beanOrder.setEndTime(endTime);
-
-                    beanOrder.setEvalBoss(orderInfo.getString("orderevalboss"));
-                    beanOrder.setEvalEmp(orderInfo.getString("orderevalemp"));
-                    beanOrder.setOrderName(orderInfo.getString("ordername"));
-                    beanOrder.setOrderText(orderInfo.getString("ordertext"));
-                    beanOrder.setMoney(orderInfo.getDouble("ordermoney"));
-                    beanOrder.setBounty(orderInfo.getDouble("orderbounty"));
-                    //封装物品表
-                    JSONArray thing = orderInfo.getJSONArray("thing");
-                    List<BeanThing> thingList = new ArrayList<BeanThing>();
-                    for (int j = 0; j < thing.length(); j++) {
-                        JSONObject thingInfo = thing.getJSONObject(j);
-                        BeanThing beanThing = new BeanThing();
-                        beanThing.setName(thingInfo.getString("thingname"));
-                        beanThing.setLongitude(thingInfo.getDouble("thinglongitude"));
-                        beanThing.setLatitude(thingInfo.getDouble("thinglatitude"));
-                        beanThing.setAddress(thingInfo.getString("thinglocation"));
-                        beanThing.setNumber(thingInfo.getInt("thingnum"));
-                        beanThing.setMoney(thingInfo.getDouble("thingmoney"));
-                        thingList.add(beanThing);
-                    }
-                    beanOrder.setThingList(thingList);
-                    int addrid = orderInfo.getInt("addrid");
-                    for (int index = 0; index < addressList.size(); index++) {
-                        if (addressList.get(index).getAddrId() == addrid) {
-                            beanOrder.setAddress(addressList.get(index));
-                        }
-                    }
-                    if (beanOrder.getAddress() == null) {
-                        Log.i(TAG, "getMyOrderList:返回的地址id不存在");
-                        beanOrder.setAddress(new BeanAddress());
-                    }
-                    orderList.add(beanOrder);
-                }
-                myOrderList = orderList;
-                sortOrderList();
-            } else {
-                return false;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
         return true;
@@ -735,7 +685,7 @@ public class MsgCenter {
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
-                orderid = result.getInt("orderid");
+                orderid = result.getInt("orderId");
                 order.setOrderId(orderid);
                 myOrderList.add(order);
             } else {
@@ -781,7 +731,7 @@ public class MsgCenter {
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
-                orderid = result.getInt("orderid");
+                orderid = result.getInt("orderId");
             } else {
                 return orderid = -1;
             }
@@ -810,10 +760,10 @@ public class MsgCenter {
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
                 beanAddress = new BeanAddress();
-                beanAddress.setLocation(result.getString("addrlocation"));
-                beanAddress.setInfo(result.getString("addrinfo"));
-                beanAddress.setName(result.getString("addruser"));
-                beanAddress.setPhone(result.getString("addrphone"));
+                beanAddress.setLocation(result.getString("addrLocation"));
+                beanAddress.setInfo(result.getString("addrInfo"));
+                beanAddress.setName(result.getString("addrUser"));
+                beanAddress.setPhone(result.getString("addrPhone"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -837,7 +787,7 @@ public class MsgCenter {
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
-                String orderendtime = result.getString("orderendtime");
+                String orderendtime = result.getString("orderEndTime");
                 instance.setTime(format.parse(orderendtime));
             } else {
                 instance = null;
