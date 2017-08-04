@@ -7,8 +7,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.control.MsgCenter;
+import com.edu.wmhxa.sskd.model.BeanAddress;
 import com.edu.wmhxa.sskd.model.BeanOrder;
 import com.edu.wmhxa.sskd.model.BeanThing;
 import com.edu.wmhxa.sskd.util.ListViewUtil;
@@ -92,6 +95,16 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
                 break;
             case R.id.accept_bt_accept:
                 //接受任务
+                BeanAddress beanAddress = MsgCenter.getInstanceMsgCenter().acceptOrder(order);
+                if (beanAddress == null) {
+                    Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    order.setAddress(beanAddress);
+                    MsgCenter.empOrderList.add(order);
+                    Toast.makeText(getApplicationContext(), "接受订单成功\n请在我的订单-正在进行的订单中查看详情", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 break;
             case R.id.title1_back:
                 finish();
