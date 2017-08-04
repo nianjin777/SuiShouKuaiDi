@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,18 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
     private Button title3_bt;
 
     private boolean isDefault = false;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            boolean result = (boolean) msg.obj;
+            if (result) {
+                Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,15 +85,17 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title3_bt:
-                BeanAddress info = getInfo();
-                boolean result = MsgCenter.getInstanceMsgCenter().addAddress(info);
-                if (result) {
-                    Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                finish();
+                //完成按钮
+                final BeanAddress info = getInfo();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean result = MsgCenter.getInstanceMsgCenter().addAddress(info);
+                        Message message = new Message();
+                        message.obj = result;
+                        handler.sendMessage(message);
+                    }
+                }).start();
                 break;
             case R.id.title3_back:
                 finish();
@@ -101,6 +117,7 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
     }
 
     private BeanAddress getInfo() {
+        //TODO 这里需要检查数据格式
         BeanAddress beanAddress = new BeanAddress();
         beanAddress.setName(add_et_savename.getText().toString());
         beanAddress.setPhone(add_et_savephone.getText().toString());
