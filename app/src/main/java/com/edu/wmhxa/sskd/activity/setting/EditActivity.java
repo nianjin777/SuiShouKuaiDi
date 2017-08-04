@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.edu.wmhxa.sskd.R;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 
+import static com.baidu.location.d.j.B;
+
 public class EditActivity extends Activity {
 
     private ListView edit_title;
@@ -35,8 +37,11 @@ public class EditActivity extends Activity {
         TextView title1_tv = (TextView) edit_title.findViewById(R.id.title1_tv);
         back = (ImageView) edit_title.findViewById(R.id.title1_back);
         title1_tv.setText("修改信息");
+        //重现数据
         edit_et_phone = (EditText) findViewById(R.id.edit_et_phone);
+        edit_et_phone.setText(MsgCenter.beanUser.getPhone());
         edit_et_email = (EditText) findViewById(R.id.edit_et_email);
+        edit_et_email.setText(MsgCenter.beanUser.getEmail());
         edit_tv_phone = (TextView) findViewById(R.id.edit_tv_phone);
         edit_tv_email = (TextView) findViewById(R.id.edit_tv_email);
         edit_bt_save = (TextView) findViewById(R.id.edit_bt_save);

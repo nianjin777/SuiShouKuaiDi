@@ -2,6 +2,8 @@ package com.edu.wmhxa.sskd.activity.order.accept;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +34,26 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
     private Button accept_bt_accept;
     private BeanOrder order;
     private ImageView back;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    BeanAddress beanAddress = (BeanAddress) msg.obj;
+                    if (beanAddress == null) {
+                        Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        order.setAddress(beanAddress);
+                        MsgCenter.empOrderList.add(order);
+                        Toast.makeText(getApplicationContext(), "接受订单成功\n请在我的订单-正在进行的订单中查看详情", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,19 +115,21 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
             case R.id.accept_bt_back:
                 finish();
                 break;
+
             case R.id.accept_bt_accept:
                 //接受任务
-                BeanAddress beanAddress = MsgCenter.getInstanceMsgCenter().acceptOrder(order);
-                if (beanAddress == null) {
-                    Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    order.setAddress(beanAddress);
-                    MsgCenter.empOrderList.add(order);
-                    Toast.makeText(getApplicationContext(), "接受订单成功\n请在我的订单-正在进行的订单中查看详情", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        BeanAddress beanAddress = MsgCenter.getInstanceMsgCenter().acceptOrder(order);
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = beanAddress;
+                        handler.sendMessage(message);
+                    }
+                }).start();
                 break;
+
             case R.id.title1_back:
                 finish();
                 break;

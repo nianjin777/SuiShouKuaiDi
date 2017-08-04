@@ -69,11 +69,11 @@
         <activity android:name="com.edu.wmhxa.sskd.activity.login.RegisterActivity"></activity>
 
         <!-- setting -->
-        <activity android:name="com.edu.wmhxa.sskd.activity.setting.WalletActivity"></activity>
         <activity android:name="com.edu.wmhxa.sskd.activity.setting.address.AddressAddActivity"></activity>
         <activity android:name="com.edu.wmhxa.sskd.activity.setting.address.AddressChooseAcrtivity"></activity>
         <activity android:name="com.edu.wmhxa.sskd.activity.setting.address.AddressEditActivity"></activity>
         <activity android:name="com.edu.wmhxa.sskd.activity.setting.address.AddressManageActivity"></activity>
+        <activity android:name=".activity.setting.EditActivity"></activity>
 
         <!-- 百度地图key -->
         <meta-data
