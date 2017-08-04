@@ -100,20 +100,20 @@ public class RegisterActivity extends Activity {
         String email = reg_et_email.getText().toString();
         //TODO 这这里写校验 写在sex判断上面
 
-        if (username == null || username.length()<8){
-            Toast.makeText(getApplicationContext(),"账号不小于8位",Toast.LENGTH_SHORT).show();
+        if (username == null || username.length()<8 || username.length()>20 ){
+            Toast.makeText(getApplicationContext(),"账号长度不正确",Toast.LENGTH_SHORT).show();
             return null;
         }
-        if (password == null || password.length()<8){
-            Toast.makeText(getApplicationContext(),"密码不小于8位",Toast.LENGTH_SHORT).show();
+        if (password == null || password.length()<8 || password.length()>20){
+            Toast.makeText(getApplicationContext(),"密码长度不正确",Toast.LENGTH_SHORT).show();
             return null;
         }
         if (rePassword != password ){
             Toast.makeText(getApplicationContext(),"两次输入密码不同",Toast.LENGTH_SHORT).show();
             return null;
         }
-        if ( name == null || name.length()>12){
-            Toast.makeText(getApplicationContext(),"用户名小于6个汉字",Toast.LENGTH_SHORT).show();
+        if ( name == null || name.length()>20){
+            Toast.makeText(getApplicationContext(),"用户名太长",Toast.LENGTH_SHORT).show();
             return null;
         }
         if ( shenfenzheng == null || shenfenzheng.length()!=18){
