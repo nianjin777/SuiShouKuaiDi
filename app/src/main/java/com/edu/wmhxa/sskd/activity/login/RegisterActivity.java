@@ -95,19 +95,44 @@ public class RegisterActivity extends Activity {
         String password = reg_et_mima.getText().toString();
         String rePassword = reg_et_remima.getText().toString();
         String name = reg_et_name.getText().toString();
-        String shenfenzhedng = reg_et_idcard.getText().toString();
+        String shenfenzheng = reg_et_idcard.getText().toString();
         String phone = reg_et_phone.getText().toString();
         String email = reg_et_email.getText().toString();
         //TODO 这这里写校验 写在sex判断上面
 
+        if (username == null || username.length()<8){
+            Toast.makeText(getApplicationContext(),"账号不小于8位",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if (password == null || password.length()<8){
+            Toast.makeText(getApplicationContext(),"密码不小于8位",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if (rePassword != password ){
+            Toast.makeText(getApplicationContext(),"两次输入密码不同",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if ( name == null || name.length()>12){
+            Toast.makeText(getApplicationContext(),"用户名小于6个汉字",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if ( shenfenzheng == null || shenfenzheng.length()!=18){
+            Toast.makeText(getApplicationContext(),"身份证输入不正确",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if ( phone == null || phone.length()!=11){
+            Toast.makeText(getApplicationContext(),"手机号输入不正确",Toast.LENGTH_SHORT).show();
+            return null;
+        }
         if (sex == null || sex.isEmpty()) {
             Toast.makeText(getApplicationContext(), "请选择性别", Toast.LENGTH_SHORT).show();
+            return null;
         }
 
         beanUser.setUsername(username);
         beanUser.setPassword(password);
         beanUser.setName(name);
-        beanUser.setID(shenfenzhedng);
+        beanUser.setID(shenfenzheng);
         beanUser.setPhone(phone);
         beanUser.setEmail(email);
         beanUser.setSex(sex);
