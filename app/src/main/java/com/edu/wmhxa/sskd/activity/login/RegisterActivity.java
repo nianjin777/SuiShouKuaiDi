@@ -91,12 +91,25 @@ public class RegisterActivity extends Activity {
 
     private BeanUser getData() {
         BeanUser beanUser = new BeanUser();
-        beanUser.setUsername(reg_et_zhanghao.getText().toString());
-        beanUser.setPassword(reg_et_mima.getText().toString());
-        beanUser.setName(reg_et_name.getText().toString());
-        beanUser.setID(reg_et_idcard.getText().toString());
-        beanUser.setPhone(reg_et_phone.getText().toString());
-        beanUser.setEmail(reg_et_email.getText().toString());
+        String username = reg_et_zhanghao.getText().toString();
+        String password = reg_et_mima.getText().toString();
+        String rePassword = reg_et_remima.getText().toString();
+        String name = reg_et_name.getText().toString();
+        String shenfenzhedng = reg_et_idcard.getText().toString();
+        String phone = reg_et_phone.getText().toString();
+        String email = reg_et_email.getText().toString();
+        //TODO 这这里写校验 写在sex判断上面
+
+        if (sex == null || sex.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "请选择性别", Toast.LENGTH_SHORT).show();
+        }
+
+        beanUser.setUsername(username);
+        beanUser.setPassword(password);
+        beanUser.setName(name);
+        beanUser.setID(shenfenzhedng);
+        beanUser.setPhone(phone);
+        beanUser.setEmail(email);
         beanUser.setSex(sex);
         return beanUser;
     }
