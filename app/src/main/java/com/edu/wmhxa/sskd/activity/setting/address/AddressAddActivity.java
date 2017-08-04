@@ -125,6 +125,21 @@ public class AddressAddActivity extends Activity implements View.OnClickListener
         beanAddress.setInfo(add_et_savereplace.getText().toString());
         beanAddress.setAddrDefault(isDefault);
 
+        if (beanAddress.getName() == null ||  beanAddress.getName().length()>20 ){
+            Toast.makeText(getApplicationContext(),"地址过长",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if (beanAddress.getPhone() == null ||  beanAddress.getPhone().length()!=11 ){
+            Toast.makeText(getApplicationContext(),"手机号输入不正确",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if (beanAddress.getInfo() == null ||  beanAddress.getInfo().length()>50 ){
+            Toast.makeText(getApplicationContext(),"地址过长",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+
+
         return beanAddress;
     }
 
