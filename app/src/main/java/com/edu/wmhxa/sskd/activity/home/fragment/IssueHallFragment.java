@@ -64,6 +64,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
     private BeanAddress beanAddress;
     private double totle = 0;
 
+    //消息机制操作
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -82,6 +83,9 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                         activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
                         activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
                     }
+                    break;
+
+                default:
                     break;
             }
         }
@@ -139,6 +143,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         issue_bt_cancel.setOnClickListener(this);
         issue_bt_issue.setOnClickListener(this);
         issue_bt_addthing.setOnClickListener(this);
+
         issue_lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -161,6 +166,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 return true;
             }
         });
+
         issue_et_money.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -183,7 +189,6 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 }
             }
         });
-        //lv也要加监听
     }
 
     @Override
@@ -195,23 +200,21 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.setting.address.AddressChooseAcrtivity");
                 startActivityForResult(intent, 2);
                 break;
+
             case R.id.issue_bt_addthing:
                 //添加物品
                 intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.order.issue.ThingsAddActivity");
                 startActivityForResult(intent, 1);
                 break;
+
             case R.id.issue_bt_cancel:
                 //点击取消
-                //重置数据
-                HomeActivity activity = HomeActivity.activity;
-                activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
-                activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
-                activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
-                activity.bottomAdapter.notifyDataSetChanged();
-
+                //重置主界面上的图标
+                changeHomeTitle();
                 break;
+
             case R.id.issue_bt_issue:
-                //TODO 发布操作
+                //发布操作
                 BeanOrder data = getData();
                 if (data == null) {
                     return;
@@ -224,9 +227,11 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // 如果子界面是点的返回 那什么也不做就return
         if (data == null) {
             return;
         }
+        // 添加物品界面的返回值
         if (requestCode == 1) {
             BeanThing thing = (BeanThing) data.getExtras().get("thing");
             thingList.add(thing);
@@ -241,7 +246,9 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 issue_tv_totle.setText(String.valueOf(totle));
             }
 
-        } else if (requestCode == 2) {
+        }
+        // 选择地址的返回操作
+        else if (requestCode == 2) {
             int position = data.getIntExtra("position", BeanAddress.indexDeault);
             if (position <= BeanAddress.indexDeault) {
                 if (position == 0) {
@@ -250,7 +257,6 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                     position -= 1;
                 }
             }
-
             beanAddress = MsgCenter.addressList.get(position);
             issue_tv_name.setText(beanAddress.getName());
             issue_tv_phone.setText(beanAddress.getPhone());
@@ -258,10 +264,20 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    //发布信息弹窗
+    private void changeHomeTitle() {
+        HomeActivity activity = HomeActivity.activity;
+        activity.title2_tv_accept.setBackground(activity.getDrawable(R.color.white));
+        activity.title2_tv_issue.setBackground(activity.getDrawable(R.color.head));
+        activity.fragmentsList.set(0, AcceptHallFragment.getInstanceFragment());
+        activity.bottomAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 确认支付弹窗
+     */
     private void issue(final BeanOrder beanOrder) {
         new AlertDialog.Builder(getContext()).setTitle("支付")//设置对话框标题
-                .setMessage("佣金为" + String.valueOf(beanOrder.getBounty()) + "元")//设置显示的内容
+                .setMessage("佣金为" + String.valueOf(beanOrder.getBounty()) + "元" + "\n第三方支付暂未实现")//设置显示的内容
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
                     @Override
                     public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
@@ -277,9 +293,8 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
     }
 
     /**
-     * 用MessageCenter与服务器交互
+     * 抓取页面上的数据
      */
-
     private BeanOrder getData() {
         BeanOrder beanOrder = new BeanOrder();
         if (beanAddress == null) {
@@ -289,7 +304,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         beanOrder.setAddress(beanAddress);
         String name = issue_et_taskname.getText().toString();
         if (name == null || name.isEmpty()) {
-            Toast.makeText(getContext(), "请输入一个用户名", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "请输入一个任务名", Toast.LENGTH_SHORT).show();
             return null;
         } else {
             beanOrder.setOrderName(name);
@@ -314,6 +329,9 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
         return beanOrder;
     }
 
+    /**
+     * 用MessageCenter与服务器交互
+     */
     private void sendData(final BeanOrder beanOrder) {
         //TODO 发送一条订单数据到服务器
         new Thread(new Runnable() {
@@ -326,12 +344,6 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                 handler.sendMessage(message);
             }
         }).start();
-    }
-
-    @Nullable
-    @Override
-    public View getView() {
-        return view;
     }
 
 }
