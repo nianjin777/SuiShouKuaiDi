@@ -138,10 +138,10 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
         if (requestCode == 1) {
-            if (data == null) {
-                return;
-            }
             BeanThing thing = (BeanThing) data.getExtras().get("thing");
             thingList.add(thing);
             issue_lv.setAdapter(new ThingListAdapter(getContext(), thingList));
