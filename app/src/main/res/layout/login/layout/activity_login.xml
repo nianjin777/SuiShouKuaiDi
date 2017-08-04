@@ -44,9 +44,9 @@
         android:layout_alignEnd="@+id/login_bt_login"
         android:layout_below="@+id/login_bt_login"
         android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/edit_bg"
         android:text="新用户注册"
-        android:textColor="#1E90FF" />
+        android:textColor="#F64242" />
 
     <ImageView
         android:id="@+id/login_img"
