@@ -68,10 +68,10 @@ public class RegisterActivity extends Activity {
                 boolean result = MsgCenter.getInstanceMsgCenter().regist(user);
                 if (result) {
                     Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "注册失败", Toast.LENGTH_SHORT).show();
                 }
-                finish();
             }
         });
         reg_rg_sexgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
