@@ -69,8 +69,8 @@ public class MsgCenter {
 
     private static void initData() {
         //模拟当前登陆用户
-        beanUser = new BeanUser("admin", "admin", "123456", "陈幼安", "350702199705301818", "17774009906", true, "404290080@qq.com", "男");
-//        beanUser = null;
+//        beanUser = new BeanUser("admin", "admin", "123456", "陈幼安", "350702199705301818", "17774009906", true, "404290080@qq.com", "男");
+        beanUser = null;
         //模拟附近订单
         nearTaskList = new ArrayList<BeanOrder>();
         for (int i = 0; i < 10; i++) {
@@ -196,17 +196,16 @@ public class MsgCenter {
             userInfo.put("useraccount", regUser.getUsername());
             userInfo.put("userpassword", regUser.getPassword());
             Log.i(TAG, userInfo.toString());
-//            JSONObject result = httpControl.postMethod(userInfo, registURL);
-//            if(result == null ){
-//                return false ;
-//            }
-//            String error = (String) result.get("error");
-//            if (error == null || error.isEmpty()) {
-//                beanUser = regUser;
-//                beanUser.setUserID(result.getInt("userid"));
-//            } else {
-//                return false;
-//            }
+            JSONObject result = httpControl.postMethod(userInfo, registURL);
+            if (result == null) {
+                return false;
+            }
+            String error = (String) result.get("error");
+            if (error == null || error.isEmpty()) {
+                beanUser = regUser;
+            } else {
+                return false;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
