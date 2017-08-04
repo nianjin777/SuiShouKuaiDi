@@ -2,7 +2,10 @@ package com.edu.wmhxa.sskd.activity.setting.address;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,7 @@ import com.edu.wmhxa.sskd.model.BeanAddress;
 import static android.R.attr.name;
 import static com.baidu.location.d.j.v;
 import static com.edu.wmhxa.sskd.R.id.add_et_saveplace;
+import static com.edu.wmhxa.sskd.R.id.editaddress_title;
 
 
 public class AddressEditActivity extends Activity {
@@ -35,6 +39,34 @@ public class AddressEditActivity extends Activity {
 
     private int position;
     private BeanAddress beanAddress;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    //修改的message
+                    boolean result1 = (boolean) msg.obj;
+                    if (result1) {
+                        Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                case 2:
+                    //改默认的message
+                    boolean result2 = (boolean) msg.obj;
+                    if (result2) {
+                        Toast.makeText(getApplicationContext(), "设置成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +85,7 @@ public class AddressEditActivity extends Activity {
     }
 
     private void findViewById() {
+        //重现数据
         edit_ev_savename = (EditText) findViewById(R.id.edit_ev_savename);
         edit_ev_savename.setText(beanAddress.getName());
         edit_ev_savephone = (EditText) findViewById(R.id.edit_ev_savephone);
@@ -64,6 +97,13 @@ public class AddressEditActivity extends Activity {
 
         editaddress_bt_del = (Button) findViewById(R.id.editaddress_bt_del);
         editaddress_bt_default = (Button) findViewById(R.id.editaddress_bt_default);
+        if (beanAddress.isAddrDefault()) {
+            editaddress_bt_default.setBackgroundColor(Color.GRAY);
+        } else {
+            editaddress_bt_default.setBackgroundColor(Color.WHITE);
+        }
+
+        //标题栏
         View editaddress_title = findViewById(R.id.editaddress_title);
         title3_back = (ImageView) editaddress_title.findViewById(R.id.title3_back);
         TextView title3_tv = (TextView) editaddress_title.findViewById(R.id.title3_tv);
@@ -89,18 +129,21 @@ public class AddressEditActivity extends Activity {
         title3_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BeanAddress check = checkInfo();
+                final BeanAddress check = checkInfo();
                 if (check == null) {
                     Toast.makeText(getApplicationContext(), "没有做任何修改", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    boolean result = MsgCenter.getInstanceMsgCenter().changeAddress(MsgCenter.addressList.get(position));
-                    if (result) {
-                        Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
-                    }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            boolean result = MsgCenter.getInstanceMsgCenter().changeAddress(check);
+                            Message message = new Message();
+                            message.what = 1;
+                            message.obj = result;
+                            handler.sendMessage(message);
+                        }
+                    }).start();
                 }
             }
         });
@@ -120,12 +163,19 @@ public class AddressEditActivity extends Activity {
         editaddress_bt_default.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean result = MsgCenter.getInstanceMsgCenter().changeDefaultAddress(beanAddress.getAddrId());
-                if (result) {
-                    Toast.makeText(getApplicationContext(), "设置成功", Toast.LENGTH_SHORT).show();
-                    finish();
+                if (beanAddress.isAddrDefault()) {
+                    //已经是默认就什么也不做
                 } else {
-                    Toast.makeText(getApplicationContext(), "数据异常或服务器正忙...", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            boolean result = MsgCenter.getInstanceMsgCenter().changeDefaultAddress(beanAddress.getAddrId());
+                            Message message = new Message();
+                            message.what = 2;
+                            message.obj = result;
+                            handler.sendMessage(message);
+                        }
+                    }).start();
                 }
             }
         });
