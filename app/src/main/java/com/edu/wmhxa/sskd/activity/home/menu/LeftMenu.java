@@ -16,8 +16,10 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.baidu.location.d.j.ac;
+
 /**
- * Created by Administrator on 2017/7/20.
+ * Created by KarlCyan on 2017/7/20.
  */
 
 public class LeftMenu {
@@ -92,7 +94,8 @@ public class LeftMenu {
                     break;
                 case 2:
                     //设置
-
+                    intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.setting.EditActivity");
+                    activity.startActivity(intent);
                     break;
             }
         }
