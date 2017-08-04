@@ -1,5 +1,6 @@
 package com.edu.wmhxa.sskd.activity.comm;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import com.edu.wmhxa.sskd.model.BeanUser;
 
 import java.util.List;
 
-public class MesFriActivity extends AppCompatActivity {
+public class MesFriActivity extends Activity {
 
     private ListView mesfri_title;
     private ListView mesfri_lv_meswindow;
@@ -31,7 +32,7 @@ public class MesFriActivity extends AppCompatActivity {
         if (type.equals("order")) {
             msgUser = MsgCenter.orderMsgList.get(position);
         } else if (type.equals("friend")) {
-            msgUser = MsgCenter.orderMsgList.get(position);
+            msgUser = MsgCenter.friendList.get(position);
         } else {
             finish();
         }

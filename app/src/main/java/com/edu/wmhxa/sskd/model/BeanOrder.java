@@ -136,4 +136,24 @@ public class BeanOrder implements Serializable {
     public void setDistence(double distence) {
         this.distence = distence;
     }
+
+    @Override
+    public String toString() {
+        return "BeanOrder{" +
+                "orderId=" + orderId +
+                ", bossAccount='" + bossAccount + '\'' +
+                ", empAccount='" + empAccount + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", money=" + money +
+                ", bounty=" + bounty +
+                ", evalBoss='" + evalBoss + '\'' +
+                ", evalEmp='" + evalEmp + '\'' +
+                ", orderName='" + orderName + '\'' +
+                ", orderText='" + orderText + '\'' +
+                ", thingList=" + thingList +
+                ", address=" + address +
+                ", distence=" + distence +
+                '}';
+    }
 }

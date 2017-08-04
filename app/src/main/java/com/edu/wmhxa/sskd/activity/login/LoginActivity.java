@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
                 finish();
             } else {
-                Toast.makeText(getApplicationContext(), "登陆失败,网络异常", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), MsgCenter.errorInfo, Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -62,6 +62,10 @@ public class LoginActivity extends Activity {
         login_bt_login = (Button) findViewById(R.id.login_bt_login);
         login_et_username = (EditText) findViewById(R.id.login_et_username);
         login_et_password = (EditText) findViewById(R.id.login_et_password);
+
+        login_et_username.setText("chwetion");
+        login_et_password.setText("123456");
+
     }
 
     //设置监听

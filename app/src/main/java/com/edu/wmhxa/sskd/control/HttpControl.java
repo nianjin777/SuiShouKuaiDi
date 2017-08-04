@@ -1,5 +1,7 @@
 package com.edu.wmhxa.sskd.control;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -13,7 +15,7 @@ import java.net.URL;
  */
 
 public class HttpControl {
-    private static String serverPath = "";
+    private static String serverPath = "http://192.168.1.11:8080/KuaiShou/";
 
     public JSONObject postMethod(final JSONObject obj, final String path) {
         ByteArrayOutputStream bos = null;
@@ -23,12 +25,14 @@ public class HttpControl {
             conn = (HttpURLConnection) (new URL(serverPath + path).openConnection());
             //设置延时
             conn.setReadTimeout(5 * 1000);
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod("GET");
             conn.setDoOutput(true);
             conn.setConnectTimeout(5 * 1000);
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             OutputStream out = conn.getOutputStream();
             out.write(obj.toString().getBytes());
             int responseCode = conn.getResponseCode();
+            Log.i("MsgCenter", "responseCode:" + responseCode);
             if (responseCode == 200) {
                 InputStream in = conn.getInputStream();
                 bos = new ByteArrayOutputStream();
@@ -37,8 +41,7 @@ public class HttpControl {
                 while ((len = in.read(buffer)) != -1) {
                     bos.write(buffer, 0, len);
                 }
-                result = new JSONObject();
-                result.put("result", bos);
+                result = new JSONObject(bos.toString());
                 bos.flush();
                 in.close();
                 bos.close();

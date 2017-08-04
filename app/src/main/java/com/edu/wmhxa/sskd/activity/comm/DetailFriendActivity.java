@@ -59,7 +59,7 @@ public class DetailFriendActivity extends Activity {
         det_bt_sendmes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(DetailFriendActivity.this, MesFriActivity.class);
                 intent.putExtra("position", position);
                 intent.putExtra("type", "friend");
                 startActivity(intent);

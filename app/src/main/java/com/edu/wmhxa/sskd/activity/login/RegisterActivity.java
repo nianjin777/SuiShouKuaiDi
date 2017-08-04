@@ -1,6 +1,8 @@
 package com.edu.wmhxa.sskd.activity.login;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.IdRes;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,22 @@ public class RegisterActivity extends Activity {
     private BeanUser user;
 
     private String sex;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    boolean result = (boolean) msg.obj;
+                    if (result) {
+                        Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), MsgCenter.errorInfo, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +57,6 @@ public class RegisterActivity extends Activity {
         SysApplication.getInstance().addActivity(this);
 
         findViewById();
-
         setListener();
 
     }
@@ -56,6 +73,15 @@ public class RegisterActivity extends Activity {
         reg_et_phone = (EditText) findViewById(R.id.reg_et_phone);
         reg_et_email = (EditText) findViewById(R.id.reg_et_email);
         register_bt_new = (Button) findViewById(R.id.register_bt_new);
+
+        reg_et_zhanghao.setText("404290080");
+        reg_et_mima.setText("123456789");
+        reg_et_remima.setText("123456789");
+        reg_et_name.setText("陈幼安");
+        reg_et_idcard.setText("350702199705301818");
+        reg_et_phone.setText("17774009906");
+        reg_et_email.setText("404290080@qq.com");
+
         return user;
     }
 
@@ -65,12 +91,19 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View v) {
                 user = getData();
-                boolean result = MsgCenter.getInstanceMsgCenter().regist(user);
-                if (result) {
-                    Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
-                    finish();
+                if (user == null) {
+                    return;
                 } else {
-                    Toast.makeText(getApplicationContext(), "注册失败", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            boolean result = MsgCenter.getInstanceMsgCenter().regist(user);
+                            Message message = new Message();
+                            message.what = 1;
+                            message.obj = result;
+                            handler.sendMessage(message);
+                        }
+                    }).start();
                 }
             }
         });
@@ -100,28 +133,28 @@ public class RegisterActivity extends Activity {
         String email = reg_et_email.getText().toString();
         //TODO 这这里写校验 写在sex判断上面
 
-        if (username == null || username.length()<8 || username.length()>20 ){
-            Toast.makeText(getApplicationContext(),"账号长度不正确",Toast.LENGTH_SHORT).show();
+        if (username == null || username.length() < 8 || username.length() > 20) {
+            Toast.makeText(getApplicationContext(), "账号长度不正确", Toast.LENGTH_SHORT).show();
             return null;
         }
-        if (password == null || password.length()<8 || password.length()>20){
-            Toast.makeText(getApplicationContext(),"密码长度不正确",Toast.LENGTH_SHORT).show();
+        if (password == null || password.length() < 8 || password.length() > 20) {
+            Toast.makeText(getApplicationContext(), "密码长度不正确", Toast.LENGTH_SHORT).show();
             return null;
         }
-        if (rePassword != password ){
-            Toast.makeText(getApplicationContext(),"两次输入密码不同",Toast.LENGTH_SHORT).show();
+        if (!rePassword.equals(password)) {
+            Toast.makeText(getApplicationContext(), "两次输入密码不同", Toast.LENGTH_SHORT).show();
             return null;
         }
-        if ( name == null || name.length()>20){
-            Toast.makeText(getApplicationContext(),"用户名太长",Toast.LENGTH_SHORT).show();
+        if (name == null || name.length() > 20) {
+            Toast.makeText(getApplicationContext(), "用户名太长", Toast.LENGTH_SHORT).show();
             return null;
         }
-        if ( shenfenzheng == null || shenfenzheng.length()!=18){
-            Toast.makeText(getApplicationContext(),"身份证输入不正确",Toast.LENGTH_SHORT).show();
+        if (shenfenzheng == null || shenfenzheng.length() != 18) {
+            Toast.makeText(getApplicationContext(), "身份证输入不正确", Toast.LENGTH_SHORT).show();
             return null;
         }
-        if ( phone == null || phone.length()!=11){
-            Toast.makeText(getApplicationContext(),"手机号输入不正确",Toast.LENGTH_SHORT).show();
+        if (phone == null || phone.length() != 11) {
+            Toast.makeText(getApplicationContext(), "手机号输入不正确", Toast.LENGTH_SHORT).show();
             return null;
         }
         if (sex == null || sex.isEmpty()) {

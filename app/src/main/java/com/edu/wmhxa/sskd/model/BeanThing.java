@@ -120,4 +120,19 @@ public class BeanThing implements Serializable {
     public void setBuy(boolean buy) {
         this.buy = buy;
     }
+
+    @Override
+    public String toString() {
+        return "BeanThing{" +
+                "thingid=" + thingid +
+                ", name='" + name + '\'' +
+                ", money=" + money +
+                ", number=" + number +
+                ", address='" + address + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", buy=" + buy +
+                ", xy=" + xy +
+                '}';
+    }
 }

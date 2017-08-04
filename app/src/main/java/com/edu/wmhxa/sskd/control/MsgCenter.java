@@ -7,6 +7,7 @@ import com.edu.wmhxa.sskd.model.BeanAddress;
 import com.edu.wmhxa.sskd.model.BeanOrder;
 import com.edu.wmhxa.sskd.model.BeanThing;
 import com.edu.wmhxa.sskd.model.BeanUser;
+import com.edu.wmhxa.sskd.util.ShowToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+
+import static android.R.attr.password;
 
 /**
  * Created by KarlCyan on 2017/7/25.
@@ -48,18 +51,20 @@ public class MsgCenter {
     //订单详情
     public static Map<String, Object> orderInfo = null;
     //物品清单
-    public static List<BeanThing> thingList = null;
+    public static List<BeanThing> thingList = new ArrayList<BeanThing>();
     //朋友表
-    public static List<BeanUser> friendList = null;
+    public static List<BeanUser> friendList = new ArrayList<BeanUser>();
     //正在进行的订单对话
     public static List<BeanUser> orderMsgList = new ArrayList<BeanUser>();
     //好友申请表
-    public static List<BeanUser> applyFriendList = null;
+    public static List<BeanUser> applyFriendList = new ArrayList<BeanUser>();
     //地址列表
-    public static List<BeanAddress> addressList = null;
+    public static List<BeanAddress> addressList = new ArrayList<BeanAddress>();
+
+    public static String errorInfo = "";
 
     private MsgCenter() {
-        initData();
+//        initData();
     }
 
     public static MsgCenter getInstanceMsgCenter() {
@@ -149,8 +154,9 @@ public class MsgCenter {
     //用户操作
     //登陆
     public boolean login(String userName, String password) {
+        errorInfo = "";
         //登陆 封装成json
-        String loginURL = "login";
+        String loginURL = "user_login.action";
         JSONObject info = new JSONObject();
         BeanUser loginUser;
         try {
@@ -162,30 +168,138 @@ public class MsgCenter {
             if (result == null) {
                 return false;
             }
-            Log.i(TAG, result.toString());
-            String error = (String) result.get("error");
+            Log.i(TAG, "result:" + result.toString());
+            String error = result.getString("error");
+            Log.i(TAG, "error:" + error);
             if (error == null || error.isEmpty()) {
 //                登陆成功 把信息封装成bean对象
+                JSONObject userJSONObject = result.getJSONObject("user");
                 loginUser = new BeanUser();
-                loginUser.setName(result.getString("username"));
-                loginUser.setSex(result.getString("usersex"));
-                loginUser.setID(result.getString("useridcard"));
-                loginUser.setPhone(result.getString("userphone"));
-                loginUser.setEmail(result.getString("usermail"));
-                loginUser.setGood(result.getInt("usergood"));
+                loginUser.setName(userJSONObject.getString("userName"));
+                loginUser.setSex(userJSONObject.getString("userSex"));
+                loginUser.setID(userJSONObject.getString("userIdcard"));
+                loginUser.setPhone(userJSONObject.getString("userPhone"));
+                loginUser.setEmail(userJSONObject.getString("userEmail"));
+                loginUser.setGood(userJSONObject.getInt("userGood"));
                 beanUser = loginUser;
+                Log.i(TAG, beanUser.toString());
+
+                //封装好友列表
+                JSONArray friends = userJSONObject.getJSONArray("friend");
+                for (int i = 0; i < friends.length(); i++) {
+                    JSONObject jsonObject = friends.getJSONObject(i);
+                    JSONObject friend = jsonObject.getJSONObject("friend");
+                    BeanUser beanUser = new BeanUser();
+                    beanUser.setName(friend.getString("userName"));
+                    beanUser.setSex(friend.getString("userSex"));
+                    beanUser.setPhone(friend.getString("userPhone"));
+                    beanUser.setUsername(friend.getString("userAccount"));
+                    beanUser.setGood(friend.getInt("userGood"));
+                    beanUser.setEmail(friend.getString("userEmail"));
+                    friendList.add(beanUser);
+                }
+
+                //封装地址
+                JSONArray addressJSONArray = userJSONObject.getJSONArray("address");
+                for (int i = 0; i < addressJSONArray.length(); i++) {
+                    JSONObject addr = addressJSONArray.getJSONObject(i);
+                    BeanAddress beanAddress = new BeanAddress();
+                    beanAddress.setAddrId(addr.getInt("addrId"));
+                    beanAddress.setLocation(addr.getString("addrLocation"));
+                    beanAddress.setInfo(addr.getString("addrInfo"));
+                    beanAddress.setName(addr.getString("addrUser"));
+                    beanAddress.setPhone(addr.getString("addrPhone"));
+                    int addrDefault = addr.getInt("addrDefault");
+                    if (addrDefault == 1) {
+                        beanAddress.setAddrDefault(true);
+                    } else {
+                        beanAddress.setAddrDefault(false);
+                    }
+                    addressList.add(beanAddress);
+                }
+
+                //封装订单
+                JSONArray orderJSONArray = userJSONObject.getJSONArray("order");
+                for (int i = 0; i < orderJSONArray.length(); i++) {
+                    JSONObject order = orderJSONArray.getJSONObject(i);
+                    BeanOrder beanOrder = new BeanOrder();
+                    beanOrder.setOrderId(order.getInt("orderId"));
+                    beanOrder.setEmpAccount(order.getString("orderEmp"));
+
+                    Calendar startTime = Calendar.getInstance();
+                    startTime.setTime(format.parse(order.getString("orderStartTime")));
+                    beanOrder.setStartTime(startTime);
+                    Calendar endTime = Calendar.getInstance();
+                    endTime.setTime(format.parse(order.getString("orderEndTime")));
+                    beanOrder.setEndTime(endTime);
+
+                    beanOrder.setMoney(order.getDouble("orderMoney"));
+                    beanOrder.setBounty(order.getDouble("orderBounty"));
+                    beanOrder.setEvalBoss(order.getString("orderEvalBoss"));
+                    beanOrder.setEvalEmp(order.getString("orderEvalEmp"));
+                    beanOrder.setOrderName(order.getString("orderName"));
+                    beanOrder.setOrderText(order.getString("orderText"));
+
+                    //添加物品
+                    JSONArray thingArray = order.getJSONArray("thing");
+                    List<BeanThing> beanThings = new ArrayList<BeanThing>();
+                    for (int j = 0; j < thingArray.length(); j++) {
+                        JSONObject thing = thingArray.getJSONObject(j);
+                        BeanThing beanThing = new BeanThing();
+                        beanThing.setThingid(thing.getInt("thingId"));
+                        beanThing.setName(thing.getString("thingName"));
+                        beanThing.setLongitude(thing.getDouble("thingLongitude"));
+                        beanThing.setLatitude(thing.getDouble("thingLatitude"));
+                        beanThing.setAddress(thing.getString("thingLocation"));
+                        beanThing.setNumber(thing.getInt("thingNum"));
+                        beanThing.setMoney(thing.getDouble("thingMoney"));
+                        beanThings.add(beanThing);
+                    }
+                    beanOrder.setThingList(beanThings);
+
+                    //订单内的地址
+                    JSONObject addressObject = order.getJSONObject("address");
+                    BeanAddress beanAddress = new BeanAddress();
+                    int addrDefault = addressObject.getInt("addrDefault");
+                    if (addrDefault == 1) {
+                        beanAddress.setAddrDefault(true);
+                    } else {
+                        beanAddress.setAddrDefault(false);
+                    }
+                    beanAddress.setAddrId(addressObject.getInt("addrId"));
+                    beanAddress.setInfo(addressObject.getString("addrInfo"));
+                    beanAddress.setLocation(addressObject.getString("addrLocation"));
+                    beanAddress.setPhone(addressObject.getString("addrPhone"));
+                    beanAddress.setName(addressObject.getString("addrUser"));
+                    beanOrder.setAddress(beanAddress);
+
+                    myOrderList.add(beanOrder);
+                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        sortOrderList();
+                    }
+                }).start();
+                Log.i(TAG, "登陆成功,返回true");
+                return true;
             } else {
+                errorInfo = error;
+                Log.i(TAG, "登陆失败,返回false");
                 return false;
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i(TAG, e.toString());
+        } catch (ParseException e) {
+            Log.i(TAG, e.toString());
         }
-        return true;
+        return false;
     }
 
     //注册
     public boolean regist(BeanUser regUser) {
-        String registURL = "regist";
+        String registURL = "user_add.action";
+        errorInfo = "";
         //封装json对象
         JSONObject userInfo = new JSONObject();
         try {
@@ -199,57 +313,19 @@ public class MsgCenter {
             userInfo.put("userpassword", regUser.getPassword());
             Log.i(TAG, userInfo.toString());
             JSONObject result = httpControl.postMethod(userInfo, registURL);
+            Log.i(TAG, result.toString());
             if (result == null) {
                 return false;
             }
             String error = (String) result.get("error");
             if (error == null || error.isEmpty()) {
-                beanUser = regUser;
             } else {
+                errorInfo = error;
                 return false;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return true;
-    }
-
-    //获取好友列表
-    public boolean getFriendList() {
-        String URL = "regist";
-        //封装json对象
-        JSONObject info = new JSONObject();
-        try {
-            info.put("check", "remeber_client");
-            info.put("useraccount", beanUser.getUsername());
-
-            JSONObject result = httpControl.postMethod(info, URL);
-            if (result == null) {
-                return false;
-            }
-            String error = result.getString("error");
-            if (error == null || error.isEmpty()) {
-                JSONArray friendlist = result.getJSONArray("friendlist");
-                List<BeanUser> list = new ArrayList<BeanUser>();
-                for (int i = 0; i < friendlist.length(); i++) {
-                    JSONObject jsonObject = friendlist.getJSONObject(i);
-                    BeanUser beanUser = new BeanUser();
-                    beanUser.setName(jsonObject.getString("username"));
-                    beanUser.setSex(jsonObject.getString("usersex"));
-                    beanUser.setPhone(jsonObject.getString("userphone"));
-                    beanUser.setUsername(jsonObject.getString("useraccount"));
-                    beanUser.setGood(jsonObject.getInt("usergood"));
-                    list.add(beanUser);
-                }
-                friendList = list;
-            } else {
-                return false;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         return true;
     }
 
@@ -339,48 +415,9 @@ public class MsgCenter {
     }
 
     //地址操作
-    //获取地址列表
-    public boolean getAddrList() {
-
-        String URL = "getAddrList";
-        //封装json对象
-        JSONObject userInfo = new JSONObject();
-        try {
-            userInfo.put("check", "remeber_client");
-            userInfo.put("useraccount", beanUser.getUsername());
-            JSONObject result = httpControl.postMethod(userInfo, URL);
-            if (result == null) {
-                return false;
-            }
-            String error = result.getString("error");
-            if (error == null || error.isEmpty()) {
-                JSONArray addresslist = result.getJSONArray("addresslist");
-                List<BeanAddress> list = new ArrayList<BeanAddress>();
-                for (int i = 0; i < addresslist.length(); i++) {
-                    JSONObject addr = addresslist.getJSONObject(i);
-                    BeanAddress beanAddress = new BeanAddress();
-                    beanAddress.setAddrId(addr.getInt("addrid"));
-                    beanAddress.setLocation(addr.getString("addrlocation"));
-                    beanAddress.setInfo(addr.getString("addrinfo"));
-                    beanAddress.setName(addr.getString("addruser"));
-                    beanAddress.setPhone(addr.getString("addrphone"));
-                    beanAddress.setAddrDefault(addr.getBoolean("addrdefault"));
-                    list.add(beanAddress);
-                }
-                addressList = list;
-            } else {
-                return false;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
-
     //新增地址
     public boolean addAddress(BeanAddress beanAddress) {
-        String URL = "addAddress";
+        String URL = "address_add.action";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();
         try {
@@ -412,7 +449,7 @@ public class MsgCenter {
 
     //删除地址
     public boolean deleteAddress(int addrId) {
-        String URL = "deleteAddress";
+        String URL = "address_delete.action";
         JSONObject info = new JSONObject();
         try {
             info.put("check", "remeber_client");
@@ -442,7 +479,7 @@ public class MsgCenter {
 
     //修改地址
     public boolean changeAddress(BeanAddress beanAddress) {
-        String URL = "changeAddress";
+        String URL = "address_edit.action";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();
         try {
@@ -470,7 +507,7 @@ public class MsgCenter {
 
     //修改默认地址
     public boolean changeDefaultAddress(int addrId) {
-        String URL = "changeDefaultAddress";
+        String URL = "address_editDefault.action";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();
         try {

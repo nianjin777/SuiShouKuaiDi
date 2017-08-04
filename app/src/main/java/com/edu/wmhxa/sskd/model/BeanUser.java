@@ -6,12 +6,12 @@ import java.io.Serializable;
  * Created by Administrator on 2017/7/19.
  */
 
-public class BeanUser implements Serializable{
+public class BeanUser implements Serializable {
     //TODO
 //    public static BeanUser localUser = new BeanUser();
 //    public static BeanUser localUser = null ;
 
-//    private int userID;//用户编号
+    //    private int userID;//用户编号
     private String username;//帐号
     private String password;
     private String payPassword;
@@ -126,5 +126,21 @@ public class BeanUser implements Serializable{
 
     public void setGood(int good) {
         this.good = good;
+    }
+
+    @Override
+    public String toString() {
+        return "BeanUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", payPassword='" + payPassword + '\'' +
+                ", name='" + name + '\'' +
+                ", ID='" + ID + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isCourier=" + isCourier +
+                ", email='" + email + '\'' +
+                ", sex='" + sex + '\'' +
+                ", good=" + good +
+                '}';
     }
 }
