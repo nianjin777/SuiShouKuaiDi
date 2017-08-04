@@ -20,12 +20,6 @@ import com.edu.wmhxa.sskd.activity.order.issue.ChoosePositionActivity;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 import com.edu.wmhxa.sskd.model.BeanAddress;
 
-import static android.R.attr.name;
-import static com.baidu.location.d.j.v;
-import static com.edu.wmhxa.sskd.R.id.add_et_saveplace;
-import static com.edu.wmhxa.sskd.R.id.editaddress_title;
-
-
 public class AddressEditActivity extends Activity {
 
     private EditText edit_ev_savename;
@@ -76,6 +70,11 @@ public class AddressEditActivity extends Activity {
         position = intent.getIntExtra("position", -1);
         if (position == -1) {
             finish();
+        }
+        if (position == 0) {
+            position = BeanAddress.indexDeault;
+        } else if (position <= BeanAddress.indexDeault) {
+            position -= 1;
         }
         beanAddress = MsgCenter.addressList.get(position);
 
