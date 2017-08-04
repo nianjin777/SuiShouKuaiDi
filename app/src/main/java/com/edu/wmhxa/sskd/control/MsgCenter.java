@@ -312,33 +312,33 @@ public class MsgCenter {
     }
 
     //修改手机
-    public boolean changePhone(String phone) {
-        String URL = "changePhone";
-        //封装json对象
-        JSONObject info = new JSONObject();
-        try {
-            info.put("check", "remeber_client");
-            info.put("useraccount", beanUser.getUsername());
-            info.put("userphone", phone);
-            JSONObject result = httpControl.postMethod(info, URL);
-            if (result == null) {
-                return false;
-            }
-            String error = result.getString("error");
-            if (error == null || error.isEmpty()) {
-            } else {
-                return false;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        return true;
-    }
+//    public boolean changePhone(String phone) {
+//        String URL = "changePhone";
+//        //封装json对象
+//        JSONObject info = new JSONObject();
+//        try {
+//            info.put("check", "remeber_client");
+//            info.put("useraccount", beanUser.getUsername());
+//            info.put("userphone", phone);
+//            JSONObject result = httpControl.postMethod(info, URL);
+//            if (result == null) {
+//                return false;
+//            }
+//            String error = result.getString("error");
+//            if (error == null || error.isEmpty()) {
+//            } else {
+//                return false;
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        return true;
+//    }
 
     //修改手机
-    public boolean changeEmail(String email) {
+    public boolean changeEmailAndPhone(String email, String phone) {
         String URL = "changeEmail";
         //封装json对象
         JSONObject info = new JSONObject();
@@ -346,6 +346,7 @@ public class MsgCenter {
             info.put("check", "remeber_client");
             info.put("useraccount", beanUser.getUsername());
             info.put("usermail", email);
+            info.put("userphone", phone);
             JSONObject result = httpControl.postMethod(info, URL);
             if (result == null) {
                 return false;
