@@ -29,14 +29,9 @@ public class FindFragment extends Fragment {
 
         findViewById();
 
-        find_wv.loadUrl("https://m.weibo.cn/");
-        find_wv.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
-                view.loadUrl("https://m.weibo.cn/");
-                return true;
-            }
-        });
+        find_wv.getSettings().setJavaScriptEnabled(true);
+        find_wv.setWebViewClient(new WebViewClient());
+        find_wv.loadUrl("https://www.baidu.com");
 
         return view;
     }
