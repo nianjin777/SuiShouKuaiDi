@@ -38,7 +38,7 @@ public class MsgFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_msg, container, false);
 
-//        initData();
+        initData();
         findViewById();
 
         return view;
