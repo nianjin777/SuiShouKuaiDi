@@ -402,6 +402,8 @@ public class MsgCenter {
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
+                beanUser.setPhone(phone);
+                beanUser.setEmail(email);
             } else {
                 errorInfo = error;
                 return false;
