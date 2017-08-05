@@ -10,14 +10,53 @@
         android:id="@+id/mesfri_title"
         layout="@layout/item_title1"></include>
 
-    <ListView
-        android:id="@+id/mesfri_lv_meswindow"
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+        <ListView
+            android:id="@+id/mesfri_lv_meswindow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    </ListView>
+        </ListView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray"
+            >
 
+            <EditText
+                android:id="@+id/mesfri_et_message"
+                android:layout_width="270dp"
+                android:layout_height="40dp"
+                android:background="@drawable/border"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:textSize="20sp"
+                />
+            <Button
+                android:id="@+id/mesfri_bt_send"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/mesfri_et_message"
+                android:hint="发送"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_marginLeft="14dp"
+                android:background="@drawable/border"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>

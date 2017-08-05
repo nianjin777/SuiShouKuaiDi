@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +23,8 @@ public class MesFriActivity extends Activity {
     private int position;
     private String type;
     private BeanUser msgUser;
+    private EditText mesfri_et_message;
+    private Button mesfri_bt_send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +48,7 @@ public class MesFriActivity extends Activity {
         TextView title1_tv = (TextView) mesfri_title.findViewById(R.id.title1_tv);
         title1_tv.setText(msgUser.getName());
         mesfri_lv_meswindow = (ListView) findViewById(R.id.mesfri_lv_meswindow);
+        mesfri_et_message = (EditText)findViewById(R.id.mesfri_et_message);
+        mesfri_bt_send = (Button) findViewById(R.id.mesfri_bt_send);
     }
 }
