@@ -1,6 +1,8 @@
 package com.edu.wmhxa.sskd.activity.setting;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.wmhxa.sskd.R;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 
 import static com.baidu.location.d.j.B;
+import static com.baidu.location.d.j.T;
 
 public class EditActivity extends Activity {
 
@@ -23,6 +27,22 @@ public class EditActivity extends Activity {
     private TextView edit_tv_email;
     private TextView edit_bt_save;
     private ImageView back;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    boolean result = (boolean) msg.obj;
+                    if (result) {
+                        Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), MsgCenter.errorInfo, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +76,11 @@ public class EditActivity extends Activity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        MsgCenter.getInstanceMsgCenter().changeEmailAndPhone(email, phone);
+                        boolean result = MsgCenter.getInstanceMsgCenter().changeEmailAndPhone(email, phone);
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = result;
+                        handler.sendMessage(message);
                     }
                 }).start();
             }

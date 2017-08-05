@@ -114,26 +114,35 @@ public class ThingsAddActivity extends Activity implements View.OnClickListener 
             //取消回来的 啥也不做
             return;
         }
+
         final PoiInfo result = (PoiInfo) data.getParcelableExtra("result");
+        final String location = data.getStringExtra("location");
         if (result == null) {
             //没选择POI的
-            final String location = data.getStringExtra("location");
+            longitude = data.getDoubleExtra("longitude", 0);
+            latitude = data.getDoubleExtra("latitude", 0);
+            address = location;
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (location == null) {
                     } else {
-                        add_bt_setplace.setText(location);
+                        add_bt_setplace.setText(address);
                     }
                 }
             });
             return;
+        } else {
+            //选了的
+            longitude = result.location.longitude;
+            latitude = result.location.latitude;
+            address = result.address + " " + result.name;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    add_bt_setplace.setText(address);
+                }
+            });
         }
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                add_bt_setplace.setText(result.address + " " + result.name);
-            }
-        });
     }
 }

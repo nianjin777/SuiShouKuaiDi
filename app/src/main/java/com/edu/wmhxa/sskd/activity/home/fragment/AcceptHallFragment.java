@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -60,6 +62,7 @@ public class AcceptHallFragment extends Fragment {
     private ScrollView accept_sv;
     private Button accept_location;
 
+
     public static Fragment getInstanceFragment() {
         if (instanceFragment == null) {
             instanceFragment = new AcceptHallFragment();
@@ -72,8 +75,18 @@ public class AcceptHallFragment extends Fragment {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            accept_lv.setAdapter(new NearTaskAdapter(getContext(), orderList));
-            ListViewUtil.setListViewHeightBasedOnChildren(accept_lv);
+            switch (msg.what) {
+                case 1:
+                    boolean result = (boolean) msg.obj;
+                    if (result) {
+                        Log.i("MsgCenter", "返回附近订单成功");
+                    } else {
+                        Toast.makeText(getContext(), MsgCenter.errorInfo, Toast.LENGTH_SHORT).show();
+                    }
+                    accept_lv.setAdapter(new NearTaskAdapter(getContext(), orderList));
+                    ListViewUtil.setListViewHeightBasedOnChildren(accept_lv);
+                    break;
+            }
         }
     };
 
@@ -120,7 +133,7 @@ public class AcceptHallFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClassName("com.edu.wmhxa.sskd", "com.edu.wmhxa.sskd.activity.order.accept.AcceptOrderActivity");
-                intent.putExtra("info", orderList.get(position));
+                intent.putExtra("position", position);
                 startActivity(intent);
             }
         });
@@ -175,8 +188,10 @@ public class AcceptHallFragment extends Fragment {
                     firstLocation = false;
                     MapStatusUpdate status = MapStatusUpdateFactory.newLatLng(xy);
                     baiduMap.animateMapStatus(status);
+                    boolean result = MsgCenter.getInstanceMsgCenter().getNearOrder(xy);
                     Message message = new Message();
                     message.what = 1;
+                    message.obj = result;
                     handler.sendMessage(message);
                 }
 

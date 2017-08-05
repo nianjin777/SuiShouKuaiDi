@@ -63,7 +63,7 @@ public class OrderWaitAdapter extends BaseAdapter {
         findViewById();
 
         BeanOrder beanOrder = list.get(position);
-        orderwait_empname.setText(beanOrder.getEmpAccount());
+        orderwait_empname.setText(beanOrder.getEmpAccount().getName());
         orderwait_tv_task.setText(beanOrder.getOrderName());
         orderwait_tv_text.setText(beanOrder.getOrderText());
         orderwait_tv_dis.setText(String.valueOf(beanOrder.getDistence()));

@@ -11,8 +11,8 @@ import java.util.List;
 
 public class BeanOrder implements Serializable {
     private int orderId;
-    private String bossAccount;
-    private String empAccount;
+    private BeanUser bossAccount;
+    private BeanUser empAccount;
     private Calendar startTime;
     private Calendar endTime;
     private double money;
@@ -33,11 +33,11 @@ public class BeanOrder implements Serializable {
         this.orderId = orderId;
     }
 
-    public String getEmpAccount() {
+    public BeanUser getEmpAccount() {
         return empAccount;
     }
 
-    public void setEmpAccount(String empAccount) {
+    public void setEmpAccount(BeanUser empAccount) {
         this.empAccount = empAccount;
     }
 
@@ -121,11 +121,11 @@ public class BeanOrder implements Serializable {
         this.address = address;
     }
 
-    public String getBossAccount() {
+    public BeanUser getBossAccount() {
         return bossAccount;
     }
 
-    public void setBossAccount(String bossAccount) {
+    public void setBossAccount(BeanUser bossAccount) {
         this.bossAccount = bossAccount;
     }
 
