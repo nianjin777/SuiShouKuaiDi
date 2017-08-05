@@ -27,7 +27,6 @@ public class OrderWaitAdapter extends BaseAdapter {
     private TextView orderwait_empname;
     private TextView orderwait_tv_task;
     private TextView orderwait_tv_text;
-    private TextView orderwait_tv_dis;
     private TextView orderwait_tv_money;
     private Button orderwait_bt_cancel;
 
@@ -67,7 +66,6 @@ public class OrderWaitAdapter extends BaseAdapter {
 //        orderwait_empname.setText(beanOrder.getEmpAccount().getName());
         orderwait_tv_task.setText(beanOrder.getOrderName());
         orderwait_tv_text.setText(beanOrder.getOrderText());
-        orderwait_tv_dis.setText(String.valueOf(beanOrder.getDistence()));
         orderwait_tv_money.setText(String.valueOf(beanOrder.getMoney()));
 
         orderwait_bt_cancel.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +82,6 @@ public class OrderWaitAdapter extends BaseAdapter {
         orderwait_empname = (TextView) view.findViewById(R.id.orderwait_empname);
         orderwait_tv_task = (TextView) view.findViewById(R.id.orderwait_tv_taskname);
         orderwait_tv_text = (TextView) view.findViewById(R.id.orderwait_tv_text);
-        orderwait_tv_dis = (TextView) view.findViewById(R.id.orderwait_tv_dis);
         orderwait_tv_money = (TextView) view.findViewById(R.id.orderwait_tv_money);
         orderwait_bt_cancel = (Button) view.findViewById(R.id.orderwait_bt_cancel);
     }

@@ -34,7 +34,6 @@ public class OrderIngAdapter extends BaseAdapter {
     private TextView ordering_empname;
     private TextView ordering_tv_task;
     private TextView ordering_tv_text;
-    private TextView ordering_tv_dis;
     private TextView ordering_tv_money;
     private Button ordering_bt_cancel;
     private Button ordering_bt_ok;
@@ -108,7 +107,6 @@ public class OrderIngAdapter extends BaseAdapter {
         ordering_empname.setText(beanOrder.getEmpAccount().getName());
         ordering_tv_task.setText(beanOrder.getOrderName());
         ordering_tv_text.setText(beanOrder.getOrderText());
-        ordering_tv_dis.setText(String.valueOf(beanOrder.getDistence()));
         ordering_tv_money.setText(String.valueOf(beanOrder.getMoney()));
 
         ordering_bt_cancel.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +139,6 @@ public class OrderIngAdapter extends BaseAdapter {
         ordering_empname = (TextView) view.findViewById(R.id.ordering_empname);
         ordering_tv_task = (TextView) view.findViewById(R.id.ordering_tv_taskname);
         ordering_tv_text = (TextView) view.findViewById(R.id.ordering_tv_text);
-        ordering_tv_dis = (TextView) view.findViewById(R.id.ordering_tv_dis);
         ordering_tv_money = (TextView) view.findViewById(R.id.ordering_tv_money);
         ordering_bt_cancel = (Button) view.findViewById(R.id.ordering_bt_cancel);
         ordering_bt_ok = (Button) view.findViewById(R.id.ordering_bt_ok);
