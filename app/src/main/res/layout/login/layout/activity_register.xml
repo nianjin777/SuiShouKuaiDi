@@ -391,9 +391,9 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="50dp"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="210dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/edit_bg"
+                android:background="@null"
                 android:text="返回"
                 android:textColor="#F64242" />
 
