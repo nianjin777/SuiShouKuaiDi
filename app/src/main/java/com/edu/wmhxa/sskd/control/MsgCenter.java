@@ -207,7 +207,7 @@ public class MsgCenter {
                     if (!order.getString("orderEmp").equals("null")) {
                         BeanUser beanEmp = new BeanUser();
                         JSONObject orderEmp = order.getJSONObject("orderEmp");
-                        beanEmp.setID(orderEmp.getString("userAccount"));
+                        beanEmp.setUsername(orderEmp.getString("userAccount"));
                         beanEmp.setEmail(orderEmp.getString("userEmail"));
                         beanEmp.setName(orderEmp.getString("userName"));
                         beanEmp.setGood(orderEmp.getInt("userGood"));
@@ -893,7 +893,7 @@ public class MsgCenter {
 
     //评价
     public boolean eval(BeanOrder order, String eval) {
-        String URL = "evl";
+        String URL = "order_assess.action";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();
         try {
@@ -908,6 +908,18 @@ public class MsgCenter {
             }
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
+                //服务器正常响应
+                for (int i = 0; i < myOrderList.size(); i++) {
+                    if (myOrderList.get(i).getOrderId() == order.getOrderId()) {
+                        if (myOrderList.get(i).getEmpAccount().getUsername().equals(beanUser.getUsername())) {
+                            //我是订单的快递员
+                            myOrderList.get(i).setEvalBoss(eval);
+                        } else {
+                            //我是雇主
+                            myOrderList.get(i).setEvalEmp(eval);
+                        }
+                    }
+                }
             } else {
                 return false;
             }

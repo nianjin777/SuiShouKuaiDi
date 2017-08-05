@@ -65,47 +65,28 @@
         <TextView
             android:id="@+id/orderfinish_tv_taskname"
             android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="8dp"
             android:text="买菜"
             android:textColor="#000000"
-            android:textSize="35sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/orderfinish_tv_text"
             android:layout_width="200dp"
-            android:layout_height="16dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/orderfinish_tv_taskname"
-            android:paddingLeft="16dp"
+            android:paddingLeft="8dp"
             android:text="备注"
             android:textColor="#000000"
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/orderfinish_tv_distance"
-            android:layout_width="80dp"
-            android:layout_height="33dp"
-            android:layout_toRightOf="@+id/orderfinish_tv_taskname"
-            android:gravity="center"
-            android:text="最远距离："
-            android:textColor="#000000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/orderfinish_tv_dis"
-            android:layout_width="40dp"
-            android:layout_height="33dp"
-            android:layout_toRightOf="@+id/orderfinish_tv_distance"
-            android:gravity="center"
-            android:text="2km"
-            android:textColor="#000000"
-            android:textSize="15sp" />
-
-        <TextView
             android:id="@+id/orderfinish_tv_reward"
-            android:layout_width="120dp"
-            android:layout_height="33dp"
-            android:layout_below="@+id/orderfinish_tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@+id/orderfinish_tv_taskname"
             android:gravity="center"
             android:text="奖励金额："
@@ -116,7 +97,7 @@
             android:id="@+id/orderfinish_tv_money"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/orderfinish_tv_dis"
+            android:layout_toRightOf="@+id/orderfinish_tv_reward"
             android:gravity="center"
             android:text="￥5"
             android:textColor="#000000"
