@@ -31,7 +31,7 @@ public class MyOrderActivity extends Activity {
     private ListView order_lv_finish;
     private ImageView back;
 
-    private List<BeanOrder> waitList = new ArrayList<BeanOrder>();
+    private List<BeanOrder> ingList = new ArrayList<BeanOrder>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +48,24 @@ public class MyOrderActivity extends Activity {
         title1_tv.setText("我的订单");
         back = (ImageView) ordewr_title1.findViewById(R.id.title1_back);
 
-        waitList.addAll(MsgCenter.empOrderList);
-        waitList.addAll(MsgCenter.waitOrderList);
+        ingList.addAll(MsgCenter.empOrderList);
+        ingList.addAll(MsgCenter.ingOrderList);
+
         //未完成订单
         order_lv_wait = (ListView) findViewById(R.id.order_lv_wait);
-        order_lv_wait.setAdapter(new OrderWaitAdapter(getApplicationContext(), waitList));
+        order_lv_wait.setAdapter(new OrderWaitAdapter(getApplicationContext(), MsgCenter.waitOrderList));
         ListViewUtil.setListViewHeightBasedOnChildren(order_lv_wait);
+
         //待评价订单
         order_lv_ing = (ListView) findViewById(R.id.order_lv_ing);
-        order_lv_ing.setAdapter(new OrderIngAdapter(getApplicationContext(), MsgCenter.ingOrderList));
+        order_lv_ing.setAdapter(new OrderIngAdapter(getApplicationContext(), ingList));
         ListViewUtil.setListViewHeightBasedOnChildren(order_lv_ing);
+
         //已完成订单
         order_lv_finish = (ListView) findViewById(R.id.order_lv_finish);
         order_lv_finish.setAdapter(new OrderFinishAdapter(getApplicationContext(), MsgCenter.finishOrderList));
         ListViewUtil.setListViewHeightBasedOnChildren(order_lv_finish);
+
     }
 
     private void setListener() {
@@ -75,8 +79,8 @@ public class MyOrderActivity extends Activity {
         order_lv_wait.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MyOrderActivity.this, OrderResultActivity.class);
-                intent.putExtra("lv", "wait");
+                Intent intent = new Intent(MyOrderActivity.this, SeeOrderActivity.class);
+                intent.putExtra("type", "wait");
                 intent.putExtra("position", position);
                 startActivity(intent);
             }
@@ -85,8 +89,8 @@ public class MyOrderActivity extends Activity {
         order_lv_ing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MyOrderActivity.this, OrderResultActivity.class);
-                intent.putExtra("lv", "ing");
+                Intent intent = new Intent(MyOrderActivity.this, SeeOrderActivity.class);
+                intent.putExtra("type", "ing");
                 intent.putExtra("position", position);
                 startActivity(intent);
             }
@@ -95,7 +99,8 @@ public class MyOrderActivity extends Activity {
         order_lv_finish.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MyOrderActivity.this, OrderResultActivity.class);
+                Intent intent = new Intent(MyOrderActivity.this, SeeOrderActivity.class);
+                intent.putExtra("type", "finish");
                 intent.putExtra("position", position);
                 startActivity(intent);
             }

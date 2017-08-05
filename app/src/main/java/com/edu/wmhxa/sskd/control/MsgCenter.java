@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import static android.R.attr.imeOptions;
 import static android.R.attr.password;
 
 /**
@@ -43,6 +44,7 @@ public class MsgCenter {
      * 用户获取到位置后会向服务器拉取附近所有任务的任务信息存在List中
      */
     public static List<BeanOrder> nearTaskList = new ArrayList<BeanOrder>();
+
     public static List<BeanOrder> myOrderList = new ArrayList<BeanOrder>();
     public static List<BeanOrder> ingOrderList = new ArrayList<BeanOrder>();
     public static List<BeanOrder> waitOrderList = new ArrayList<BeanOrder>();
@@ -72,78 +74,6 @@ public class MsgCenter {
             msgCenter = new MsgCenter();
         }
         return msgCenter;
-    }
-
-    private static void initData() {
-        //模拟当前登陆用户
-        beanUser = new BeanUser("admin", "admin", "123456", "陈幼安", "350702199705301818", "17774009906", true, "404290080@qq.com", "男");
-//        beanUser = null;
-        //模拟附近订单
-        nearTaskList = new ArrayList<BeanOrder>();
-        for (int i = 0; i < 10; i++) {
-            BeanOrder order = new BeanOrder();
-            order.setBossAccount("luren" + i);
-            order.setOrderName("任务" + i);
-            order.setOrderText("备注" + i);
-            order.setMoney(10.0 + i);
-            order.setBounty(1.0 + i);
-            List<BeanThing> thingList = new ArrayList<BeanThing>();
-            for (int j = 0; j < 5; j++) {
-                BeanThing beanThing = new BeanThing();
-                beanThing.setName("物品" + (j + 1));
-                beanThing.setNumber(5);
-                beanThing.setMoney(5.0 + i);
-                beanThing.setLatitude(30.3208407389);
-                beanThing.setLongitude(120.1413774490);
-                beanThing.setAddress("源清中学" + i);
-                thingList.add(beanThing);
-                Log.i(TAG, "添加一个物品");
-            }
-            order.setThingList(thingList);
-            BeanAddress beanAddress = new BeanAddress();
-            beanAddress.setLocation("地点" + i);
-            order.setAddress(beanAddress);
-
-            nearTaskList.add(order);
-            Log.i(TAG, "添加一个订单");
-        }
-
-        friendList = new ArrayList<BeanUser>();
-        for (int i = 0; i < 20; i++) {
-            BeanUser beanUser = new BeanUser();
-            beanUser.setName("朋友" + i);
-            beanUser.setSex("女");
-            beanUser.setPhone("110" + i);
-            beanUser.setUsername("userAccount" + i);
-            beanUser.setGood(i);
-            friendList.add(beanUser);
-        }
-
-        applyFriendList = new ArrayList<BeanUser>();
-        BeanUser addUser = new BeanUser();
-        addUser.setName("申请人1");
-        addUser.setSex("男");
-        addUser.setGood(100);
-        applyFriendList.add(addUser);
-
-        //地址
-        addressList = new ArrayList<BeanAddress>();
-        for (int i = 0; i < 6; i++) {
-            BeanAddress beanAddress = new BeanAddress();
-            beanAddress.setName("收货人" + i);
-            beanAddress.setPhone("110" + i);
-            beanAddress.setLocation("定位" + i);
-            beanAddress.setInfo("详细地址" + i);
-            beanAddress.setAddrId(i);
-            if (i == 3) {
-                beanAddress.setAddrDefault(true);
-                BeanAddress.indexDeault = i;
-            } else {
-                beanAddress.setAddrDefault(false);
-            }
-            addressList.add(beanAddress);
-        }
-
     }
 
     /**
@@ -226,14 +156,19 @@ public class MsgCenter {
                     JSONObject order = orderJSONArray.getJSONObject(i);
                     BeanOrder beanOrder = new BeanOrder();
                     beanOrder.setOrderId(order.getInt("orderId"));
-                    beanOrder.setEmpAccount(order.getString("orderEmp"));
 
-                    Calendar startTime = Calendar.getInstance();
-                    startTime.setTime(format.parse(order.getString("orderStartTime")));
-                    beanOrder.setStartTime(startTime);
-                    Calendar endTime = Calendar.getInstance();
-                    endTime.setTime(format.parse(order.getString("orderEndTime")));
-                    beanOrder.setEndTime(endTime);
+                    String orderStartTime = order.getString("orderStartTime");
+                    if (orderStartTime != null && !orderStartTime.isEmpty() && !orderStartTime.equals("null")) {
+                        Calendar startTime = Calendar.getInstance();
+                        startTime.setTime(format.parse(order.getString("orderStartTime")));
+                        beanOrder.setStartTime(startTime);
+                    }
+                    String orderEndTime = order.getString("orderEndTime");
+                    if (orderEndTime != null && !orderEndTime.isEmpty() && !orderEndTime.equals("null")) {
+                        Calendar endTime = Calendar.getInstance();
+                        endTime.setTime(format.parse(order.getString("orderEndTime")));
+                        beanOrder.setEndTime(endTime);
+                    }
 
                     beanOrder.setMoney(order.getDouble("orderMoney"));
                     beanOrder.setBounty(order.getDouble("orderBounty"));
@@ -262,18 +197,21 @@ public class MsgCenter {
                     //订单内的地址
                     JSONObject addressObject = order.getJSONObject("address");
                     BeanAddress beanAddress = new BeanAddress();
-                    int addrDefault = addressObject.getInt("addrDefault");
-                    if (addrDefault == 1) {
-                        beanAddress.setAddrDefault(true);
-                    } else {
-                        beanAddress.setAddrDefault(false);
-                    }
                     beanAddress.setAddrId(addressObject.getInt("addrId"));
                     beanAddress.setInfo(addressObject.getString("addrInfo"));
                     beanAddress.setLocation(addressObject.getString("addrLocation"));
                     beanAddress.setPhone(addressObject.getString("addrPhone"));
                     beanAddress.setName(addressObject.getString("addrUser"));
                     beanOrder.setAddress(beanAddress);
+                    //快递员信息
+                    JSONObject orderEmp = order.getJSONObject("orderEmp");
+                    BeanUser beanEmp = new BeanUser();
+                    beanEmp.setID(orderEmp.getString("userAccount"));
+                    beanEmp.setEmail(orderEmp.getString("userEmail"));
+                    beanEmp.setName(orderEmp.getString("userName"));
+                    beanEmp.setGood(orderEmp.getInt("userGood"));
+                    beanEmp.setSex(orderEmp.getString("userSex"));
+                    beanOrder.setEmpAccount(beanEmp);
 
                     myOrderList.add(beanOrder);
                 }
@@ -393,7 +331,8 @@ public class MsgCenter {
 
     //修改手机 和邮箱
     public boolean changeEmailAndPhone(String email, String phone) {
-        String URL = "changeEmail";
+        errorInfo = "";
+        String URL = "user_edit.action";
         //封装json对象
         JSONObject info = new JSONObject();
         try {
@@ -408,6 +347,7 @@ public class MsgCenter {
             String error = result.getString("error");
             if (error == null || error.isEmpty()) {
             } else {
+                errorInfo = error;
                 return false;
             }
         } catch (JSONException e) {
@@ -559,9 +499,11 @@ public class MsgCenter {
 
     //订单操作
     //获取位置周边订单信息
-    public boolean getNearTask(LatLng position) {
+    public boolean getNearOrder(LatLng position) {
         //获取当前位置下的订单
-        String URL = "getneartask";
+        errorInfo = "";
+        String URL = "order_searchNear.action";
+        nearTaskList.clear();
 
         double latitude = position.latitude;
         double longitude = position.longitude;
@@ -574,51 +516,131 @@ public class MsgCenter {
             jsonObject.put("userlongitude", longitude);
             jsonObject.put("userlatitude", latitude);
             JSONObject result = httpControl.postMethod(jsonObject, URL);//拿到数据
-            if (result == null) {
-                return false;
-            }
+            Log.i(TAG, "getNearTask_result:" + result);
             if (result == null) {
                 return false;
             }
             String error = (String) result.get("error");
+            Log.i(TAG, "getNearTask_error:" + error);
             if (error == null || error.isEmpty()) {
-                JSONArray order = result.getJSONArray("order");
-                List<BeanOrder> orderList = new ArrayList<BeanOrder>();
-                for (int i = 0; i < order.length(); i++) {
-                    JSONObject orderInfo = order.getJSONObject(i);
+                JSONArray list = result.getJSONArray("orderList");
+                for (int i = 0; i < list.length(); i++) {
+                    JSONArray listItem = list.getJSONArray(i);
                     BeanOrder beanOrder = new BeanOrder();
-                    beanOrder.setOrderId(orderInfo.getInt("orderId"));
-                    beanOrder.setOrderName(orderInfo.getString("orderName"));
-                    beanOrder.setOrderText(orderInfo.getString("orderText"));
-                    beanOrder.setMoney(orderInfo.getDouble("orderMoney"));
-                    beanOrder.setBounty(orderInfo.getDouble("orderBounty"));
-                    //封装物品表
-                    JSONArray thing = orderInfo.getJSONArray("thing");
-                    List<BeanThing> thingList = new ArrayList<BeanThing>();
-                    for (int j = 0; j < thing.length(); j++) {
-                        JSONObject thingInfo = thing.getJSONObject(j);
-                        BeanThing beanThing = new BeanThing();
-                        beanThing.setName(thingInfo.getString("thingName"));
-                        beanThing.setLongitude(thingInfo.getDouble("thingLongitude"));
-                        beanThing.setLatitude(thingInfo.getDouble("thingLatitude"));
-                        beanThing.setAddress(thingInfo.getString("thingLocation"));
-                        beanThing.setNumber(thingInfo.getInt("thingNum"));
-                        beanThing.setMoney(thingInfo.getDouble("thingMoney"));
-                        thingList.add(beanThing);
-                    }
-                    beanOrder.setThingList(thingList);
-                    BeanAddress beanAddress = new BeanAddress();
-                    beanAddress.setLocation(orderInfo.getString("addrLocation"));
-                    beanOrder.setAddress(beanAddress);
-                    orderList.add(beanOrder);
+                    beanOrder.setOrderId(listItem.getInt(0));
+                    beanOrder.setOrderName(listItem.getString(1));
+                    beanOrder.setOrderText(listItem.getString(2));
+                    beanOrder.setBounty(listItem.getDouble(3));
+                    beanOrder.setDistence(listItem.getDouble(4));
+                    nearTaskList.add(beanOrder);
                 }
-                nearTaskList = orderList;
+                Log.i(TAG, "getNearTask_nearTaskList:" + nearTaskList.toString());
             } else {
+                errorInfo = error;
                 return false;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return true;
+    }
+
+    //获取单个订单的详情
+    public boolean getOrderItem(int orderId) {
+        String URL = "order_get.action";
+        int position = 0;
+        for (int i = 0; i < nearTaskList.size(); i++) {
+            if (nearTaskList.get(i).getOrderId() == orderId) {
+                position = i;
+            }
+        }
+        BeanOrder beanOrder = nearTaskList.get(position);
+        Log.i(TAG, "getOrderItem_position:" + position);
+        //把数据封装成JSON
+        JSONObject info = new JSONObject();
+        try {
+            info.put("check", "remeber_client");
+            info.put("orderid", orderId);
+            JSONObject result = httpControl.postMethod(info, URL);
+            Log.i(TAG, "getOrderItem_result:" + result);
+            if (result == null) {
+                return false;
+            }
+            String error = (String) result.get("error");
+            Log.i(TAG, "getOrderItem_error:" + error);
+            if (error == null || error.isEmpty()) {
+                JSONObject order = result.getJSONObject("order");
+                beanOrder.setBounty(order.getDouble("orderBounty"));
+                BeanUser empUser = new BeanUser();
+
+                String orderStartTime = order.getString("orderStartTime");
+                if (orderStartTime != null && !orderStartTime.isEmpty() && !orderStartTime.equals("null")) {
+                    Calendar startTime = Calendar.getInstance();
+                    startTime.setTime(format.parse(order.getString("orderStartTime")));
+                    beanOrder.setStartTime(startTime);
+                }
+                String orderEndTime = order.getString("orderEndTime");
+                if (orderEndTime != null && !orderEndTime.isEmpty() && !orderEndTime.equals("null")) {
+                    Calendar endTime = Calendar.getInstance();
+                    endTime.setTime(format.parse(order.getString("orderEndTime")));
+                    beanOrder.setEndTime(endTime);
+                }
+
+                beanOrder.setEvalBoss(order.getString("orderEvalBoss"));
+                beanOrder.setEvalEmp(order.getString("orderEvalEmp"));
+                beanOrder.setMoney(order.getDouble("orderMoney"));
+                beanOrder.setOrderName(order.getString("orderName"));
+                beanOrder.setOrderText(order.getString("orderText"));
+
+                JSONObject address = order.getJSONObject("address");
+                BeanAddress beanAddress = new BeanAddress();
+                beanAddress.setAddrId(address.getInt("addrId"));
+                beanAddress.setInfo(address.getString("addrInfo"));
+                beanAddress.setLocation(address.getString("addrLocation"));
+                beanAddress.setPhone(address.getString("addrPhone"));
+                beanAddress.setName(address.getString("addrUser"));
+                beanOrder.setAddress(beanAddress);
+
+                JSONArray thing = order.getJSONArray("thing");
+                List<BeanThing> thingList = new ArrayList<BeanThing>();
+                for (int i = 0; i < thing.length(); i++) {
+                    JSONObject thingItem = thing.getJSONObject(i);
+                    BeanThing beanThing = new BeanThing();
+                    beanThing.setThingid(thingItem.getInt("thingId"));
+//                    if (thingItem.getInt("thingBuy") == 1) {
+//                        beanThing.setBuy(true);
+//                    } else {
+//                        beanThing.setBuy(false);
+//                    }
+                    beanThing.setLatitude(thingItem.getDouble("thingLatitude"));
+                    beanThing.setLongitude(thingItem.getDouble("thingLongitude"));
+                    beanThing.setAddress(thingItem.getString("thingLocation"));
+                    beanThing.setMoney(thingItem.getDouble("thingMoney"));
+                    beanThing.setName(thingItem.getString("thingName"));
+                    beanThing.setNumber(thingItem.getInt("thingNum"));
+                    thingList.add(beanThing);
+                }
+                beanOrder.setThingList(thingList);
+
+                JSONObject user = order.getJSONObject("user");
+                BeanUser beanUser = new BeanUser();
+                beanUser.setUsername(user.getString("userAccount"));
+                beanUser.setEmail(user.getString("userEmail"));
+                beanUser.setGood(user.getInt("userGood"));
+                beanUser.setName(user.getString("userName"));
+                beanUser.setPhone(user.getString("userPhone"));
+                beanUser.setSex(user.getString("userSex"));
+                beanOrder.setBossAccount(beanUser);
+
+                nearTaskList.set(position, beanOrder);
+                Log.i(TAG, "nearTaskList_position:" + nearTaskList.get(position));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return true;
     }
 
@@ -636,7 +658,7 @@ public class MsgCenter {
                 continue;
             } else if (beanOrder.getStartTime() != null && beanOrder.getEndTime() == null) {
                 //有开始时间 没有结束时间 正在进行 有可能是当前用户自己的,也有可能是他在快递的
-                if (beanOrder.getEmpAccount() == beanUser.getUsername()) {
+                if (beanOrder.getEmpAccount().getUsername() == beanUser.getUsername()) {
                     //是自己在负责的
                     empOrderList.add(beanOrder);
                 } else {
@@ -654,7 +676,7 @@ public class MsgCenter {
     //新增订单
     public int addOrder(BeanOrder order) {
         int orderid = -1;
-        String URL = "addOrder";
+        String URL = "order_add.action";
         //把bean对象封装成JSON
         JSONObject info = new JSONObject();
         try {
@@ -679,7 +701,9 @@ public class MsgCenter {
             }
             info.put("thing", thing);
             info.put("addrid", order.getAddress().getAddrId());
+            Log.i(TAG, "addOrder_info:" + info.toString());
             JSONObject result = httpControl.postMethod(info, URL);
+            Log.i(TAG, "addOrder_result:" + result.toString());
             if (result == null) {
                 return -1;
             }
@@ -744,8 +768,9 @@ public class MsgCenter {
     //接受订单
     public BeanAddress acceptOrder(BeanOrder order) {
         BeanAddress beanAddress = null;
+        errorInfo = "";
         //获取当前位置下的订单
-        String URL = "acceptOrder";
+        String URL = "order_receive.action";
         String useraccount = beanUser.getUsername();
         //把数据封装成JSON
         JSONObject info = new JSONObject();
@@ -764,6 +789,9 @@ public class MsgCenter {
                 beanAddress.setInfo(result.getString("addrInfo"));
                 beanAddress.setName(result.getString("addrUser"));
                 beanAddress.setPhone(result.getString("addrPhone"));
+            } else {
+                errorInfo = error;
+                return null;
             }
         } catch (JSONException e) {
             e.printStackTrace();

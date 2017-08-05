@@ -170,6 +170,10 @@ public class ChoosePositionActivity extends Activity implements
                 Intent intent = new Intent();
                 intent.putExtra("result", result);
                 intent.putExtra("location", address);
+                if (poiResult == null) {
+                    intent.putExtra("longitude", xy.longitude);
+                    intent.putExtra("latitude", xy.latitude);
+                }
                 setResult(10, intent);
                 finish();
             }
@@ -194,7 +198,6 @@ public class ChoosePositionActivity extends Activity implements
             }
         });
         bt.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 keyWord = String.valueOf(et.getText());

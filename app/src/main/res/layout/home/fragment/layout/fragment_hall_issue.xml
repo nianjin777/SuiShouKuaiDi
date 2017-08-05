@@ -45,10 +45,12 @@
                     android:id="@+id/issue_tv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignBaseline="@+id/issue_tv_name"
+                    android:layout_alignBottom="@+id/issue_tv_name"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
-                    android:layout_marginTop="8dp"
-                    android:text="15858258596"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -73,7 +75,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/issue_tv_addrword"
                     android:maxLength="32"
-                    android:text="浙江大学城市学院北校区"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>

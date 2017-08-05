@@ -75,6 +75,7 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
                     if (result == -1) {
                         Toast.makeText(getContext(), "网络错误", Toast.LENGTH_SHORT).show();
                     } else {
+                        Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
                         //跳转
                         HomeActivity activity = HomeActivity.activity;
                         HomeActivity.click = 0;
@@ -112,13 +113,17 @@ public class IssueHallFragment extends Fragment implements View.OnClickListener 
     }
 
     private void findViewById() {
-        beanAddress = MsgCenter.addressList.get(BeanAddress.indexDeault);
+        issue_tv_name = (TextView) view.findViewById(R.id.issue_tv_name);
+        issue_tv_phone = (TextView) view.findViewById(R.id.issue_tv_phone);
+        issue_tv_addr = (TextView) view.findViewById(R.id.issue_tv_addr);
+        if (MsgCenter.addressList.size() == 0) {
+            beanAddress = null;
+        } else {
+            beanAddress = MsgCenter.addressList.get(BeanAddress.indexDeault);
+        }
         if (beanAddress == null) {
             issue_tv_name.setText("暂无地址");
         } else {
-            issue_tv_name = (TextView) view.findViewById(R.id.issue_tv_name);
-            issue_tv_phone = (TextView) view.findViewById(R.id.issue_tv_phone);
-            issue_tv_addr = (TextView) view.findViewById(R.id.issue_tv_addr);
             issue_tv_name.setText(beanAddress.getName());
             issue_tv_phone.setText(beanAddress.getPhone());
             issue_tv_addr.setText(beanAddress.getLocation() + "\n" + beanAddress.getInfo());

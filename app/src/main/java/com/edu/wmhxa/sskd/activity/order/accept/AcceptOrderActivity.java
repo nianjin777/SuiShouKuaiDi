@@ -1,6 +1,7 @@
 package com.edu.wmhxa.sskd.activity.order.accept;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -51,19 +52,40 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
                         finish();
                     }
                     break;
+                case 100:
+                    boolean result = (boolean) msg.obj;
+                    if (result) {
+                        order = MsgCenter.nearTaskList.get(position);
+                        findViewById();
+                        setListener();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "订单信息拉取失败", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    break;
             }
         }
     };
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_accept);
         //拿到选择任务的信息Map
-        Bundle extras = getIntent().getExtras();
-        order = (BeanOrder) extras.get("info");
-        findViewById();
-        setListener();
+        Intent intent = getIntent();
+        position = intent.getIntExtra("position", 0);
+        order = MsgCenter.nearTaskList.get(position);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean result = MsgCenter.getInstanceMsgCenter().getOrderItem(order.getOrderId());
+                Message message = new Message();
+                message.what = 100;
+                message.obj = result;
+                handler.sendMessage(message);
+            }
+        }).start();
     }
 
     public void findViewById() {

@@ -62,7 +62,7 @@ public class OrderFinishAdapter extends BaseAdapter {
         BeanOrder beanOrder = list.get(position);
         findViewById();
 
-        orderfinish_empname.setText(beanOrder.getEmpAccount());
+        orderfinish_empname.setText(beanOrder.getEmpAccount().getName());
         orderfinish_tv_task.setText(beanOrder.getOrderName());
         orderfinish_tv_text.setText(beanOrder.getOrderText());
         orderfinish_tv_dis.setText(String.valueOf(beanOrder.getDistence()));

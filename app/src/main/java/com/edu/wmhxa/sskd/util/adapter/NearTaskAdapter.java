@@ -62,15 +62,14 @@ public class NearTaskAdapter extends BaseAdapter {
 
         BeanOrder beanOrder = list.get(position);
         List<BeanThing> thinglist = (List<BeanThing>) beanOrder.getThingList();
-        LatLng thingXY = new LatLng(thinglist.get(0).getLatitude(), thinglist.get(0).getLongitude());
-        LatLng userXY = AcceptHallFragment.xy;
+//        LatLng thingXY = new LatLng(thinglist.get(0).getLatitude(), thinglist.get(0).getLongitude());
+//        LatLng userXY = AcceptHallFragment.xy;
         taskNmae.setText((String) beanOrder.getOrderName());
 //        taskDis.setText((String) map.get("distance"));//距离
 //        int distance = (int)DistanceUtil.getDistance(userXY, thingXY);
-        double distance = (int) DistanceUtil.getDistance(userXY, thingXY) / 1000.0;
-        DecimalFormat df = new DecimalFormat("0.00");
+        double distance = beanOrder.getDistence();
 
-        taskDis.setText(df.format(distance) + " km");
+        taskDis.setText(String.valueOf(distance) + " km");
         taskText.setText((String) beanOrder.getOrderText());
         taskMoney.setText(String.valueOf(beanOrder.getBounty()));
 

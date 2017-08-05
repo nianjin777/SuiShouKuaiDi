@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.control.MsgCenter;
 import com.edu.wmhxa.sskd.model.BeanOrder;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class OrderIngAdapter extends BaseAdapter {
     private TextView ordering_tv_money;
     private Button ordering_bt_cancel;
     private Button ordering_bt_ok;
+    private TextView ordering_state;
 
     public OrderIngAdapter(Context context, List<BeanOrder> list) {
         this.context = context;
@@ -61,9 +63,15 @@ public class OrderIngAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        BeanOrder beanOrder = list.get(position);
         findViewById();
-        ordering_empname.setText(beanOrder.getEmpAccount());
+        if (position < MsgCenter.empOrderList.size()) {
+            ordering_state.setText("正在负责快递");
+        } else if (position >= MsgCenter.empOrderList.size()) {
+            ordering_state.setText("正在进行");
+        }
+
+        BeanOrder beanOrder = list.get(position);
+        ordering_empname.setText(beanOrder.getEmpAccount().getName());
         ordering_tv_task.setText(beanOrder.getOrderName());
         ordering_tv_text.setText(beanOrder.getOrderText());
         ordering_tv_dis.setText(String.valueOf(beanOrder.getDistence()));
@@ -93,6 +101,7 @@ public class OrderIngAdapter extends BaseAdapter {
         ordering_tv_money = (TextView) view.findViewById(R.id.ordering_tv_money);
         ordering_bt_cancel = (Button) view.findViewById(R.id.ordering_bt_cancel);
         ordering_bt_ok = (Button) view.findViewById(R.id.ordering_bt_ok);
+        ordering_state = (TextView) view.findViewById(R.id.ordering_state);
     }
 
 }
