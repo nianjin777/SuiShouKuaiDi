@@ -1,17 +1,23 @@
 package com.edu.wmhxa.sskd.util.adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.activity.order.MyOrderActivity;
 import com.edu.wmhxa.sskd.control.MsgCenter;
 import com.edu.wmhxa.sskd.model.BeanOrder;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +39,32 @@ public class OrderIngAdapter extends BaseAdapter {
     private Button ordering_bt_cancel;
     private Button ordering_bt_ok;
     private TextView ordering_state;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Calendar endTime = (Calendar) msg.obj;
+                    if (endTime == null) {
+                        Toast.makeText(context, "网络错误", Toast.LENGTH_SHORT).show();
+                    } else {
+                        for (int i = 0; i < MsgCenter.myOrderList.size(); i++) {
+                            if (MsgCenter.myOrderList.get(i).getOrderId() == beanOrder.getOrderId()) {
+                                MsgCenter.myOrderList.get(i).setEndTime(endTime);
+                                MsgCenter.getInstanceMsgCenter().sortOrderList();
+                                MyOrderActivity.freshLV(context);
+                                break;
+                            }
+                        }
+                        Toast.makeText(context, "订单完成,感谢您的使用!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
+
+    private BeanOrder beanOrder;
 
     public OrderIngAdapter(Context context, List<BeanOrder> list) {
         this.context = context;
@@ -66,11 +98,13 @@ public class OrderIngAdapter extends BaseAdapter {
         findViewById();
         if (position < MsgCenter.empOrderList.size()) {
             ordering_state.setText("正在负责快递");
+            ordering_bt_ok.setVisibility(View.GONE);
         } else if (position >= MsgCenter.empOrderList.size()) {
             ordering_state.setText("正在进行");
         }
 
-        BeanOrder beanOrder = list.get(position);
+        beanOrder = list.get(position);
+        final BeanOrder finalBeanOrder = beanOrder;
         ordering_empname.setText(beanOrder.getEmpAccount().getName());
         ordering_tv_task.setText(beanOrder.getOrderName());
         ordering_tv_text.setText(beanOrder.getOrderText());
@@ -87,6 +121,16 @@ public class OrderIngAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //TODO 确认收货
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Calendar calendar = MsgCenter.getInstanceMsgCenter().completeOrder(finalBeanOrder);
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = calendar;
+                        handler.sendMessage(message);
+                    }
+                }).start();
             }
         });
 

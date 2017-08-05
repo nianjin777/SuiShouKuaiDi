@@ -1,8 +1,11 @@
 package com.edu.wmhxa.sskd.activity.order;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -26,12 +29,19 @@ public class MyOrderActivity extends Activity {
 
     private View ordewr_title1;
     private TextView title1_tv;
-    private ListView order_lv_wait;
-    private ListView order_lv_ing;
-    private ListView order_lv_finish;
+    private static ListView order_lv_wait;
+    private static ListView order_lv_ing;
+    private static ListView order_lv_finish;
     private ImageView back;
 
-    private List<BeanOrder> ingList = new ArrayList<BeanOrder>();
+    private static List<BeanOrder> ingList = new ArrayList<BeanOrder>();
+
+    public static Handler freshHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +92,7 @@ public class MyOrderActivity extends Activity {
                 Intent intent = new Intent(MyOrderActivity.this, SeeOrderActivity.class);
                 intent.putExtra("type", "wait");
                 intent.putExtra("position", position);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -92,7 +102,7 @@ public class MyOrderActivity extends Activity {
                 Intent intent = new Intent(MyOrderActivity.this, SeeOrderActivity.class);
                 intent.putExtra("type", "ing");
                 intent.putExtra("position", position);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -102,8 +112,40 @@ public class MyOrderActivity extends Activity {
                 Intent intent = new Intent(MyOrderActivity.this, SeeOrderActivity.class);
                 intent.putExtra("type", "finish");
                 intent.putExtra("position", position);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
+    }
+
+    public static void freshLV(Context context) {
+        ingList.clear();
+        ingList.addAll(MsgCenter.empOrderList);
+        ingList.addAll(MsgCenter.ingOrderList);
+        //未完成订单
+        order_lv_wait.setAdapter(new OrderWaitAdapter(context, MsgCenter.waitOrderList));
+        ListViewUtil.setListViewHeightBasedOnChildren(order_lv_wait);
+
+        //待评价订单
+        order_lv_ing.setAdapter(new OrderIngAdapter(context, ingList));
+        ListViewUtil.setListViewHeightBasedOnChildren(order_lv_ing);
+
+        //已完成订单
+        order_lv_finish.setAdapter(new OrderFinishAdapter(context, MsgCenter.finishOrderList));
+        ListViewUtil.setListViewHeightBasedOnChildren(order_lv_finish);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //未完成订单
+        order_lv_wait.setAdapter(new OrderWaitAdapter(getApplicationContext(), MsgCenter.waitOrderList));
+        ListViewUtil.setListViewHeightBasedOnChildren(order_lv_wait);
+
+        //待评价订单
+        order_lv_ing.setAdapter(new OrderIngAdapter(getApplicationContext(), ingList));
+        ListViewUtil.setListViewHeightBasedOnChildren(order_lv_ing);
+
+        //已完成订单
+        order_lv_finish.setAdapter(new OrderFinishAdapter(getApplicationContext(), MsgCenter.finishOrderList));
+        ListViewUtil.setListViewHeightBasedOnChildren(order_lv_finish);
     }
 }

@@ -43,10 +43,11 @@ public class AcceptOrderActivity extends Activity implements View.OnClickListene
                 case 1:
                     BeanAddress beanAddress = (BeanAddress) msg.obj;
                     if (beanAddress == null) {
-                        Toast.makeText(getApplicationContext(), "网络异常,请稍后再试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), MsgCenter.errorInfo, Toast.LENGTH_SHORT).show();
                         return;
                     } else {
                         order.setAddress(beanAddress);
+                        order.setEmpAccount(MsgCenter.beanUser);
                         MsgCenter.empOrderList.add(order);
                         Toast.makeText(getApplicationContext(), "接受订单成功\n请在我的订单-正在进行的订单中查看详情", Toast.LENGTH_SHORT).show();
                         finish();

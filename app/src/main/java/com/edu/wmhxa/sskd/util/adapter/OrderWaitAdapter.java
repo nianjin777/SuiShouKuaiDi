@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -63,7 +64,7 @@ public class OrderWaitAdapter extends BaseAdapter {
         findViewById();
 
         BeanOrder beanOrder = list.get(position);
-        orderwait_empname.setText(beanOrder.getEmpAccount().getName());
+//        orderwait_empname.setText(beanOrder.getEmpAccount().getName());
         orderwait_tv_task.setText(beanOrder.getOrderName());
         orderwait_tv_text.setText(beanOrder.getOrderText());
         orderwait_tv_dis.setText(String.valueOf(beanOrder.getDistence()));
