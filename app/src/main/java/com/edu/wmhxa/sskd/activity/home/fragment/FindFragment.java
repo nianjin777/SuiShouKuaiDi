@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.edu.wmhxa.sskd.R;
+import com.edu.wmhxa.sskd.control.MsgCenter;
 
 
 /**
@@ -18,6 +19,9 @@ import com.edu.wmhxa.sskd.R;
  */
 
 public class FindFragment extends Fragment {
+
+    private static final String url = "";
+    private static String data = "";
 
     private View view;
     private WebView find_wv;
@@ -28,6 +32,7 @@ public class FindFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_find, container, false);
 
         findViewById();
+        data = "?useraccount=" + MsgCenter.beanUser.getUsername() + "&username=" + MsgCenter.beanUser.getName();
 
         find_wv.getSettings().setJavaScriptEnabled(true);
         find_wv.setWebViewClient(new WebViewClient());
